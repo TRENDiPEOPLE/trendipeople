@@ -1,0 +1,4 @@
+# trendipeople
+
+MVP project - TRENDiPEOPLE
+
