@@ -7,5 +7,9 @@ module.exports = {
 		RECEIVED_USER: null
 	})
 
+<<<<<<< HEAD
 
 }
+=======
+};
+>>>>>>> master

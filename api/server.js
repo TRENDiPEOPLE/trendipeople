@@ -1,4 +1,4 @@
-var Hapi = require('hapi');
+var Hapi 	 = require("hapi");
 var server = new Hapi.Server();
 var Path = require('path');
 var index = Path.resolve(__dirname + '/../public/index.html');
@@ -7,8 +7,9 @@ var Cookie = require('hapi-auth-cookie');
 var Joi = require('joi');
 var handler = require('./handler');
 
+
 server.connection({
-	host: 'localhost',
+	host: "localhost",
 	port:  process.env.PORT || 8080
 });
 

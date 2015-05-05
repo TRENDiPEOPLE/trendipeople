@@ -15,7 +15,7 @@ var Profile = React.createClass({
 				<p>Profile page</p>
 				<input type="submit" onClick={this.clickHander} value="Rate!"/>		
 			</div>
-		)
+		);
 	}
 });
 
