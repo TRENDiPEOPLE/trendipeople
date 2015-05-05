@@ -6,11 +6,11 @@ The emphasis is on everyday people and not promoting the unrealistic, idealised 
 
 To run this project:
 
+
 ```git clone```
 ```cd trendipeople```
 ```npm install```
 ```gulp```
 ```node app.js```
-open localhost:8080 in the browser
 
 
