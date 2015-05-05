@@ -7,13 +7,18 @@ var Route = Router.Route;
 
 //var ActionCreators = require('../actions/ActionCreators');
 var Store = require('../stores/Store');
-var Profile = require('./sections/Profile');
+var Profile = require('./Profile');
+var Body = require('./Body');
+var Trending = require('./Trending');
+
+var ActionCreators = require('../actions/ActionCreators')
 
 function getStateFromStore(){
 	var rating = Store.getRating();
-
+	var user = Store.getUser();
 	return {
-		rating : rating
+		rating : rating,
+		user : user
 	}
 
 }
@@ -24,8 +29,11 @@ var TrendiPeople = React.createClass({
 		return getStateFromStore();
 	},
 
-	componentDidMount: function(){
+	componentWillMount: function(){
+		console.log('componentDidMount');
 		Store.addChangeListener(this._onChange);
+		console.log('going to ActionCreators to fetch user')
+		ActionCreators.fetchUser();
 	},
 
 	componentWillUnmount: function(){
@@ -37,16 +45,49 @@ var TrendiPeople = React.createClass({
 	},
 
 	render: function(){
+
+		var email;
+
+		// display login or logout if the user is logged in or out
+		if (this.state.user) {
+			loginButton = <li><a href="/logout">Log out</a></li>;
+			email = this.state.user.email;
+		} else {
+			loginButton = <li><a href="/facebook">Login</a></li>;
+		}
+
 		var rating = this.state.rating;
 		return(
 			<div>
-				<Profile />
-				Rating: {rating}
+			<h3>TRENDiPEOPLE</h3>
+			{email}
+			<ul>
+				<li><Link to="Profile" >Profile</Link></li>
+				<li><Link to="Trending" >Trending</Link></li>
+				{loginButton}
+			</ul>
+          	<RouteHandler rating={this.state.rating} user={this.state.user}/>
 			</div>
-
 			)
 	}
 });
+
+
+var routes = (
+	<Route path="/" handler={TrendiPeople} >
+		<Route name="Profile" handler={Profile} />
+		<Route name="Trending" handler={Trending} />
+		<DefaultRoute handler={Trending} />
+	</Route>
+)
+
+// Add Router.HistoryLocation to remove the urgy hash from the URL, but then the dynamic urls dont work...
+Router.run(routes, Router.HistoryLocation, function(Handler){
+    React.render(<Handler/>, document.body);
+});
+
+
+
 
 
 module.exports = TrendiPeople;
