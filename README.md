@@ -10,6 +10,8 @@ To run this project:
 ```git clone```  
 ```cd trendipeople```  
 ```npm install```  
-```gulp ```
+```gulp ```  
 ```node app.js```  
+
+Open localhost:8080 in the browser
 
