@@ -6,8 +6,8 @@ The emphasis is on everyday people and not promoting the unrealistic, idealised 
 
 To run this project:
 
-```git clone```
-```cd trendipeople```
-```npm install```
-```node app.js```
+```git clone```  
+```cd trendipeople```  
+```npm install```  
+```node app.js```  
 
