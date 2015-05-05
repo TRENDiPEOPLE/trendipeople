@@ -1,10 +1,10 @@
-var Hapi = require('hapi');
+var Hapi 	 = require("hapi");
 var server = new Hapi.Server();
-var Path = require('path');
-var index = Path.resolve(__dirname + '/../public/index.html');
+var Path   = require("path");
+var index  = Path.resolve(__dirname + "/../public/index.html");
 
 server.connection({
-	host: 'localhost',
+	host: "localhost",
 	port:  process.env.PORT || 8080
 });
 
@@ -19,7 +19,7 @@ server.route([{
 	method: "GET",
 	handler: {
 		directory:{
-			path: Path.resolve(__dirname + '/../public'),
+			path: Path.resolve(__dirname + "/../public"),
 			index: true
 		}
 	}
