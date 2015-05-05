@@ -10,5 +10,5 @@ To run this project:
 ```git clone```  
 ```cd trendipeople```  
 ```npm install```  
-```gulp```  
+```node app.js```  
 
