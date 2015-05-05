@@ -14,7 +14,7 @@ function getStateFromStore(){
 
 	return {
 		rating : rating
-	}
+	};
 
 }
 
@@ -44,7 +44,7 @@ var TrendiPeople = React.createClass({
 				Rating: {rating}
 			</div>
 
-			)
+			);
 	}
 });
 

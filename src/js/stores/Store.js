@@ -8,7 +8,7 @@ var CHANGE_EVENT = "change";
 var rating = 0;
 
 var Store = assign({}, EventEmitter.prototype, {
-	
+
 	emitChange: function(){
 		this.emit(CHANGE_EVENT);
 	},
@@ -28,7 +28,7 @@ var Store = assign({}, EventEmitter.prototype, {
 
 
 Dispatcher.register(function(action){
-	
+
 	switch (action.type) {
 		case ActionTypes.RATE:
 		rating +=1;
