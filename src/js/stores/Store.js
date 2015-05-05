@@ -6,6 +6,7 @@ var assign = require('object-assign');
 var CHANGE_EVENT = "change";
 
 var rating = 0;
+var _user = null;
 
 var Store = assign({}, EventEmitter.prototype, {
 
@@ -24,16 +25,29 @@ var Store = assign({}, EventEmitter.prototype, {
 	getRating: function(){
 		return rating;
 	},
+
+	getUser: function(){
+		return _user;
+	}
 });
 
 
 Dispatcher.register(function(action){
 
 	switch (action.type) {
+		
 		case ActionTypes.RATE:
-		rating +=1;
-		Store.emitChange();
+			rating +=1;
+			Store.emitChange();
+			break;
+
+		case ActionTypes.RECEIVED_USER:
+			_user = action.user;
+			Store.emitChange();
+			break;
 	}
+
+
 });
 
 
