@@ -17,14 +17,10 @@ function getStateFromStore(){
 	var rating = Store.getRating();
 	var user = Store.getUser();
 	return {
-<<<<<<< HEAD
 		rating : rating,
 		user : user
 	}
-=======
-		rating : rating
-	};
->>>>>>> master
+
 
 }
 
@@ -73,17 +69,12 @@ var TrendiPeople = React.createClass({
 			</ul>
           	<RouteHandler rating={this.state.rating} user={this.state.user}/>
 			</div>
-<<<<<<< HEAD
-			)
-=======
 
 			);
->>>>>>> master
 	}
 });
 
 
-<<<<<<< HEAD
 var routes = (
 	<Route path="/" handler={TrendiPeople} >
 		<Route name="Profile" handler={Profile} />
@@ -102,6 +93,4 @@ Router.run(routes, Router.HistoryLocation, function(Handler){
 
 
 module.exports = TrendiPeople;
-=======
-module.exports = TrendiPeople;
->>>>>>> master
+
