@@ -11,6 +11,5 @@ To run this project:
 ```cd trendipeople```  
 ```npm install```  
 ```gulp```  
-```node app.js```
 
 
