@@ -14,7 +14,7 @@ var Profile = React.createClass({
 				<p>Increment rating</p>
 				<input type="submit" onClick={this.clickHander} value="Rate!"/>
 			</div>
-		)
+		);
 	}
 });
 
