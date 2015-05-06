@@ -17,7 +17,4 @@ var Body = React.createClass({
 	}
 });
 
-
-
-
 module.exports = Body;
