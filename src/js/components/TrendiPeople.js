@@ -10,6 +10,7 @@ var Store = require('../stores/Store');
 var Profile = require('./Profile');
 var Body = require('./Body');
 var Trending = require('./Trending');
+var Upload = require('./Upload');
 
 var ActionCreators = require('../actions/ActionCreators')
 
@@ -62,17 +63,21 @@ var TrendiPeople = React.createClass({
 			<div>
 				<div className="container">
 					<div className="row">
+						<div className="header col-md-12">
+							<h1>PUT HIS LOGO HERE</h1>
+						</div>
 						<div className="col-md-12">
 							<nav className="navbar navbar-default">
 								<div className="container-fluid">
 								    <div className="navbar-header">
-								    	<Link to="trendipeople" className="navbar-brand">TRENDiPEOPLE</Link>
+								    	<Link to="home" className="navbar-brand">Home</Link>
 								    </div>
 								    <div>
 										<ul className="nav navbar-nav">
 											{email}
 											<li><Link to="profile">Profile</Link></li>
 											<li><Link to="trending">Trending</Link></li>
+											<li><Link to="upload">Upload</Link></li>
 											{loginButton}
 										</ul>
 									</div>
@@ -89,9 +94,10 @@ var TrendiPeople = React.createClass({
 
 
 var routes = (
-	<Route name="trendipeople" path="/" handler={TrendiPeople} >
+	<Route name="home" path="/" handler={TrendiPeople} >
 		<Route name="profile" handler={Profile} />
 		<Route name="trending" handler={Trending} />
+		<Route name="upload" handler={Upload} />
 		<DefaultRoute handler={Trending} />
 	</Route>
 );
