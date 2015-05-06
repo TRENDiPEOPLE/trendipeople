@@ -60,23 +60,37 @@ var TrendiPeople = React.createClass({
 		var rating = this.state.rating;
 		return(
 			<div>
-			<h3>TRENDiPEOPLE</h3>
-			{email}
-			<ul>
-				<li><Link to="Profile" >Profile</Link></li>
-				<li><Link to="Trending" >Trending</Link></li>
-				{loginButton}
-			</ul>
-          	<RouteHandler rating={this.state.rating} user={this.state.user}/>
+				<div className="container">
+					<div className="row">
+						<div className="col-md-12">
+							<nav className="navbar navbar-default">
+								<div className="container-fluid">
+								    <div className="navbar-header">
+								    	<Link to="TRENDiPEOPLE" title="Home" className="navbar-brand">TRENDiPEOPLE</Link>
+								    </div>
+								    <div>
+										<ul className="nav navbar-nav">
+											{email}
+											<li><Link to="Profile" title="Profile">Profile</Link></li>
+											<li><Link to="Trending" title="Trending">Trending</Link></li>
+											{loginButton}
+										</ul>
+									</div>
+								</div>
+							</nav>
+						</div>
+					</div>
+				</div>
 			</div>
-
-			);
+		);
 	}
 });
 
 
+// <RouteHandler rating={this.state.rating} user={this.state.user}/>
+
 var routes = (
-	<Route path="/" handler={TrendiPeople} >
+	<Route name="TRENDiPEOPLE" path="/" handler={TrendiPeople} >
 		<Route name="Profile" handler={Profile} />
 		<Route name="Trending" handler={Trending} />
 		<DefaultRoute handler={Trending} />
@@ -88,9 +102,4 @@ Router.run(routes, Router.HistoryLocation, function(Handler){
     React.render(<Handler/>, document.body);
 });
 
-
-
-
-
 module.exports = TrendiPeople;
-

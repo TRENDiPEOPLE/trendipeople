@@ -2,8 +2,6 @@ This is the fashion sharing and discovering MVP project for week 15 of Founders 
 
 The emphasis is on everyday people and not promoting the unrealistic, idealised version of what beauty looks like that is shown in today's media.
 
-
-
 To run this project:
 
 
@@ -14,4 +12,3 @@ To run this project:
 ```node app.js```  
 
 Open localhost:8080 in the browser
-
