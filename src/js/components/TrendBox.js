@@ -2,9 +2,16 @@ var React = require("react");
 
 var TrendBox = React.createClass({
     render: function() {
+
+      var trendTopics = this.props.trends.map(function(ele, index) {
+        return <li key={ele + index} >{ele}</li>;
+      });
         return(
           <div>
-            TrendBox
+            <h5>What's Hot</h5>
+              <ul>
+                {trendTopics}
+              </ul>
           </div>
         );
     }

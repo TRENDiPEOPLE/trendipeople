@@ -11,16 +11,22 @@ var Profile = require('./Profile');
 var Body = require('./Body');
 var Trending = require('./Trending');
 
-var ActionCreators = require('../actions/ActionCreators')
+var ActionCreators = require('../actions/ActionCreators');
 
 function getStateFromStore(){
 	var rating = Store.getRating();
-	var user = Store.getUser();
+	var user   = Store.getUser();
+	var people = Store.getPeople();
+	var trends = Store.getTrends();
+	var looks  = Store.getLooks();
+
 	return {
 		rating : rating,
-		user : user
-	}
-
+		user   : user,
+		people : people,
+		trends : trends,
+		looks  : looks
+	};
 
 }
 
@@ -33,7 +39,7 @@ var TrendiPeople = React.createClass({
 	componentWillMount: function(){
 		console.log('componentDidMount');
 		Store.addChangeListener(this._onChange);
-		console.log('going to ActionCreators to fetch user')
+		console.log('going to ActionCreators to fetch user');
 		ActionCreators.fetchUser();
 	},
 
@@ -62,7 +68,7 @@ var TrendiPeople = React.createClass({
 			<div>
 				<div className="container">
 					<div className="row">
-						<div className="col-md-12">
+						<div className="col-md-12" id="navBar">
 							<nav className="navbar navbar-default">
 								<div className="container-fluid">
 								    <div className="navbar-header">
@@ -80,8 +86,8 @@ var TrendiPeople = React.createClass({
 							</nav>
 						</div>
 					</div>
-					<div className="row">
-						<RouteHandler rating={this.state.rating} user={this.state.user}/>
+					<div className="row col-md-12">
+						<RouteHandler rating={this.state.rating} user={this.state.user} people={this.state.people} trends={this.state.trends} looks={this.state.looks} />
 					</div>
 				</div>
 			</div>
