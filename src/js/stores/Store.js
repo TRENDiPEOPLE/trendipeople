@@ -31,7 +31,6 @@ var Store = assign({}, EventEmitter.prototype, {
 	}
 });
 
-
 Dispatcher.register(function(action){
 
 	switch (action.type) {
@@ -49,6 +48,5 @@ Dispatcher.register(function(action){
 
 
 });
-
 
 module.exports = Store;

@@ -1,13 +1,13 @@
 var mongoose = require('mongoose');
 var Path = require('path');
 var index = Path.resolve(__dirname + '/../public/index.html');
-var bson = require('bson');
+var config = require('./config');
 
 // local mongoose connection
 //mongoose.connect('mongodb://127.0.0.1:27017/test');
 
 // mongolab mongoose connection
-mongoose.connect('mongodb://trendipeople:trendipeople@ds034348.mongolab.com:34348/trendipeople');
+mongoose.connect(config.db.dburl);
 var db = mongoose.connection;
 
 db.once('open', function(callback){
