@@ -80,7 +80,9 @@ var TrendiPeople = React.createClass({
 							</nav>
 						</div>
 					</div>
-					<RouteHandler rating={this.state.rating} user={this.state.user}/>
+					<div className="row">
+						<RouteHandler rating={this.state.rating} user={this.state.user}/>
+					</div>
 				</div>
 			</div>
 		);
