@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Path = require('path');
 var index = Path.resolve(__dirname + '/../public/index.html');
-var bson = require('bson');
 var config = require('./config');
 
 // local mongoose connection
