@@ -7,7 +7,7 @@ var Cookie = require('hapi-auth-cookie');
 var Joi = require('joi');
 var handler = require('./handler');
 var config = require('./config');
-console.log(config.facebook.clientId);
+
 server.connection({
 	host: "localhost",
 	port:  process.env.PORT || 8080
