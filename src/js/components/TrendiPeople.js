@@ -66,13 +66,13 @@ var TrendiPeople = React.createClass({
 							<nav className="navbar navbar-default">
 								<div className="container-fluid">
 								    <div className="navbar-header">
-								    	<Link to="TRENDiPEOPLE" title="Home" className="navbar-brand">TRENDiPEOPLE</Link>
+								    	<Link to="trendipeople" className="navbar-brand">TRENDiPEOPLE</Link>
 								    </div>
 								    <div>
 										<ul className="nav navbar-nav">
 											{email}
-											<li><Link to="Profile" title="Profile">Profile</Link></li>
-											<li><Link to="Trending" title="Trending">Trending</Link></li>
+											<li><Link to="profile">Profile</Link></li>
+											<li><Link to="trending">Trending</Link></li>
 											{loginButton}
 										</ul>
 									</div>
@@ -80,6 +80,7 @@ var TrendiPeople = React.createClass({
 							</nav>
 						</div>
 					</div>
+					<RouteHandler rating={this.state.rating} user={this.state.user}/>
 				</div>
 			</div>
 		);
@@ -87,15 +88,13 @@ var TrendiPeople = React.createClass({
 });
 
 
-// <RouteHandler rating={this.state.rating} user={this.state.user}/>
-
 var routes = (
-	<Route name="TRENDiPEOPLE" path="/" handler={TrendiPeople} >
-		<Route name="Profile" handler={Profile} />
-		<Route name="Trending" handler={Trending} />
+	<Route name="trendipeople" path="/" handler={TrendiPeople} >
+		<Route name="profile" handler={Profile} />
+		<Route name="trending" handler={Trending} />
 		<DefaultRoute handler={Trending} />
 	</Route>
-)
+);
 
 // Add Router.HistoryLocation to remove the urgy hash from the URL, but then the dynamic urls dont work...
 Router.run(routes, Router.HistoryLocation, function(Handler){
