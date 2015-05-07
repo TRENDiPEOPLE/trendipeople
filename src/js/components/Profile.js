@@ -17,11 +17,18 @@ var Profile = React.createClass({
 		var username = this.props.user.username;
 		var facebook_id = this.props.user.facebook_id;
 		var profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture';
+		var images = this.props.user.shared_images;
+		console.log('images: ', images);
+		imagesHTML = images.map(function(image){
+			return (<img key={image._id} src={image.link}  />)
+		});
+
 		return (
 			<div>
 				<img src={profile_image_url} />
 				<p>{username}</p>
-				<Link to="upload">Upload image</Link>
+				<p><Link to="upload">Upload image</Link></p>
+				{imagesHTML}
 			</div>
 		);
 	}

@@ -5,15 +5,14 @@ var Link = Router.Link;
 var RouteHandler = Router.RouteHandler;
 var Route = Router.Route;
 
-// Flux stuff
-var ActionCreators = require('../actions/ActionCreators')
+//var ActionCreators = require('../actions/ActionCreators');
 var Store = require('../stores/Store');
-
-// React components
 var Profile = require('./Profile');
 var Body = require('./Body');
 var Trending = require('./Trending');
 var Upload = require('./Upload');
+
+var ActionCreators = require('../actions/ActionCreators')
 
 function getStateFromStore(){
 	var rating = Store.getRating();
@@ -22,6 +21,8 @@ function getStateFromStore(){
 		rating : rating,
 		user : user
 	}
+
+
 }
 
 var TrendiPeople = React.createClass({
@@ -33,6 +34,7 @@ var TrendiPeople = React.createClass({
 	componentWillMount: function(){
 		console.log('componentDidMount');
 		Store.addChangeListener(this._onChange);
+		console.log('going to ActionCreators to fetch user')
 		ActionCreators.fetchUser();
 	},
 
@@ -46,37 +48,39 @@ var TrendiPeople = React.createClass({
 
 	render: function(){
 
-		var menu;
+		var loginButton;
+
 		// display login or logout if the user is logged in or out
 		if (this.state.user) {
-			menu = 	<ul>
-						<li><Link to="Profile" title="Profile">Profile</Link></li>
-						<li><Link to="Trending" title="Trending">Trending</Link></li>
-						<li><a href="/logout">Log out</a></li>
-					</ul>;
+			loginButton = <li><a href="/logout">Log out</a></li>;
 		} else {
-			menu = <ul><li><a href="/facebook">Facebook Login</a></li></ul>;
+			loginButton = <li><a href="/facebook">Login</a></li>;
 		}
 
+		var rating = this.state.rating;
 		return(
 			<div>
-
 				<div className="container">
 					<div className="row">
 						<div className="col-md-12">
 							<nav className="navbar navbar-default">
 								<div className="container-fluid">
 								    <div className="navbar-header">
-								    	<Link to="TRENDiPEOPLE" title="Home" className="navbar-brand">TRENDiPEOPLE</Link>
+								    	<Link to="trendipeople" className="navbar-brand">TRENDiPEOPLE</Link>
 								    </div>
 								    <div>
 										<ul className="nav navbar-nav">
-											{menu}
+											<li><Link to="profile">Profile</Link></li>
+											<li><Link to="trending">Trending</Link></li>
+											{loginButton}
 										</ul>
 									</div>
 								</div>
 							</nav>
 						</div>
+					</div>
+					<div className="row">
+						<RouteHandler rating={this.state.rating} user={this.state.user}/>
 					</div>
 				</div>
 			</div>
@@ -85,17 +89,14 @@ var TrendiPeople = React.createClass({
 });
 
 
-// <RouteHandler rating={this.state.rating} user={this.state.user}/>
-
 var routes = (
-	<Route name="TRENDiPEOPLE" path="/" handler={TrendiPeople} >
-		<Route name="Profile" handler={Profile} />
-		<Route name="Trending" handler={Trending} />
-		<Route name="Upload" handler={Upload} />
+	<Route name="trendipeople" path="/" handler={TrendiPeople} >
+		<Route name="profile" handler={Profile} />
+		<Route name="trending" handler={Trending} />
+		<Route name="upload" handler={Upload} />
 		<DefaultRoute handler={Trending} />
 	</Route>
-)
-
+);
 
 // Add Router.HistoryLocation to remove the urgy hash from the URL, but then the dynamic urls dont work...
 Router.run(routes, Router.HistoryLocation, function(Handler){

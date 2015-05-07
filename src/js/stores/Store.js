@@ -45,6 +45,11 @@ Dispatcher.register(function(action){
 			_user = action.user;
 			Store.emitChange();
 			break;
+
+		case ActionTypes.RECEIVED_IMAGE:
+			_user = action.user;
+			Store.emitChange();
+			break;
 	}
 
 

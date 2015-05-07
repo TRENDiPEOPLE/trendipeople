@@ -17,6 +17,7 @@ module.exports = {
 	},
 
 	saveImage: function(data){
+		console.log('data in actionCreators: ', data);
 		APIUtils.saveImage(data);
 	}
 

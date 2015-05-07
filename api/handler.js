@@ -18,7 +18,11 @@ var userSchema = new mongoose.Schema({
 	username: String,
 	email: String,
 	facebook_id: String,
-	shared_images: [{ data: Buffer, contentType: String }]
+	shared_images: [{
+		link: String,
+		title: String,
+		rating: Number
+	}]
 
 });
 
@@ -114,14 +118,18 @@ var user = function(request,reply){
 
 var image = function(request,reply){
 	if (request.auth.isAuthenticated){
+		//var payload= request.payload;
+		//var payloadPath = request.payload.path;
+		//var image = fs.readFileSync(payloadPath);
+	 
+
+		var id = request.params.id;		
 		var email = request.auth.credentials.email;
-		var id = request.params.id;
-		console.log('image handler trigged. id: ', id);
-	    var payload = request.payload;
-	    var imagePath = payload.image;
-	    var image = fs.readFileSync(imagePath);
-	    console.log('payload: ', payload);
-		
+
+		var payload = request.payload;
+		var image_link = payload.image;
+		console.log('payload: ',request.payload);
+
 		User.findOne({email: email}, function(err,user){
 		    
 		    if (err){
@@ -130,15 +138,19 @@ var image = function(request,reply){
 		    }
 
 	        // if the user is registered
-			if (user){ 
-	    		console.log('user is: ', user);
-				
-				user.shared_images.push(image);
+			if (user){
+				var new_image = {
+					link: image_link,
+					title: 'some title'
+				}
+				user.shared_images.push(new_image);
+
 				user.markModified('shared_images');
-                                //save the updated
-                res.save(function(err){
+                
+                //save the updated
+                user.save(function(err){
                     if (err){
-                    console.log(err);
+                    console.log('Error is : ', err);
                     }
                 });
 				reply(user);
@@ -149,7 +161,7 @@ var image = function(request,reply){
 			}
 
 		});
-
+		
 
 	} else {
 		reply('not authenticated');

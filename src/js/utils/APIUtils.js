@@ -12,10 +12,10 @@ module.exports = {
 	},
 
 	saveImage: function(data){
-		console.log('sending ajax request');
-		Request.post('/users/' + data.user_id + '/image')
+		console.log('sending ajax request. data: ', data);
+		Request.post('/api/image')
 			.send(data)
-			.end(function(err,res){
+			.end(function(err,res) {
 				console.log('AJAX response: ', res);
 				ServerActionCreators.receivedImage(res.text);
 			});
