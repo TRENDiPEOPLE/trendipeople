@@ -4,7 +4,7 @@ var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
 var RouteHandler = Router.RouteHandler;
 var Route = Router.Route;
-var TrendiPeople = require('./TrendiPeople')
+var TrendiPeople = require('./TrendiPeople');
 var Profile = require('./Profile');
 var Trending = require('./Trending');
 
@@ -13,7 +13,7 @@ var Body = React.createClass({
 		return(
 			<div>
 			</div>
-		)
+		);
 	}
 });
 
