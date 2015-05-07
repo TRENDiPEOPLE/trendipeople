@@ -6,7 +6,6 @@ var Profile = React.createClass({
 	clickHander: function(){
 		// testing the flux structure with a random click handler
 		var data = 'some random data';
-		ActionCreators.rate(data);
 	},
 
 	render: function(){

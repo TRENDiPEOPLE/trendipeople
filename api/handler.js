@@ -108,6 +108,13 @@ var user = function(request,reply){
 };
 
 
+var rate = function(request, reply) {
+  console.log("handler");
+
+
+};
+
+
 var facebook = function (request, reply) {
     var creds = request.auth.credentials;
 
@@ -127,5 +134,6 @@ module.exports = {
 	facebook: facebook,
 	home: home,
 	logout: logout,
-	user: user
+	user: user,
+  rate: rate
 };
