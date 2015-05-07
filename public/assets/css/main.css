@@ -17,7 +17,8 @@
 .imageBox {
   height: 200px;
   width: 200px;
-  padding: 5px;
+  margin: 1%;
+  padding: 2%;
   border: 2px solid lightskyblue;
   border-radius: 1px;
 }
@@ -25,17 +26,18 @@
 .lookBox {
   height: 200px;
   width: 200px;
-  padding: 5px;
+  margin: 1%;
+  padding: 2%;
   border: 2px solid lightskyblue;
   border-radius: 1px;
 }
 
 .categoryBox {
-  margin-top: 3%;
+  margin-top: 4%;
 }
 
 .trendBox {
-  margin-top: 3%;
+  margin-top: 4%;
 }
 
 .ps-top-to-bottom {
