@@ -12,7 +12,7 @@ var Profile = React.createClass({
 	},
 
 	render: function(){
-
+		console.log('render profile');
 		// the users info is stored in this.props.user
 		var username = this.props.user.username;
 		var facebook_id = this.props.user.facebook_id;
