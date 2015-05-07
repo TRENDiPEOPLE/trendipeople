@@ -1,17 +1,18 @@
 var mongoose = require('mongoose');
 var Path = require('path');
 var index = Path.resolve(__dirname + '/../public/index.html');
-var bson = require('bson');
-var fs = require('fs');
+
+var config = require('./config');
+
 // local mongoose connection
 //mongoose.connect('mongodb://127.0.0.1:27017/test');
 
 // mongolab mongoose connection
-mongoose.connect('mongodb://trendipeople:trendipeople@ds034348.mongolab.com:34348/trendipeople');
+mongoose.connect(config.db.dburl);
 var db = mongoose.connection;
 
 db.once('open', function(callback){
-	console.log('db connected')
+	console.log('db connected');
 });
 
 var userSchema = new mongoose.Schema({
@@ -26,7 +27,7 @@ var userSchema = new mongoose.Schema({
 
 });
 
-var User = mongoose.model('User', userSchema)
+var User = mongoose.model('User', userSchema);
 
 var logout = function(request,reply){
 	if (request.auth.isAuthenticated) {
@@ -40,8 +41,9 @@ var logout = function(request,reply){
 
 var home = function(request,reply){
 	if (request.auth.isAuthenticated){
-		console.log('is authenticated');		
-		console.log('request.auth: ', request.auth);
+
+		console.log('is authenticated');
+
 		var email = request.auth.credentials.email;
 		var username = request.auth.credentials.username;
 		var facebook_id = request.auth.credentials.auth_id;
@@ -53,7 +55,7 @@ var home = function(request,reply){
 
 		    if (user){
 		    	console.log('user exists');
-		    	console.log(user)
+		    	console.log(user);
 				reply.file(index);
 		    }
 
@@ -71,7 +73,7 @@ var home = function(request,reply){
                     console.log('registration successful');
                     reply.file(index);
                 });
-		    
+
 		    }
 
 		});
@@ -90,14 +92,14 @@ var user = function(request,reply){
 
 	    // query the db for the user
 		User.findOne({email: email}, function(err,user){
-		    
+
 		    if (err){
-	       		throw err;
-	       		console.log(err);	
+	       		console.log(err);
+            throw err;
 		    }
 
 	        // if the user is registered
-			if (user){ 
+			if (user){
 	    		console.log('user is: ', user);
 				reply(user);
 
@@ -171,23 +173,23 @@ var image = function(request,reply){
 
 var facebook = function (request, reply) {
     var creds = request.auth.credentials;
-    
-    console.log('creds: ', creds);
+    console.log('facebook handler trigged');
+    console.log('creds.profile.d: ', creds.profile.displayName);
     var profile = {
         username    : creds.profile.displayName,
         auth_method : 'facebook',
         auth_id     : creds.profile.raw.id,
         email       : creds.profile.email
-    }
+    };
 
     request.auth.session.set(profile);
-    reply.redirect('/');     
+    reply.redirect('/');
 };
 
 module.exports = {
 	facebook: facebook,
 	home: home,
 	logout: logout,
-	user: user,
-	image: image
-}
+	image:image,
+	user: user
+};

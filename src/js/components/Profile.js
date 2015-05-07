@@ -24,11 +24,9 @@ var Profile = React.createClass({
 		});
 
 		return (
-			<div>
-				<img src={profile_image_url} />
-				<p>{username}</p>
-				<p><Link to="upload">Upload image</Link></p>
-				{imagesHTML}
+			<div className="col-md-2">
+				<p>Profile page</p>
+				<input type="submit" onClick={this.clickHander} value="Rate!"/>
 			</div>
 		);
 	}

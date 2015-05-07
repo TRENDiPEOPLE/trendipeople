@@ -6,7 +6,7 @@ var Bell = require('bell');
 var Cookie = require('hapi-auth-cookie');
 var Joi = require('joi');
 var handler = require('./handler');
-
+var config = require('./config');
 
 server.connection({
 	host: "localhost",
@@ -21,14 +21,14 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 
 	server.auth.strategy('facebook', 'bell', {
 		provider	: 'facebook',
-        password    : 'cookie_encryption_password',
-        clientId    : '1435448896757183',
-        clientSecret: '210ee644e1c933b92b3a85fa3b546cfc',
+        password    : config.facebook.password,
+        clientId    : config.facebook.clientId,
+        clientSecret: config.facebook.password,
         isSecure    : false
 	});
 
 	server.auth.strategy('session', 'cookie', {
-        password        : 'password',
+        password        : config.cookie.password,
         cookie          : 'sid',
         isSecure        : false	
     });

@@ -1,5 +1,6 @@
 var React = require("react");
-var ActionCreators = require('../actions/ActionCreators');
+
+/*var ActionCreators = require('../actions/ActionCreators');
 
 
 
@@ -32,6 +33,16 @@ var Upload = React.createClass({
 			
 			</form>
 
+			*/
+
+
+
+var Upload = React.createClass({
+	render: function(){
+		return (
+			<div>
+				Upload page
+			</div>
 			)
 	}
 });
