@@ -7,6 +7,29 @@ var CHANGE_EVENT = "change";
 
 var rating = 0;
 var _user = null;
+var people = [
+	{ img : "http://lorempixel.com/150/150/people/1", rating : 0 },
+	{ img : "http://lorempixel.com/150/150/people/2", rating : 0 },
+	{ img : "http://lorempixel.com/150/150/people/3", rating : 0 },
+	{ img : "http://lorempixel.com/150/150/people/4", rating : 0 },
+	{ img : "http://lorempixel.com/150/150/people/5", rating : 0 },
+	{ img : "http://lorempixel.com/150/150/people/6", rating : 0 },
+	{ img : "http://lorempixel.com/150/150/people/7", rating : 0 },
+	{ img : "http://lorempixel.com/150/150/people/8", rating : 0 }
+];
+
+var looks = [
+	{ look : "http://lorempixel.com/150/150/fashion/1", rating : 0 },
+	{ look : "http://lorempixel.com/150/150/fashion/2", rating : 0 },
+	{ look : "http://lorempixel.com/150/150/fashion/3", rating : 0 },
+	{ look : "http://lorempixel.com/150/150/fashion/4", rating : 0 },
+	{ look : "http://lorempixel.com/150/150/fashion/5", rating : 0 },
+	{ look : "http://lorempixel.com/150/150/fashion/6", rating : 0 },
+	{ look : "http://lorempixel.com/150/150/fashion/7", rating : 0 },
+	{ look : "http://lorempixel.com/150/150/fashion/8", rating : 0 }
+];
+var trends = [ "Xmas", "Winter", "TopShop", "Fur Coats", "River Island", "Hats", "Big Jackets", "Spring"];
+var categories = [ "Men", " Women", "Accesories", "Beauty", "Hair", "Beachwear", "Sunglasses", "Shorts", "Tops", "Swimwear", "Denim", "Dresses"];
 
 var Store = assign({}, EventEmitter.prototype, {
 
@@ -28,14 +51,29 @@ var Store = assign({}, EventEmitter.prototype, {
 
 	getUser: function(){
 		return _user;
+	},
+
+	getPeople: function(){
+		return people;
+	},
+
+	getTrends: function(){
+		return trends;
+	},
+
+	getLooks: function(){
+		return looks;
+	},
+
+	getCategories: function(){
+		return categories;
 	}
 });
-
 
 Dispatcher.register(function(action){
 
 	switch (action.type) {
-		
+
 		case ActionTypes.RATE:
 			rating +=1;
 			Store.emitChange();
@@ -49,6 +87,5 @@ Dispatcher.register(function(action){
 
 
 });
-
 
 module.exports = Store;
