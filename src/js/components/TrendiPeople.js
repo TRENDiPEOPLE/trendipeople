@@ -56,12 +56,12 @@ var TrendiPeople = React.createClass({
 
 	render: function(){
 
-		var email;
+		var menu;
 
 		// display login or logout if the user is logged in or out
 		if (this.state.user) {
-			loginButton = <li><a href="/logout">Log out</a></li>;
-			email = this.state.user.email;
+			loginButton = 
+					<li><a href="/logout">Log out</a></li>;
 		} else {
 			loginButton = <li><a href="/facebook">Login</a></li>;
 		}
@@ -82,7 +82,6 @@ var TrendiPeople = React.createClass({
 								    </div>
 								    <div>
 										<ul className="nav navbar-nav">
-											{email}
 											<li><Link to="profile">Profile</Link></li>
 											<li><Link to="trending">Trending</Link></li>
 											<li><Link to="upload">Upload</Link></li>

@@ -109,8 +109,8 @@ var user = function(request,reply){
 
 
 var facebook = function (request, reply) {
+	console.log('facebook handler');
     var creds = request.auth.credentials;
-
     console.log('creds.profile.d: ', creds.profile.displayName);
     var profile = {
         username    : creds.profile.displayName,
