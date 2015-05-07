@@ -35,6 +35,8 @@
     "joi": "^6.4.1",
     "jsonstream": "^1.0.3",
     "mongoose": "^4.0.1",
+    "mongoose-crate": "^1.0.10",
+    "mongoose-crate-s3": "^1.1.1",
     "object-assign": "^2.0.0",
     "react": "^0.13.1",
     "react-router": "^0.13.2",
