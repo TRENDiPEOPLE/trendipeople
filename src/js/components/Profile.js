@@ -1,5 +1,7 @@
 var React = require("react");
 var ActionCreators = require('../actions/ActionCreators');
+var Router = require('react-router'); // or var Router = ReactRouter; in browsers
+var Link = Router.Link;
 
 var Profile = React.createClass({
 
@@ -10,10 +12,16 @@ var Profile = React.createClass({
 	},
 
 	render: function(){
+
+		// the users info is stored in this.props.user
+		var username = this.props.user.username;
+		var facebook_id = this.props.user.facebook_id;
+		var profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture';
 		return (
 			<div>
-				<p>Profile page</p>
-				<input type="submit" onClick={this.clickHander} value="Rate!"/>		
+				<img src={profile_image_url} />
+				<p>{username}</p>
+				<Link to="upload">Upload image</Link>
 			</div>
 		);
 	}

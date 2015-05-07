@@ -10,6 +10,10 @@ module.exports = {
 			type: ActionTypes.RECEIVED_USER,
 			user: user
 		});	
+	},
+
+	receivedImage: function(image){
+		console.log('ServerActionCreators received images: ', image);
 	}
 
 }

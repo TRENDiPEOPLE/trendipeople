@@ -14,6 +14,10 @@ module.exports = {
 
 	fetchUser: function(){
 		APIUtils.fetchUser();
+	},
+
+	saveImage: function(data){
+		APIUtils.saveImage(data);
 	}
 
 }

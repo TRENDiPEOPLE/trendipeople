@@ -5,13 +5,15 @@ var Link = Router.Link;
 var RouteHandler = Router.RouteHandler;
 var Route = Router.Route;
 
-//var ActionCreators = require('../actions/ActionCreators');
+// Flux stuff
+var ActionCreators = require('../actions/ActionCreators')
 var Store = require('../stores/Store');
+
+// React components
 var Profile = require('./Profile');
 var Body = require('./Body');
 var Trending = require('./Trending');
-
-var ActionCreators = require('../actions/ActionCreators')
+var Upload = require('./Upload');
 
 function getStateFromStore(){
 	var rating = Store.getRating();
@@ -20,8 +22,6 @@ function getStateFromStore(){
 		rating : rating,
 		user : user
 	}
-
-
 }
 
 var TrendiPeople = React.createClass({
@@ -47,38 +47,35 @@ var TrendiPeople = React.createClass({
 
 	render: function(){
 
-		var email;
-
+		var menu;
 		// display login or logout if the user is logged in or out
 		if (this.state.user) {
-			loginButton = <li><a href="/logout">Log out</a></li>;
-			email = this.state.user.email;
+			menu = 	<ul>
+						<li><Link to="profile" >Profile</Link></li>
+						<li><Link to="trending" >Trending</Link></li>
+						<li><a href="/logout">Log out</a></li>
+					</ul>;
 		} else {
-			loginButton = <li><a href="/facebook">Login</a></li>;
+			menu = <ul><li><a href="/facebook">Facebook Login</a></li></ul>;
 		}
 
 		var rating = this.state.rating;
 		return(
 			<div>
-			<h3>TRENDiPEOPLE</h3>
-			{email}
-			<ul>
-				<li><Link to="Profile" >Profile</Link></li>
-				<li><Link to="Trending" >Trending</Link></li>
-				{loginButton}
-			</ul>
-          	<RouteHandler rating={this.state.rating} user={this.state.user}/>
+				<Link to="trendiPeople"><h3>TRENDiPEOPLE</h3></Link>
+					{menu}
+	          	<RouteHandler rating={this.state.rating} user={this.state.user}/>
 			</div>
-
 			);
 	}
 });
 
 
 var routes = (
-	<Route path="/" handler={TrendiPeople} >
-		<Route name="Profile" handler={Profile} />
-		<Route name="Trending" handler={Trending} />
+	<Route path="/" name="trendiPeople" handler={TrendiPeople} >
+		<Route name="profile" handler={Profile} />
+		<Route name="trending" handler={Trending} />
+		<Route name="upload" handler={Upload} />
 		<DefaultRoute handler={Trending} />
 	</Route>
 )
