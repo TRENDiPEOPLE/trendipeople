@@ -28,7 +28,8 @@ var looks = [
 	{ look : "http://lorempixel.com/150/150/fashion/7", rating : 0 },
 	{ look : "http://lorempixel.com/150/150/fashion/8", rating : 0 }
 ];
-var trends = [ "Winter", "TopShop", "Fur Coats", "Hats", "Spring"];
+var trends = [ "Xmas", "Winter", "TopShop", "Fur Coats", "River Island", "Hats", "Big Jackets", "Spring"];
+var categories = [ "Men", " Women", "Accesories", "Beauty", "Hair", "Beachwear", "Sunglasses", "Shorts", "Tops", "Swimwear", "Denim", "Dresses"];
 
 var Store = assign({}, EventEmitter.prototype, {
 
@@ -62,6 +63,10 @@ var Store = assign({}, EventEmitter.prototype, {
 
 	getLooks: function(){
 		return looks;
+	},
+
+	getCategories: function(){
+		return categories;
 	}
 });
 
