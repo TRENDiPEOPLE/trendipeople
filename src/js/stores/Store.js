@@ -30,7 +30,7 @@ var looks = [
 ];
 var trends = [ "Xmas", "Winter", "TopShop", "Fur Coats", "River Island", "Hats", "Big Jackets", "Spring"];
 var categories = [ "Men", " Women", "Accesories", "Beauty", "Hair", "Beachwear", "Sunglasses", "Shorts", "Tops", "Swimwear", "Denim", "Dresses"];
-
+var images;
 var Store = assign({}, EventEmitter.prototype, {
 
 	emitChange: function(){
@@ -67,7 +67,11 @@ var Store = assign({}, EventEmitter.prototype, {
 
 	getCategories: function(){
 		return categories;
-	}
+	},
+
+	getImages: function(){
+		return images;
+	},
 });
 
 Dispatcher.register(function(action){
@@ -80,6 +84,17 @@ Dispatcher.register(function(action){
 			break;
 
 		case ActionTypes.RECEIVED_USER:
+			_user = action.user;
+			Store.emitChange();
+			break;
+
+		case ActionTypes.RECEIVED_IMAGES:
+			images = action.images;
+			console.log('images in Store: ', images);
+			Store.emitChange();
+			break;
+
+		case ActionTypes.RECEIVED_IMAGE:
 			_user = action.user;
 			Store.emitChange();
 			break;

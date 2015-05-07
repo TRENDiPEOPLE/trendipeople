@@ -12,4 +12,12 @@ module.exports = {
 		});
 	},
 
+	receivedImages: function(images){
+		AppDispatcher.dispatch({
+			type: ActionTypes.RECEIVED_IMAGES,
+			images: images
+		});
+
+	}
+
 };
