@@ -1,4 +1,4 @@
-var Hapi 	 = require("hapi");
+var Hapi = require("hapi");
 var server = new Hapi.Server();
 var Path = require('path');
 var index = Path.resolve(__dirname + '/../public/index.html');
@@ -50,9 +50,34 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 		}
 
 	},{
+		path: '/api/image',
+		method: ['POST'],
+		config: {
+			 
+			 //for image uploading
+			 /*payload: {
+	           output:'file',
+	           maxBytes:209715200,
+	           parse: false
+	        },*/
+
+			auth: {
+				strategy: 'session',
+				mode: 'try'
+			},
+			handler: handler.image,
+
+            plugins: {
+                'hapi-auth-cookie': {
+                    reddirectTo: '/'
+                }
+            }
+		}
+	},{
 		path: '/user',
 		method: 'GET',
 		config: {
+
 			auth: {
 				strategy: 'session',
 				mode: 'try'

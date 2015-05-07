@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Path = require('path');
 var index = Path.resolve(__dirname + '/../public/index.html');
+
 var config = require('./config');
 
 // local mongoose connection
@@ -16,7 +17,14 @@ db.once('open', function(callback){
 
 var userSchema = new mongoose.Schema({
 	username: String,
-	email: String
+	email: String,
+	facebook_id: String,
+	shared_images: [{
+		link: String,
+		title: String,
+		rating: Number
+	}]
+
 });
 
 var User = mongoose.model('User', userSchema);
@@ -33,10 +41,12 @@ var logout = function(request,reply){
 
 var home = function(request,reply){
 	if (request.auth.isAuthenticated){
+
 		console.log('is authenticated');
 
 		var email = request.auth.credentials.email;
 		var username = request.auth.credentials.username;
+		var facebook_id = request.auth.credentials.auth_id;
 
 		User.findOne({email: email}, function(err,user){
 		    if (err){
@@ -50,11 +60,11 @@ var home = function(request,reply){
 		    }
 
 		    else {
-		    	console.log('trying to save new user');
+		    	console.log('trying to save new user, with all info');
 				var new_user = new User();
                 new_user.email = email;
                 new_user.username = username;
-
+                new_user.facebook_id = facebook_id;
                 new_user.save( function(err){
                     if (err){
                         console.log('error when saving new member');
@@ -100,7 +110,7 @@ var user = function(request,reply){
 
 		});
 
-    // if the user isnt authenticated
+    // if the user isn't authenticated
 	} else {
 		console.log('request.auth.credentials: ', request.auth.credentials);
 		reply('youre not authenticated');
@@ -108,9 +118,64 @@ var user = function(request,reply){
 };
 
 
+var image = function(request,reply){
+	if (request.auth.isAuthenticated){
+		//var payload= request.payload;
+		//var payloadPath = request.payload.path;
+		//var image = fs.readFileSync(payloadPath);
+	 
+
+		var id = request.params.id;		
+		var email = request.auth.credentials.email;
+
+		var payload = request.payload;
+		var image_link = payload.image;
+		console.log('payload: ',request.payload);
+
+		User.findOne({email: email}, function(err,user){
+		    
+		    if (err){
+	       		throw err;
+	       		console.log(err);	
+		    }
+
+	        // if the user is registered
+			if (user){
+				var new_image = {
+					link: image_link,
+					title: 'some title'
+				}
+				user.shared_images.push(new_image);
+
+				user.markModified('shared_images');
+                
+                //save the updated
+                user.save(function(err){
+                    if (err){
+                    console.log('Error is : ', err);
+                    }
+                });
+				reply(user);
+
+	        // if the user isn't registered
+			} else if (!user){
+				console.log('couldnt find user');
+			}
+
+		});
+		
+
+	} else {
+		reply('not authenticated');
+	}
+};
+
+
 var facebook = function (request, reply) {
 	console.log('facebook handler');
     var creds = request.auth.credentials;
+
+    console.log('facebook handler trigged');
     console.log('creds.profile.d: ', creds.profile.displayName);
     var profile = {
         username    : creds.profile.displayName,
@@ -127,5 +192,6 @@ module.exports = {
 	facebook: facebook,
 	home: home,
 	logout: logout,
+	image:image,
 	user: user
 };

@@ -14,6 +14,11 @@ module.exports = {
 
 	fetchUser: function(){
 		APIUtils.fetchUser();
+	},
+
+	saveImage: function(data){
+		console.log('data in actionCreators: ', data);
+		APIUtils.saveImage(data);
 	}
 
 }
