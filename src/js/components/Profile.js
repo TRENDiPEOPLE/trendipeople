@@ -11,9 +11,9 @@ var Profile = React.createClass({
 
 	render: function(){
 		return (
-			<div>
+			<div className="col-md-2">
 				<p>Profile page</p>
-				<input type="submit" onClick={this.clickHander} value="Rate!"/>		
+				<input type="submit" onClick={this.clickHander} value="Rate!"/>
 			</div>
 		);
 	}
