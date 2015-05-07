@@ -21,9 +21,9 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 
 	server.auth.strategy('facebook', 'bell', {
 		provider	: 'facebook',
-        password    : config.facebook.password,
+        password    : config.facebook.clientSecret,
         clientId    : config.facebook.clientId,
-        clientSecret: config.facebook.password,
+        clientSecret: config.facebook.clientSecret,
         isSecure    : false
 	});
 
