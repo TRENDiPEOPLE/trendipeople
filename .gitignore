@@ -4,4 +4,4 @@ node_modules
 
 public/assets/js/main.js
 
-credentials.json
+creds.json
