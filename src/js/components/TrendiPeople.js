@@ -58,7 +58,6 @@ var TrendiPeople = React.createClass({
 			menu = <ul><li><a href="/facebook">Facebook Login</a></li></ul>;
 		}
 
-		var rating = this.state.rating;
 		return(
 			<div>
 
