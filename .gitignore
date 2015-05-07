@@ -1,11 +1,7 @@
 .DS_Store
 public/assets/js/main.js
-
-
 credentials.json
-
 creds.json
 npm-debug.log
-
 creds.json
-
+node_modules
