@@ -3,6 +3,7 @@ var Path = require('path');
 var index = Path.resolve(__dirname + '/../public/index.html');
 
 var config = require('./config');
+var Schema = mongoose.Schema;
 
 // local mongoose connection
 //mongoose.connect('mongodb://127.0.0.1:27017/test');
@@ -15,7 +16,7 @@ db.once('open', function(callback){
 	console.log('db connected');
 });
 
-var userSchema = new mongoose.Schema({
+var userSchema = new Schema({
 	username: String,
 	email: String,
 	facebook_id: String,
@@ -26,8 +27,18 @@ var userSchema = new mongoose.Schema({
 	}]
 
 });
-
 var User = mongoose.model('User', userSchema);
+
+
+var imgSchema = new Schema({
+	link: String,
+	rating: Number,
+	raters: [String],
+	facebook_id: String
+});
+
+var Img = mongoose.model('Img', imgSchema);
+
 
 var logout = function(request,reply){
 	if (request.auth.isAuthenticated) {
@@ -119,19 +130,59 @@ var user = function(request,reply){
 
 
 var image = function(request,reply){
+	console.log('image handler triggered')
 	if (request.auth.isAuthenticated){
+		if (request.raw.req.method === 'POST'){
+			var id = request.params.id;		
+			var email = request.auth.credentials.email;
+			var facebook_id = request.auth.credentials.auth_id;
+			console.log('facebook_id: ', facebook_id);
+			var payload = request.payload;
+			var image_link = payload.image;
+			console.log('payload: ',request.payload);
+
+			var new_image = new Img();
+			new_image.link = image_link;
+			new_image.rating = 4;
+			new_image.raters = [];
+			new_image.facebook_id = facebook_id;
+	        new_image.save( function(err){
+	            if (err){
+	                console.log('error when saving new member');
+	                throw error;
+	            }
+	            console.log('registration successful');
+	            reply('success');
+	        });
+
+		} 
+		else if (request.raw.req.method === 'GET'){
+			var facebook_id = request.auth.credentials.auth_id;
+
+			Img.find({facebook_id: facebook_id}, function(err,images){
+				if (err){
+	       			throw err;
+	       			console.log(err);	
+		    	}
+
+		    	if (images){
+		    		reply(images)
+		    	}
+		    	else if (!images){
+		    		reply([]);
+		    	}
+
+			});
+
+		}
 		//var payload= request.payload;
 		//var payloadPath = request.payload.path;
 		//var image = fs.readFileSync(payloadPath);
 	 
 
-		var id = request.params.id;		
-		var email = request.auth.credentials.email;
 
-		var payload = request.payload;
-		var image_link = payload.image;
-		console.log('payload: ',request.payload);
 
+/*
 		User.findOne({email: email}, function(err,user){
 		    
 		    if (err){
@@ -163,6 +214,8 @@ var image = function(request,reply){
 			}
 
 		});
+
+*/
 		
 
 	} else {

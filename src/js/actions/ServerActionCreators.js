@@ -11,8 +11,12 @@ module.exports = {
 		});	
 	},
 
-	receivedImage: function(image){
-		console.log('ServerActionCreators received images: ', image);
+	receivedImages: function(images){
+		AppDispatcher.dispatch({
+			type: ActionTypes.RECEIVED_IMAGES,
+			images: images
+		});		
+
 	}
 
 }

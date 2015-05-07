@@ -1,6 +1,6 @@
 var React = require("react");
 
-/*var ActionCreators = require('../actions/ActionCreators');
+var ActionCreators = require('../actions/ActionCreators');
 
 
 
@@ -27,24 +27,14 @@ var Upload = React.createClass({
 		return (
 
 			<form method="POST" action="/api/image"  onSubmit={this.handleSubmit} >
-  			
   				<input type="text" name="image_link" ref="image" />
 				<input type="submit" value="Share image" />
-			
 			</form>
+		)
 
-			*/
-
-
-
-var Upload = React.createClass({
-	render: function(){
-		return (
-			<div>
-				Upload page
-			</div>
-			)
+		
 	}
+
 });
 
 module.exports = Upload;

@@ -20,6 +20,7 @@ function getStateFromStore(){
 	var people 		 = Store.getPeople();
 	var trends 		 = Store.getTrends();
 	var looks  		 = Store.getLooks();
+	var images 		 = Store.getImages();
 	var categories = Store.getCategories();
 
 	return {
@@ -28,7 +29,8 @@ function getStateFromStore(){
 		people 		 : people,
 		trends 		 : trends,
 		looks  		 : looks,
-		categories : categories
+		categories : categories,
+		images 		 : images
 	};
 
 }
@@ -56,15 +58,19 @@ var TrendiPeople = React.createClass({
 
 	render: function(){
 
-		var loginButton;
+		var menu;
 
 		// display login or logout if the user is logged in or out
 		if (this.state.user) {
-			loginButton = 
-					<li><a href="/logout">Log out</a></li>;
+			menu = <ul className="nav navbar-nav">
+				<li><Link to="profile">Profile</Link></li>
+				<li><Link to="trending">Trending</Link></li>
+				<li><Link to="upload">Upload</Link></li>
+				 <li><a href="/logout">Log out</a></li>
+			</ul>;
 
 		} else {
-			loginButton = <li><a href="/facebook">Login</a></li>;
+			menu =<ul className="nav navbar-nav"> <li><a href="/facebook">Login</a></li></ul>;
 		}
 
 		var rating = this.state.rating;
@@ -79,17 +85,10 @@ var TrendiPeople = React.createClass({
 							<nav className="navbar navbar-default">
 								<div className="container-fluid">
 								    <div className="navbar-header">
-
 								    	<Link to="home" className="navbar-brand">Home</Link>
 								    </div>
 								    <div>
-										<ul className="nav navbar-nav">
-											<li><Link to="profile">Profile</Link></li>
-											<li><Link to="trending">Trending</Link></li>
-
-											<li><Link to="upload">Upload</Link></li>
-											{loginButton}
-										</ul>
+								    {menu}
 									</div>
 								</div>
 							</nav>
@@ -97,7 +96,7 @@ var TrendiPeople = React.createClass({
 					</div>
 
 					<div className="row col-md-12">
-						<RouteHandler rating={this.state.rating} user={this.state.user} people={this.state.people} trends={this.state.trends} looks={this.state.looks} categories={this.state.categories} />
+						<RouteHandler rating={this.state.rating} user={this.state.user} images={this.state.images} people={this.state.people} trends={this.state.trends} looks={this.state.looks} categories={this.state.categories} />
 					</div>
 				</div>
 			</div>

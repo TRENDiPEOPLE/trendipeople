@@ -51,7 +51,7 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 
 	},{
 		path: '/api/image',
-		method: ['POST'],
+		method: ['GET','POST'],
 		config: {
 			 
 			 //for image uploading
@@ -73,7 +73,8 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
                 }
             }
 		}
-	},{
+	},
+	{
 		path: '/user',
 		method: 'GET',
 		config: {

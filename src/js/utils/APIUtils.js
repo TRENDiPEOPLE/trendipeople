@@ -11,6 +11,15 @@ module.exports = {
 			});
 	},
 
+	fetchImages: function(id){
+		Request.get('/api/image')
+			.end(function(err,res){
+				console.log('AJAX response: ', res);
+				ServerActionCreators.receivedImages(res.body);
+			});
+	},
+
+
 	saveImage: function(data){
 		console.log('sending ajax request. data: ', data);
 		Request.post('/api/image')
