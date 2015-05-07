@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 var Path = require('path');
 var index = Path.resolve(__dirname + '/../public/index.html');
 var config = require('./config');
+var User = require('./schema').User;
+var Images = require('./schema').Images;
 
 // local mongoose connection
 //mongoose.connect('mongodb://127.0.0.1:27017/test');
@@ -13,13 +15,6 @@ var db = mongoose.connection;
 db.once('open', function(callback){
 	console.log('db connected');
 });
-
-var userSchema = new mongoose.Schema({
-	username: String,
-	email: String
-});
-
-var User = mongoose.model('User', userSchema);
 
 var logout = function(request,reply){
 	if (request.auth.isAuthenticated) {
