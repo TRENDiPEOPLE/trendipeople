@@ -60,11 +60,10 @@ var TrendiPeople = React.createClass({
 
 		// display login or logout if the user is logged in or out
 		if (this.state.user) {
-			menu = 	<li><Link to="Profile" title="Profile">Profile</Link></li>
-					<li><Link to="Trending" title="Trending">Trending</Link></li>
+			loginButton = 
 					<li><a href="/logout">Log out</a></li>;
 		} else {
-			menu = <li><a href="/facebook">Login</a></li>;
+			loginButton = <li><a href="/facebook">Login</a></li>;
 		}
 
 		var rating = this.state.rating;
