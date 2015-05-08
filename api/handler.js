@@ -5,6 +5,8 @@ var index = Path.resolve(__dirname + '/../public/index.html');
 var config = require('./config');
 var Schema = mongoose.Schema;
 
+var User = require('./schema').User;
+var Img = require('./schema').Img;
 // local mongoose connection
 //mongoose.connect('mongodb://127.0.0.1:27017/test');
 
@@ -15,30 +17,6 @@ var db = mongoose.connection;
 db.once('open', function(callback){
 	console.log('db connected');
 });
-
-var userSchema = new Schema({
-	username: String,
-	email: String,
-	facebook_id: String,
-	shared_images: [{
-		link: String,
-		title: String,
-		rating: Number
-	}]
-
-});
-var User = mongoose.model('User', userSchema);
-
-
-var imgSchema = new Schema({
-	link: String,
-	rating: Number,
-	raters: [String],
-	facebook_id: String
-});
-
-var Img = mongoose.model('Img', imgSchema);
-
 
 var logout = function(request,reply){
 	if (request.auth.isAuthenticated) {
@@ -128,8 +106,35 @@ var user = function(request,reply){
 	}
 };
 
+var trending = function(request,reply){
+	console.log('api/user/images handler triggered')
+	if (request.auth.isAuthenticated){
+		Img.find({},function(err,images){
+			if (err){
+	   			throw err;
+	   			console.log(err);	
+	    	}
+
+	    	if (images){
+	    		trending_images = images.map(function(image){
+	    			if (image.rating > 3){
+	    				return image;
+	    			}
+	    		});
+	    		console.log('trending_images: ', trending_images);
+	    		reply(trending_images)
+	    	}
+	    	else if (!images){
+	    		console.log('no images')
+	    		reply([]);
+	    	}
+		});
+	}
+
+};
+
 var image = function(request,reply){
-	console.log('image handler triggered')
+	console.log('api/user/images handler triggered')
 	if (request.auth.isAuthenticated){
 		if (request.raw.req.method === 'POST'){
 			var id = request.params.id;		
@@ -165,9 +170,11 @@ var image = function(request,reply){
 		    	}
 
 		    	if (images){
+		    		console.log('users images: ', images);
 		    		reply(images)
 		    	}
 		    	else if (!images){
+		    		console.log('no user images')
 		    		reply([]);
 		    	}
 
@@ -242,7 +249,7 @@ var facebook = function (request, reply) {
 };
 
 var rate = function(request, reply) {
-
+	reply('hello')
 };
 
 module.exports = {
@@ -251,5 +258,6 @@ module.exports = {
 	logout: logout,
 	image:image,
 	user: user,
-	rate: rate
+	rate: rate,
+	trending: trending
 };

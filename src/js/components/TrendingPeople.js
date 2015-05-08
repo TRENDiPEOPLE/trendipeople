@@ -3,33 +3,55 @@ var ActionCreators = require("../actions/ActionCreators");
 
 var TrendingPeople = React.createClass({
 
-    clickHandler: function() {
-      ActionCreators.rate({ id: "user1", img: "pic1"});
+    clickHandler: function(rating,_id) {
+      console.log('id: ',_id)
+      var voter_id = this.props.user.facebook_id;
+      var data = {
+        image_id: _id,
+        voter_id: voter_id,
+        rating: rating
+      }
+      ActionCreators.rate(data);
+    },
+
+    componentWillMount: function(){
+      ActionCreators.fetchTrendingImages();
     },
 
     render: function() {
-      var images = this.props.images;
-      console.log('images: ', images);
-      console.log('this.props: ', this.props);
-      var trendiLogo = "./assets/images/logo-small.png";
-
-      if (images === undefined){
-        images = [];
-      }
+      var images = this.props.trendingImages || [];
+      var trendiLogo = "/public/assets/images/logo-small.png";
       var that = this;
-      var images = images.map(function(image){
-        var id = Math.floor(Math.random()*1000);
-        return (
-            <img src={image.link} key={id} onClick={that.clickHandler} />
-          );
-      });
 
-      console.log('images: ', images);
+      if (images !== undefined){
+          var imagesHTML = images.map(function(image){
+          var id = Math.floor(Math.random()*1000);
+          var count = 1;
+          var rating = [];
+
+          while (count<=5){
+            var rateClick = that.clickHandler.bind(null, count, image._id);
+            rating.push(<img key={Math.random()} src={trendiLogo} onClick={rateClick} />)
+            count +=1
+          }
+
+          return (
+             <div key={id} className="imageBox">
+              <img src={image.link} />
+               {rating} {image.rating}
+              </div>
+            );
+        });        
+      }
+      
+
+
+      console.log('imagesHTML: ', imagesHTML);
       return (
             <div>
               <h5> Trending People </h5>
-                <div  className="imageBox">
-                  {images}
+                <div>
+                  {imagesHTML}
               </div>
             </div>
       )

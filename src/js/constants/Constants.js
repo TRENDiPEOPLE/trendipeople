@@ -5,7 +5,8 @@ module.exports = {
 	ActionTypes: keyMirror({
 		RATE: null,
 		RECEIVED_USER: null,
-		RECEIVED_IMAGES: null
+		RECEIVED_USER_IMAGES: null,
+		RECEIVED_TRENDING_IMAGES: null
 	})
 
 };
