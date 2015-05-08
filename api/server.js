@@ -102,17 +102,16 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 		path: '/api/user',
 		method: 'GET',
 		config: {
-
 			auth: {
 				strategy: 'session',
 				mode: 'try'
 			},
 			handler: handler.user,
-      plugins: {
-        'hapi-auth-cookie': {
-           reddirectTo: '/'
-         }
-      }
+	        plugins: {
+	          'hapi-auth-cookie': {
+	             reddirectTo: '/'
+	           }
+      		}
 		}
 	},{
     path: "/api/rate",
@@ -147,17 +146,16 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
      handler: handler.facebook
     }
   },
-
   {
-		path: "/public/{param*}",
-		method: "GET",
-		handler: {
-			directory:{
-				path: Path.resolve(__dirname + '/../public'),
-				index: true
-			}
-
+	path: "/public/{param*}",
+	method: "GET",
+	handler: {
+		directory:{
+			path: Path.resolve(__dirname + '/../public'),
+			index: true
 		}
+
+	}
 
 	}]);
 

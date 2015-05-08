@@ -33,7 +33,7 @@ module.exports = {
 			.send(data)
 			.end(function(err,res){
 				console.log('AJAX response rate: ', res);
-				ServerActionCreators.receivedTrendingImages(res.body)
+				ServerActionCreators.receivedRating(res.body)
 			});
 	},
 

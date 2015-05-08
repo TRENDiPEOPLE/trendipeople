@@ -6,7 +6,8 @@ var APIUtils = require('../utils/APIUtils');
 module.exports = {
 
 	rate: function(data){
-		console.log('actionCreators RATE')
+		APIUtils.rate(data);
+
 		AppDispatcher.dispatch({
 			type: ActionTypes.RATE,
 			data: data

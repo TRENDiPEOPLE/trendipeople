@@ -23,30 +23,27 @@ var TrendingPeople = React.createClass({
       var trendiLogo = "/public/assets/images/logo-small.png";
       var that = this;
 
-      if (images !== undefined){
-          var imagesHTML = images.map(function(image){
-          var id = Math.floor(Math.random()*1000);
-          var count = 1;
-          var rating = [];
+      if (images.length > 0){
+            var imagesHTML = images.map(function(image){
+            var id = Math.floor(Math.random()*1000);
+            var count = 1;
+            var rating = [];
 
-          while (count<=5){
-            var rateClick = that.clickHandler.bind(null, count, image._id);
-            rating.push(<img key={Math.random()} src={trendiLogo} onClick={rateClick} />)
-            count +=1
-          }
+            while (count<=5){
+              var rateClick = that.clickHandler.bind(null, count, image._id);
+              rating.push(<img key={Math.random()} src={trendiLogo} onClick={rateClick} />)
+              count +=1
+            }
 
-          return (
-             <div key={id} className="imageBox">
-              <img src={image.link} />
-               {rating} {image.rating}
-              </div>
-            );
+            return (
+               <div key={id} className="imageBox">
+                <img src={image.link} />
+                 {rating} {image.rating}
+                </div>
+              );
         });        
       }
       
-
-
-      console.log('imagesHTML: ', imagesHTML);
       return (
             <div>
               <h5> Trending People </h5>
