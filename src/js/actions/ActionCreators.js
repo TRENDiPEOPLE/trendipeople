@@ -6,12 +6,15 @@ var APIUtils = require('../utils/APIUtils');
 module.exports = {
 
 	rate: function(data){
-		APIUtils.rate(data);
-
+		//optimistic update
 		AppDispatcher.dispatch({
 			type: ActionTypes.RATE,
 			data: data
 		});
+
+		// database update
+		APIUtils.rate(data);
+
 	  },
 
 	fetchUser: function(){

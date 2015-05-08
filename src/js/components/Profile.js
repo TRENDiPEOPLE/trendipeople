@@ -10,13 +10,7 @@ var Profile = React.createClass({
 		ActionCreators.fetchUserImages(facebook_id);
 	},
 
-	clickHander: function(){
-		// testing the flux structure with a random click handler
-		var data = 'some random data';
-	},
-
 	render: function(){
-		console.log('render profile');
 		// the users info is stored in this.props.user
 		var username = this.props.user.username;
 		var facebook_id = this.props.user.facebook_id;
