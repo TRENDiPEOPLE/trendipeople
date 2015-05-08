@@ -30,7 +30,7 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 	server.auth.strategy('session', 'cookie', {
         password        : config.cookie.password,
         cookie          : 'sid',
-        isSecure        : false	
+        isSecure        : false
     });
 
 	server.route([{
@@ -42,15 +42,39 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 				mode: 'try'
 			},
 			handler: handler.home,
+      plugins: {
+        'hapi-auth-cookie': {
+            reddirectTo: '/'
+          }
+       }
+		}
+
+	},{
+		path: '/api/trending/images',
+		method: 'GET',
+		config: {
+			 
+			 //for image uploading
+			 /*payload: {
+	           output:'file',
+	           maxBytes:209715200,
+	           parse: false
+	        },*/
+
+			auth: {
+				strategy: 'session',
+				mode: 'try'
+			},
+			handler: handler.trending,
+
             plugins: {
                 'hapi-auth-cookie': {
                     reddirectTo: '/'
                 }
             }
 		}
-
 	},{
-		path: '/api/image',
+		path: '/api/user/images',
 		method: ['GET','POST'],
 		config: {
 			 
@@ -73,9 +97,9 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
                 }
             }
 		}
-	},
-	{
-		path: '/user',
+	},{
+
+		path: '/api/user',
 		method: 'GET',
 		config: {
 
@@ -84,32 +108,48 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 				mode: 'try'
 			},
 			handler: handler.user,
-            plugins: {
-                'hapi-auth-cookie': {
-                    reddirectTo: '/'
-                }
-            }
+      plugins: {
+        'hapi-auth-cookie': {
+           reddirectTo: '/'
+         }
+      }
 		}
 	},{
-        method: 'GET',
-        path: '/logout',
-        config: {
-            auth: {
-                strategy: 'session',
-                mode: 'try'
-            },
-            handler: handler.logout
-        }
-    },{
+    path: "/api/rate",
+    method: "POST",
+    config: {
+      auth: {
+        strategy: "session",
+        mode: "optional"
+      },
+      handler: handler.rate
+    }
+  },
+
+  {
+     path: '/logout',
+     method: 'GET',
+     config: {
+       auth: {
+         strategy: 'session',
+         mode: 'try'
+       },
+        handler: handler.logout
+      }
+  },
+
+  {
 		//Facebook login route
-        method  : ['GET', 'POST'],
-        path    : '/facebook',
-        config  : {
-            auth: 'facebook',
-            handler: handler.facebook
-        }
-    },{
-		path: "/{param*}",
+   method  : ['GET', 'POST'],
+   path    : '/facebook',
+   config  : {
+   auth: 'facebook',
+     handler: handler.facebook
+    }
+  },
+
+  {
+		path: "/public/{param*}",
 		method: "GET",
 		handler: {
 			directory:{

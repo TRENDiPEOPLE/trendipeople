@@ -28,9 +28,12 @@ var looks = [
 	{ look : "http://lorempixel.com/150/150/fashion/7", rating : 0 },
 	{ look : "http://lorempixel.com/150/150/fashion/8", rating : 0 }
 ];
+
+var trendingImages = null;
+
 var trends = [ "Xmas", "Winter", "TopShop", "Fur Coats", "River Island", "Hats", "Big Jackets", "Spring"];
 var categories = [ "Men", " Women", "Accesories", "Beauty", "Hair", "Beachwear", "Sunglasses", "Shorts", "Tops", "Swimwear", "Denim", "Dresses"];
-var images;
+var userImages;
 var Store = assign({}, EventEmitter.prototype, {
 
 	emitChange: function(){
@@ -69,8 +72,12 @@ var Store = assign({}, EventEmitter.prototype, {
 		return categories;
 	},
 
-	getImages: function(){
-		return images;
+	getTrendingImages: function(){
+		return trendingImages;
+	},
+
+	getUserImages: function(){
+		return userImages;
 	},
 });
 
@@ -79,7 +86,27 @@ Dispatcher.register(function(action){
 	switch (action.type) {
 
 		case ActionTypes.RATE:
-			rating +=1;
+			console.log('store RATE')
+			console.log('store: trendingImages: ', trendingImages);
+			var id = action.data.image_id;
+			u = trendingImages.map(function(image){
+				console.log('id: ', id);
+				console.log('image._id', image._id);
+				if (image._id.toString() == id.toString()){
+					var new_rating_count = image.raters.length + 1;
+					var all_ratings_ever = (image.raters.length*image.rating) + action.data.rating;
+					var new_average_rating = all_ratings_ever / new_rating_count;
+					image.rating = new_average_rating;
+					image.raters.push(action.data.voter_id);
+					console.log('image.raters: ', image.raters);
+					console.log('new_average_rating: ', new_average_rating);
+					return image;
+				} 
+				else {
+					return image
+				}
+			});
+			trendingImages = u;
 			Store.emitChange();
 			break;
 
@@ -88,14 +115,18 @@ Dispatcher.register(function(action){
 			Store.emitChange();
 			break;
 
-		case ActionTypes.RECEIVED_IMAGES:
-			images = action.images;
-			console.log('images in Store: ', images);
+		case ActionTypes.RECEIVED_USER_IMAGES:
+			userImages = action.images;
 			Store.emitChange();
 			break;
 
 		case ActionTypes.RECEIVED_IMAGE:
 			_user = action.user;
+			Store.emitChange();
+			break;
+
+		case ActionTypes.RECEIVED_TRENDING_IMAGES:
+			trendingImages = action.images;
 			Store.emitChange();
 			break;
 	}

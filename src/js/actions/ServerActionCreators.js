@@ -11,12 +11,19 @@ module.exports = {
 		});	
 	},
 
-	receivedImages: function(images){
+	receivedUserImages: function(images){
 		AppDispatcher.dispatch({
-			type: ActionTypes.RECEIVED_IMAGES,
+			type: ActionTypes.RECEIVED_USER_IMAGES,
 			images: images
 		});		
+	},
 
+	receivedTrendingImages: function(images){
+		AppDispatcher.dispatch({
+			type: ActionTypes.RECEIVED_TRENDING_IMAGES,
+			images: images
+		});		
 	}
 
-}
+
+};
