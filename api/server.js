@@ -51,7 +51,31 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 	},
 
   {
-		path: '/api/image',
+		path: '/api/trending/images',
+		method: 'GET',
+		config: {
+
+			 //for image uploading
+			 /*payload: {
+	           output:'file',
+	           maxBytes:209715200,
+	           parse: false
+	        },*/
+
+			auth: {
+				strategy: 'session',
+				mode: 'try'
+			},
+			handler: handler.trending,
+
+            plugins: {
+                'hapi-auth-cookie': {
+                    reddirectTo: '/'
+                }
+            }
+		}
+	},{
+		path: '/api/user/images',
 		method: ['GET','POST'],
 		config: {
 
@@ -75,9 +99,9 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
             }
 		}
 	},
-	{
 
-		path: '/user',
+	{
+		path: '/api/user',
 		method: 'GET',
 		config: {
 
@@ -92,9 +116,7 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
          }
       }
 		}
-	},
-
-  {
+	},{
     path: "/api/rate",
     method: "POST",
     config: {
@@ -129,7 +151,7 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
   },
 
   {
-		path: "/{param*}",
+		path: "/public/{param*}",
 		method: "GET",
 		handler: {
 			directory:{

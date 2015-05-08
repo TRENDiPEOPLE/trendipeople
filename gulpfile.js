@@ -63,4 +63,4 @@ gulp.task("heroku:production", function(){
 	console.log('hello heroku!');
 });
 
-gulp.task("default", ["browserify"]);
+gulp.task("default", ["browserify","watch"]);

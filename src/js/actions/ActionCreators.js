@@ -5,24 +5,27 @@ var APIUtils = require('../utils/APIUtils');
 
 module.exports = {
 
-  rate: function(data){
-    AppDispatcher.dispatch({
-      type: ActionTypes.RATE,
-      data: data
-    });
-  },
+	rate: function(data){
+		console.log('actionCreators RATE')
+		AppDispatcher.dispatch({
+			type: ActionTypes.RATE,
+			data: data
+		});
+	  },
 
 	fetchUser: function(){
 		APIUtils.fetchUser();
 	},
 
-	fetchImages: function(){
-		APIUtils.fetchImages();
+	fetchUserImages: function(){
+		APIUtils.fetchUserImages();
 	},
 
+	fetchTrendingImages: function(){
+		APIUtils.fetchTrendingImages();
+	},
 
 	saveImage: function(data){
-		console.log('data in actionCreators: ', data);
 		APIUtils.saveImage(data);
 	}
 

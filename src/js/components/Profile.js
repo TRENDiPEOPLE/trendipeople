@@ -7,7 +7,7 @@ var Profile = React.createClass({
 
 	componentWillMount: function(){
 		var facebook_id = this.props.user.facebook_id;
-		ActionCreators.fetchImages(facebook_id);
+		ActionCreators.fetchUserImages(facebook_id);
 	},
 
 	clickHander: function(){
@@ -21,7 +21,7 @@ var Profile = React.createClass({
 		var username = this.props.user.username;
 		var facebook_id = this.props.user.facebook_id;
 		var profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture';
-		var images = this.props.images;
+		var images = this.props.userImages;
 		
 		if (images === undefined){
 			images = [];

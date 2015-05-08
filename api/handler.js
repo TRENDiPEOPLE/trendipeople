@@ -106,14 +106,38 @@ var user = function(request,reply){
 	}
 };
 
+var trending = function(request,reply){
+	console.log('api/user/images handler triggered')
+	if (request.auth.isAuthenticated){
+		Img.find({},function(err,images){
+			if (err){
+	   			throw err;
+	   			console.log(err);
+	    	}
+
+	    	if (images){
+	    		trending_images = images.map(function(image){
+	    			if (image.rating > 3){
+	    				return image;
+	    			}
+	    		});
+	    		console.log('trending_images: ', trending_images);
+	    		reply(trending_images)
+	    	}
+	    	else if (!images){
+	    		console.log('no images')
+	    		reply([]);
+	    	}
+		});
+	}
+}
 
 var rate = function(request, reply) {
   console.log("rate handler");
 };
 
-
 var image = function(request,reply){
-	console.log('image handler triggered');
+	console.log('api/user/images handler triggered');
 	if (request.auth.isAuthenticated){
 		if (request.raw.req.method === 'POST'){
 			var id = request.params.id;
@@ -149,9 +173,11 @@ var image = function(request,reply){
 		    	}
 
 		    	if (images){
+		    		console.log('users images: ', images);
 		    		reply(images)
 		    	}
 		    	else if (!images){
+		    		console.log('no user images')
 		    		reply([]);
 		    	}
 
@@ -201,9 +227,9 @@ var image = function(request,reply){
 */
 
 
-	} else {
-		reply('not authenticated');
-	}
+  	} else {
+  		reply('not authenticated');
+  }
 };
 
 
@@ -224,11 +250,16 @@ var facebook = function (request, reply) {
     reply.redirect('/');
 };
 
+var rate = function(request, reply) {
+	reply('hello')
+};
+
 module.exports = {
 	facebook: facebook,
 	home: home,
 	logout: logout,
-	user: user,
-  rate: rate,
 	image:image,
+	user: user,
+	rate: rate,
+	trending: trending
 };
