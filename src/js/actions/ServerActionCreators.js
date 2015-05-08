@@ -4,6 +4,13 @@ var AppDispatcher = require('../dispatcher/Dispatcher');
 
 module.exports = {
 
+	receivedRating: function(data){
+		AppDispatcher.dispatch({
+			type: ActionTypes.RATE,
+			data: data
+		});
+	},
+
 	receivedUser: function(user){
 		AppDispatcher.dispatch({
 			type: ActionTypes.RECEIVED_USER,

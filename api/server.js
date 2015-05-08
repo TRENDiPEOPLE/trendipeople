@@ -42,13 +42,12 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 				mode: 'try'
 			},
 			handler: handler.home,
-      plugins: {
+      	plugins: {
         'hapi-auth-cookie': {
             reddirectTo: '/'
-          }
-       }
+        	 }
+       	}
 		}
-
 	},{
 		path: '/api/trending/images',
 		method: 'GET',
@@ -73,7 +72,7 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
                 }
             }
 		}
-	},{
+	}, {
 		path: '/api/user/images',
 		method: ['GET','POST'],
 		config: {
@@ -102,53 +101,47 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 		path: '/api/user',
 		method: 'GET',
 		config: {
-
 			auth: {
 				strategy: 'session',
 				mode: 'try'
 			},
 			handler: handler.user,
-      plugins: {
-        'hapi-auth-cookie': {
-           reddirectTo: '/'
-         }
-      }
+	        plugins: {
+	          'hapi-auth-cookie': {
+	             reddirectTo: '/'
+	           }
+      		}
 		}
+		},{
+	    path: "/api/rate",
+	    method: "POST",
+	    config: {
+	      auth: {
+	        strategy: "session",
+	        mode: "optional"
+	      },
+	      handler: handler.rate
+	    }
 	},{
-    path: "/api/rate",
-    method: "POST",
-    config: {
-      auth: {
-        strategy: "session",
-        mode: "optional"
-      },
-      handler: handler.rate
-    }
-  },
-
-  {
-     path: '/logout',
-     method: 'GET',
-     config: {
-       auth: {
-         strategy: 'session',
-         mode: 'try'
-       },
-        handler: handler.logout
-      }
-  },
-
-  {
+	    path: '/logout',
+	    method: 'GET',
+	    config: {
+	        auth: {
+	          strategy: 'session',
+	          mode: 'try'
+	       	},
+	        handler: handler.logout
+	      }
+	},{
 		//Facebook login route
-   method  : ['GET', 'POST'],
-   path    : '/facebook',
-   config  : {
-   auth: 'facebook',
-     handler: handler.facebook
-    }
-  },
+	   method  : ['GET', 'POST'],
+	   path    : '/facebook',
+	   config  : {
+	   auth: 'facebook',
+	     handler: handler.facebook
+	    }
+	},{
 
-  {
 		path: "/public/{param*}",
 		method: "GET",
 		handler: {
@@ -156,10 +149,24 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 				path: Path.resolve(__dirname + '/../public'),
 				index: true
 			}
-
 		}
-
-	}]);
+	},{
+		path: '/{subpage}',
+		method: 'GET',
+		config: {
+			auth: {
+				strategy: 'session',
+				mode: 'try'
+			},
+			handler: handler.home,
+      	plugins: {
+        'hapi-auth-cookie': {
+            reddirectTo: '/'
+        	}
+       	}
+		}
+	}
+]);
 
 });
 
