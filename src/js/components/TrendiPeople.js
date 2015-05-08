@@ -42,9 +42,9 @@ var TrendiPeople = React.createClass({
 	},
 
 	componentWillMount: function(){
-		console.log('componentDidMount');
+		// console.log('componentDidMount');
 		Store.addChangeListener(this._onChange);
-		console.log('going to ActionCreators to fetch user');
+		// console.log('going to ActionCreators to fetch user');
 		ActionCreators.fetchUser();
 	},
 
@@ -58,6 +58,7 @@ var TrendiPeople = React.createClass({
 
 	render: function(){
 
+		console.log('images in TrendiPeople: ', this.state.images);
 		var menu;
 
 		// display login or logout if the user is logged in or out
@@ -97,6 +98,12 @@ var TrendiPeople = React.createClass({
 
 					<div className="row col-md-12">
 						<RouteHandler rating={this.state.rating} user={this.state.user} images={this.state.images} people={this.state.people} trends={this.state.trends} looks={this.state.looks} categories={this.state.categories} />
+						<RouteHandler rating={this.state.rating}
+													user={this.state.user}
+													people={this.state.people}
+													trends={this.state.trends}
+													looks={this.state.looks}
+													categories={this.state.categories} />
 					</div>
 				</div>
 			</div>

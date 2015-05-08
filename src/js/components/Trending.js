@@ -12,7 +12,7 @@ var Trending = React.createClass({
           <TrendBox trends={this.props.trends} />
         </div>
         <div className="trendingPeople col-md-10 col-sm-8 col-lg-10 col-xs-8">
-          <TrendingPeople people={this.props.people} />
+          <TrendingPeople people={this.props.people} images={this.props.images} rating={this.props.rating} />
         </div>
         <div className="categoryBox ps-top-to-bottom col-md-2 col-sm-4 col-lg-2 col-xs-4">
           <CategoryBox categories={this.props.categories} />

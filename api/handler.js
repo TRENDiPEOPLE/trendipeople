@@ -128,7 +128,6 @@ var user = function(request,reply){
 	}
 };
 
-
 var image = function(request,reply){
 	console.log('image handler triggered')
 	if (request.auth.isAuthenticated){
@@ -221,6 +220,7 @@ var image = function(request,reply){
 	} else {
 		reply('not authenticated');
 	}
+
 };
 
 
@@ -241,10 +241,15 @@ var facebook = function (request, reply) {
     reply.redirect('/');
 };
 
+var rate = function(request, reply) {
+
+};
+
 module.exports = {
 	facebook: facebook,
 	home: home,
 	logout: logout,
 	image:image,
-	user: user
+	user: user,
+	rate: rate
 };
