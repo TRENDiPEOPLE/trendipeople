@@ -15,6 +15,8 @@ var Upload = require('./Upload');
 var ActionCreators = require('../actions/ActionCreators');
 
 function getStateFromStore(){
+
+
 	var rating 		 = Store.getRating();
 	var user   		 = Store.getUser();
 	var people 		 = Store.getPeople();
@@ -23,6 +25,9 @@ function getStateFromStore(){
 	var userImages 		 = Store.getUserImages();
 	var categories   = Store.getCategories();
 	var trendingImages = Store.getTrendingImages();
+
+
+	console.log('user in getStateFromStore: ', user);
 
 	return {
 		rating 		 : rating,

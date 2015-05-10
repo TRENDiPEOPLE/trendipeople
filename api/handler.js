@@ -106,9 +106,13 @@ var user = function(request,reply){
 	}
 };
 
+
+
 var trending = function(request,reply){
 	console.log('api/user/images handler triggered')
 	if (request.auth.isAuthenticated){
+
+		// fetch all images in db
 		Img.find({},function(err,images){
 			if (err){
 	   			throw err;
@@ -116,14 +120,15 @@ var trending = function(request,reply){
 	    	}
 
 	    	if (images){
-	    		trending_images = images.map(function(image){
-	    			if (image.rating > 3){
-	    				return image;
-	    			}
+
+	    		// filter through the images, and only return those with >2 in rating
+	    		trending_images = images.filter(function(image){
+	    			return image.rating > 2;
 	    		});
-	    		console.log('trending_images: ', trending_images);
+
 	    		reply(trending_images)
 	    	}
+
 	    	else if (!images){
 	    		console.log('no images')
 	    		reply([]);
@@ -138,34 +143,41 @@ var rate = function(request, reply) {
 
 var image = function(request,reply){
 	console.log('api/user/images handler triggered');
+
 	if (request.auth.isAuthenticated){
+
+		// if the user is adding a new image
 		if (request.raw.req.method === 'POST'){
+			var id = request.params.id;
+
+			// declare some useful variables
 			var id = request.params.id;
 			var email = request.auth.credentials.email;
 			var facebook_id = request.auth.credentials.auth_id;
-			console.log('facebook_id: ', facebook_id);
 			var payload = request.payload;
 			var image_link = payload.image;
-			console.log('payload: ',request.payload);
 
+			// create a new image to save in db
 			var new_image = new Img();
 			new_image.link = image_link;
-			new_image.rating = 4;
-			new_image.raters = [];
+			new_image.rating = 2.5;
+			new_image.raters = [facebook_id];
 			new_image.facebook_id = facebook_id;
+
+			// save img
 	        new_image.save( function(err){
 	            if (err){
 	                console.log('error when saving new member');
 	                throw error;
 	            }
-	            console.log('registration successful');
 	            reply('success');
 	        });
-
 		}
-		else if (request.raw.req.method === 'GET'){
-			var facebook_id = request.auth.credentials.auth_id;
 
+		// find all images from this user
+		else if (request.raw.req.method === 'GET'){
+
+			var facebook_id = request.auth.credentials.auth_id;
 			Img.find({facebook_id: facebook_id}, function(err,images){
 				if (err){
 	       			throw err;
@@ -226,7 +238,6 @@ var image = function(request,reply){
 
 */
 
-
   	} else {
   		reply('not authenticated');
   }
@@ -251,8 +262,39 @@ var facebook = function (request, reply) {
 };
 
 var rate = function(request, reply) {
-	reply('hello')
-};
+	var payload = request.payload;
+	var voter_id = payload.voter_id;
+	var rating = payload.rating;
+	console.log('payload: ', payload);
+	Img.findOne({_id: payload.image_id}, function(err,image){
+		var voters = image.raters;
+		var previous_rating = image.rating;
+		if(voters.indexOf(voter_id) > -1){
+
+			reply(payload);
+
+		} else {
+
+			var new_rating_count = voters.length + 1;
+			var all_ratings_ever = (voters.length * previous_rating) + rating;
+			var new_average_rating = all_ratings_ever / new_rating_count;
+
+			image.rating = new_average_rating;
+			image.raters.push(voter_id);
+			image.markModified('rating');
+			image.markModified('raters');
+
+            image.save(function(err){
+                if (err){
+                console.log('Error is : ', err);
+                }
+            });
+
+            console.log('db updated!')
+            reply(payload);
+			}
+		});
+}
 
 module.exports = {
 	facebook: facebook,
