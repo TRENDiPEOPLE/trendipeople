@@ -1,7 +1,11 @@
 .DS_Store
 public/assets/js/main.js
-
-
 credentials.json
+<<<<<<< HEAD
 
 npm-debug.log
+=======
+creds.json
+npm-debug.log
+creds.json
+>>>>>>> master2
