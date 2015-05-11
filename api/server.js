@@ -77,15 +77,15 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 		}
 	}, {
 		path: '/api/user/images',
-		method: ['GET','POST'],
+		method: ['POST'],
 		config: {
 
 			 //for image uploading
-			 /*payload: {
-	           output:'file',
-	           maxBytes:209715200,
-	           parse: false
-	        },*/
+			 payload: {
+	   //         output:'file',
+	   //         maxBytes:209715200,
+	   //         parse: false
+	        },
 
 			auth: {
 				strategy: 'session',
