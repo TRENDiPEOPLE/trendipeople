@@ -26,9 +26,6 @@ function getStateFromStore(){
 	var categories   = Store.getCategories();
 	var trendingImages = Store.getTrendingImages();
 
-
-	console.log('user in getStateFromStore: ', user);
-
 	return {
 		rating 		 : rating,
 		user   		 : user,

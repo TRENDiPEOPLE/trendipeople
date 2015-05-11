@@ -9,7 +9,7 @@ var TrendingPeople = React.createClass({
         image_id: _id,
         voter_id: voter_id,
         rating: rating
-      }
+      };
       ActionCreators.rate(data);
     },
 
@@ -22,7 +22,7 @@ var TrendingPeople = React.createClass({
       var trendiLogo = "/public/assets/images/logo-small.png";
       var that = this;
 
-      // create the HTML for all the images 
+      // create the HTML for all the images
       if (images.length > 0){
             var imagesHTML = images.map(function(image, index){
             var id = Math.floor(Math.random()*1000);
@@ -32,8 +32,8 @@ var TrendingPeople = React.createClass({
             // create the trendi rating below each image
             while (count<=5){
               var rateClick = that.clickHandler.bind(null, count, image._id);
-              rating.push(<img key={Math.random()} src={trendiLogo} onClick={rateClick} />)
-              count +=1
+              rating.push(<img key={Math.random()} src={trendiLogo} onClick={rateClick} />);
+              count +=1;
             }
 
             return (
@@ -42,9 +42,9 @@ var TrendingPeople = React.createClass({
                  {rating} {image.rating}
                 </div>
               );
-        });        
+        });
       }
-      
+
       return (
             <div>
               <h5> Trending People </h5>
@@ -52,7 +52,7 @@ var TrendingPeople = React.createClass({
                   {imagesHTML}
               </div>
             </div>
-      )
+      );
     }
 });
 

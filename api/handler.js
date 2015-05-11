@@ -109,7 +109,7 @@ var user = function(request,reply){
 
 
 var trending = function(request,reply){
-	console.log('api/user/images handler triggered')
+	// console.log('api/user/images handler triggered')
 	if (request.auth.isAuthenticated){
 
 		// fetch all images in db
@@ -141,6 +141,10 @@ var rate = function(request, reply) {
   console.log("rate handler");
 };
 
+
+
+
+
 var image = function(request,reply){
 	console.log('api/user/images handler triggered');
 
@@ -148,7 +152,6 @@ var image = function(request,reply){
 
 		// if the user is adding a new image
 		if (request.raw.req.method === 'POST'){
-			var id = request.params.id;
 
 			// declare some useful variables
 			var id = request.params.id;
@@ -181,10 +184,9 @@ var image = function(request,reply){
 			Img.find({facebook_id: facebook_id}, function(err,images){
 				if (err){
 	       			throw err;
-	       			console.log(err);
 		    	}
 
-		    	if (images){
+		    if (images){
 		    		console.log('users images: ', images);
 		    		reply(images)
 		    	}

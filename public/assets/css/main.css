@@ -2,6 +2,10 @@
   margin-top: 1%;
 }
 
+.navBar {
+  font-size: 18px;
+}
+
 #logo {
   height: 100%;
   width: 30%;
@@ -12,6 +16,55 @@
 .fb-share-button {
   height:5%;
   width: 10%;
+}
+
+.profileRow {
+  height: 30%;
+  border: 3px solid lightskyblue;
+}
+
+.wardrobeRow {
+  border: solid 2px lightskyblue;
+  height: 80%;
+  margin-top: 5%
+}
+
+.wardrobeImage {
+  display: inline-block;
+  margin: 1%;
+  border: 3px solid lightskyblue;
+  border-radius: 4px;
+  padding: 1%;
+}
+
+.profileBox {
+  border: solid 3px lightskyblue;
+  margin-top: 1%
+}
+
+#profilePic {
+  margin: 1%;
+  margin-left: 38%;
+}
+
+#userName {
+  text-align: center;
+}
+
+.infoBar {
+  border: solid 2px lightskyblue;
+  position: absolute;
+  top: 80%;
+  height: 20%;
+  width: 95%;}
+
+.infoBox {
+  display: inline-block;
+  text-align: center;
+  border: solid 2px lightskyblue;
+  border-radius: 3px;
+  width: 25%;
+  height: 100%;
 }
 
 .imageBox {
