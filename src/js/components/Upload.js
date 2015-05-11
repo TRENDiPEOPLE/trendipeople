@@ -44,11 +44,12 @@ var Upload = React.createClass({
 		e.preventDefault();
 
 		Request.post("/api/user/images")
-					.send({path : this.state.data_uri})
+					.send({data : this.state.data_uri})
 					.end(function(err, res) {
 						if (err) console.log("err: ", err);
 						console.log("superagent success: ", res);
 					});
+					// console.log(this.state.data_uri);
 	},
 
 	handleFile: function(e) {
@@ -59,17 +60,17 @@ var Upload = React.createClass({
 			this.setState({
 				data_uri: upload.target.result
 			});
-			console.log(this.state.data_uri);
+			// console.log(this.state.data_uri);
 		}.bind(this);
 
-		reader.readAsDataURL(file);
+		reader.readAsText(file);
 	},
 
 	render: function(){
 
 		return (
 			<form onSubmit={this.handleSubmit} encyType="multipart/form-data" >
-  				<input type="file" onChange={this.handleFile} name="image_link" ref="image" />
+  				<input type="file" onChange={this.handleFile} name="image" ref="image" />
 				<input type="submit" value="Save image" />
 			</form>
 		);

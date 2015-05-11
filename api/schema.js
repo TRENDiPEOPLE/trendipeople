@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var crate = require('mongoose-crate');
 var S3 = require('mongoose-crate-s3');
 var config = require('./config');
+var path = require("path");
 
 var userSchema = new mongoose.Schema({
 	username: String,

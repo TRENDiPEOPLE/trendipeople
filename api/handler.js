@@ -3,6 +3,7 @@ var Path = require('path');
 var index = Path.resolve(__dirname + '/../public/index.html');
 var s3 = require("mongoose-crate-s3");
 var crate = require('mongoose-crate');
+var fs = require("fs");
 
 var config = require('./config');
 var Schema = mongoose.Schema;
@@ -148,27 +149,32 @@ var image = function(request,reply){
 		if (request.raw.req.method === 'POST'){
 
 			// declare some useful variables
-			var id = request.params.id;
-			var email = request.auth.credentials.email;
-			var facebook_id = request.auth.credentials.auth_id;
-			var payload = request.payload;
-			var image_link = payload.image;
+			// var id = request.params.id;
+			// var email = request.auth.credentials.email;
+			// var facebook_id = request.auth.credentials.auth_id;
+			// var payload = request.payload.data;
+			// var image_link = payload.image;
 
 			// create a new image to save in db
 			var new_image = new Img();
-			new_image.link = image_link;
-			new_image.rating = 2.5;
-			new_image.raters = [facebook_id];
-			new_image.facebook_id = facebook_id;
-      new_image.image = payload;
+			// new_image.link = image_link;
+			// new_image.rating = 2.5;
+			// new_image.raters = [facebook_id];
+			// new_image.facebook_id = facebook_id;
+      // new_image.image = payload;
 
-      console.log("payload: ", request.payload);
+      console.log("payload:", request.payload);
+
+      fs.writeFile("logo1.png", request.payload.data, function(err) {
+        if (err) throw err;
+        console.log("saved to file!");
+      });
 
       var img = new Img();
 
-      img.attach("file", {path: "../public/assets/images/logo.png"}, function(error) {
-        if (error) console.log("attaching error: ", error);
-        console.log("image attached to s3");
+      // img.attach("file", {path : request.payload}, function(error) {
+      //   if (error) console.log("attaching error: ", error);
+      //   console.log("image attached to s3");
 
       // save img
           new_image.save( function(err){
@@ -178,7 +184,7 @@ var image = function(request,reply){
               }
               reply('success');
           });
-        });
+        // });
 		}
 
 		// find all images from this user

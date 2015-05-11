@@ -82,9 +82,9 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 
 			 //for image uploading
 			 payload: {
-	   //         output:'file',
-	   //         maxBytes:209715200,
-	   //         parse: false
+	           // output:'file',
+	           // maxBytes:209715200,
+	           // parse: false
 	        },
 
 			auth: {
