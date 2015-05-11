@@ -16,8 +16,6 @@ var Upload = require('./Upload');
 var ActionCreators = require('../actions/ActionCreators');
 
 function getStateFromStore(){
-
-
 	var rating 		 = Store.getRating();
 	var user   		 = Store.getUser();
 	var people 		 = Store.getPeople();
