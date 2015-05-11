@@ -163,9 +163,14 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
         'hapi-auth-cookie': {
             reddirectTo: '/'
         	}
-       	}
-		}
+    	}
 	}
+	},{
+		path: '/profile/{userid}',
+		method: 'GET',
+		handler: handler.profiles,
+   	}	
+	
 ]);
 
 });

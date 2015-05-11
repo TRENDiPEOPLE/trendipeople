@@ -252,6 +252,15 @@ var rate = function(request, reply) {
 		});
 }
 
+
+var profiles = function(request,reply){
+	var userid = request.params.userid;
+	User.findOne({facebook_id: userid}, function(err,user){
+		console.log('user is ', user);
+		reply(user);
+	});
+}
+
 module.exports = {
 	facebook: facebook,
 	home: home,
@@ -259,5 +268,6 @@ module.exports = {
 	image:image,
 	user: user,
 	rate: rate,
-	trending: trending
+	trending: trending,
+	profiles:profiles
 };
