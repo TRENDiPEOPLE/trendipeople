@@ -8,7 +8,7 @@ var TrendBox = React.createClass({
       });
         return(
           <div>
-            <h5>What's Hot Worldwide</h5>
+            <h5>Hot Worldwide</h5>
               <ul>
                 {trendTopics}
               </ul>

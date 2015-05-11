@@ -9,6 +9,8 @@ var Route = Router.Route;
 var Store = require('../stores/Store');
 var Profile = require('./Profile');
 var Body = require('./Body');
+var User = require('./User');
+
 var Trending = require('./Trending');
 var Upload = require('./Upload');
 
@@ -38,7 +40,6 @@ function getStateFromStore(){
 		userImages 		 : userImages,
 		trendingImages: trendingImages
 	};
-
 }
 
 var TrendiPeople = React.createClass({
@@ -121,7 +122,8 @@ var TrendiPeople = React.createClass({
 
 
 var routes = (
-	<Route name="home" path="/" handler={TrendiPeople} >
+	<Route name="home" path="/" hashndler={TrendiPeople} >
+		<Route name="user" path="/user/:userId" handler={User} />
 		<Route name="profile" handler={Profile} />
 		<Route name="trending" handler={Trending} />
 		<Route name="upload" handler={Upload} />

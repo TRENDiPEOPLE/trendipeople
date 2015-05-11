@@ -29,6 +29,9 @@ var logout = function(request,reply){
 };
 
 var home = function(request,reply){
+	console.log('home handler triggered');
+	var subpage = request.params.subpage;
+	console.log('subpage: ', subpage);
 	if (request.auth.isAuthenticated){
 
 		console.log('is authenticated');
