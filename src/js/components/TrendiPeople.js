@@ -101,7 +101,7 @@ var TrendiPeople = React.createClass({
 						</div>
 					</div>
 
-					<div className="row col-md-12">
+					<div className="row">
 
 						<RouteHandler rating={this.state.rating}
 													userImages={this.state.userImages}

@@ -27,7 +27,7 @@ var Profile = React.createClass({
 
 		return (
 			<div>
-				<div className="row profileRow col-md-12">
+				<div className="profileRow col-md-12">
 					<div className="profileBox col-md-offset-4 col-md-4 col-sm-offset-4 col-sm-4">
 						<img src={profile_image_url} id="profilePic" />
 						<p id="userName">{username}</p>
@@ -44,7 +44,7 @@ var Profile = React.createClass({
 						</div>
 					</div>
 				</div>
-				<div className="row wardrobeRow col-md-12">
+				<div className="wardrobeRow col-md-12">
 						{imagesHTML}
 				</div>
 			</div>
