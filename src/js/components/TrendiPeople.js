@@ -125,12 +125,9 @@ var TrendiPeople = React.createClass({
 
 var routes = (
 	<Route name="home" path="/" handler={TrendiPeople} >
-		<Route name="profile" handler={Profile} />
-		<Route path="users">
-			<Route path="/:userId" handler={User} />
-		</Route>
-		<Route name="trending" handler={Trending} />
 		<Route name="upload" handler={Upload} />
+		<Route name="profile" handler={Profile} />
+		<Route name="trending" handler={Trending} />
 		<DefaultRoute handler={Trending} />
 	</Route>
 );

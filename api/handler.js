@@ -181,7 +181,7 @@ var rate = function(request, reply) {
 };
 
 
-var upload = function(request, reply){
+/*var upload = function(request, reply){
   // console.log(request.payload["image"]);
   console.log(' - - - - - - - - - - - - - - - - - - - - - - - - - ')
   console.log('request.payload', request.payload)
@@ -212,7 +212,7 @@ var upload = function(request, reply){
   });
 
 }
-
+*/
 
 var image = function(request,reply){
 	console.log('request: ', request);
@@ -394,6 +394,5 @@ module.exports = {
 	rate: rate,
 	trending: trending,
 	profiles:profiles,
-	publicProfile: publicProfile,
-  	upload: upload
+	publicProfile: publicProfile
 };

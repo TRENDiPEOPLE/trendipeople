@@ -74,7 +74,7 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 				strategy: 'session',
 				mode: 'try'
 			},
-			handler: handler.upload,
+			handler: handler.image,
       plugins: {
           'hapi-auth-cookie': {
               reddirectTo: '/'
@@ -98,12 +98,17 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
         	}
       	}
 	}
-	},{
+	},
+
+/*	{
 		path: '/api/user/public/{id}',
 		method: 'GET',
 		handler: handler.publicProfile,
 	
-	},{
+	},
+	*/
+
+	{
 		
 	    path: "/api/rate",
 	    method: "POST",
