@@ -4,11 +4,12 @@ var CategoryBox = React.createClass({
     render: function() {
 
       var categories = this.props.categories.map(function(ele, index) {
-        return <li key={ele + index}> {ele} </li>;
+        return <li className="boxList" key={ele + index}> {ele} </li>;
       });
         return(
           <div>
-            <h5>Categories</h5>
+            <h5 className="boxTitle">Categories</h5>
+            <hr className="boxLine" />
             {categories}
           </div>
         );

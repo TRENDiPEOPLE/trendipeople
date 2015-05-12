@@ -96,7 +96,7 @@ Dispatcher.register(function(action){
 						// if you've already voted on this image, just return the object without changes
 						if (image.raters.indexOf(voter_id) > -1 ) {
 							return image;
-						} 
+						}
 						else {
 							var new_rating_count = image.raters.length + 1;
 							var all_ratings_ever = (image.raters.length*image.rating) + action.data.rating;
@@ -109,7 +109,7 @@ Dispatcher.register(function(action){
 					}
 					else{
 						return image;
-					} 
+					}
 			});
 
 			trendingImages = newTrendingImages;
