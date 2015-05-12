@@ -11,7 +11,7 @@ var Profile = require('./Profile');
 var Body = require('./Body');
 var Trending = require('./Trending');
 var Upload = require('./Upload');
-
+var User = require('./User');
 var ActionCreators = require('../actions/ActionCreators');
 
 function getStateFromStore(){
@@ -100,14 +100,14 @@ var TrendiPeople = React.createClass({
 					</div>
 
 					<div className="row col-md-12">
-						<RouteHandler rating={this.state.rating}
-													userImages={this.state.userImages}
-													user={this.state.user}
-													people={this.state.people}
-													trends={this.state.trends}
-													looks={this.state.looks}
-													categories={this.state.categories}
-													trendingImages={this.state.trendingImages} />
+						<RouteHandler 	rating={this.state.rating}
+										userImages={this.state.userImages}
+										user={this.state.user}
+										people={this.state.people}
+										trends={this.state.trends}
+										looks={this.state.looks}
+										categories={this.state.categories}
+										trendingImages={this.state.trendingImages} />
 					</div>
 				</div>
 			</div>
@@ -119,6 +119,9 @@ var TrendiPeople = React.createClass({
 var routes = (
 	<Route name="home" path="/" handler={TrendiPeople} >
 		<Route name="profile" handler={Profile} />
+		<Route path="users">
+			<Route path="/:userId" handler={User} />
+		</Route>
 		<Route name="trending" handler={Trending} />
 		<Route name="upload" handler={Upload} />
 		<DefaultRoute handler={Trending} />
@@ -126,7 +129,7 @@ var routes = (
 );
 
 // Add Router.HistoryLocation to remove the urgy hash from the URL, but then the dynamic urls dont work...
-Router.run(routes, Router.HistoryLocation, function(Handler){
+Router.run(routes, function(Handler){
     React.render(<Handler/>, document.body);
 });
 

@@ -74,7 +74,6 @@ var home = function(request,reply){
 };
 
 var user = function(request,reply){
-	console.log('user handler triggered');
     // if user is authenticated
 	if (request.auth.isAuthenticated){
     	var email = request.auth.credentials.email;
@@ -106,6 +105,47 @@ var user = function(request,reply){
 	}
 };
 
+var publicProfile = function(request,reply){
+	var id = request.params.userid;
+	console.log('id: ', id);
+	
+	User.findOne({facebook_id: id}, function(err,user){
+			if (err){
+	       		console.log(err);
+            throw err;
+		    }
+	        // if the user is registered
+			if (user){
+	    		console.log('Fund user ', user);
+				Img.find({facebook_id: id}, function(err,images){
+					if (err){
+		       			throw err;
+		       			console.log(err);	
+			    	}
+		    		var publicProfile = {
+		    			user: user,
+		    			images: images
+		    		}
+			    	if (images){
+			    		console.log('users images: ', images);
+			    		reply(publicProfile)
+			    	}
+			    	else if (!images){
+			    		console.log('no user images')
+			    		reply(publicProfile)
+			    	}
+			    });
+	        // if the user isn't registered
+			} else if (!user){
+				console.log('couldnt find user');
+			}
+
+	});
+
+	console.log('id: ', id);
+	reply(id);
+};
+
 var trending = function(request,reply){
 	console.log('api/user/images handler triggered')
 	if (request.auth.isAuthenticated){
@@ -116,10 +156,8 @@ var trending = function(request,reply){
 	    	}
 
 	    	if (images){
-	    		trending_images = images.map(function(image){
-	    			if (image.rating > 3){
-	    				return image;
-	    			}
+	    		trending_images = images.filter(function(image){
+	    			return (image.rating > 3)
 	    		});
 	    		console.log('trending_images: ', trending_images);
 	    		reply(trending_images)
@@ -132,6 +170,9 @@ var trending = function(request,reply){
 	}
 
 };
+
+
+
 
 var image = function(request,reply){
 	console.log('api/user/images handler triggered')
@@ -181,48 +222,7 @@ var image = function(request,reply){
 			});
 
 		}
-		//var payload= request.payload;
-		//var payloadPath = request.payload.path;
-		//var image = fs.readFileSync(payloadPath);
-	 
 
-
-
-/*
-		User.findOne({email: email}, function(err,user){
-		    
-		    if (err){
-	       		throw err;
-	       		console.log(err);	
-		    }
-
-	        // if the user is registered
-			if (user){
-				var new_image = {
-					link: image_link,
-					title: 'some title'
-				}
-				user.shared_images.push(new_image);
-
-				user.markModified('shared_images');
-                
-                //save the updated
-                user.save(function(err){
-                    if (err){
-                    console.log('Error is : ', err);
-                    }
-                });
-				reply(user);
-
-	        // if the user isn't registered
-			} else if (!user){
-				console.log('couldnt find user');
-			}
-
-		});
-
-*/
-		
 
 	} else {
 		reply('not authenticated');
@@ -259,5 +259,6 @@ module.exports = {
 	image:image,
 	user: user,
 	rate: rate,
-	trending: trending
+	trending: trending,
+	publicProfile: publicProfile
 };

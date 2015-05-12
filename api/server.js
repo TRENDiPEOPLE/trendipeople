@@ -34,22 +34,6 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
     });
 
 	server.route([{
-		path: '/',
-		method: 'GET',
-		config: {
-			auth: {
-				strategy: 'session',
-				mode: 'try'
-			},
-			handler: handler.home,
-      plugins: {
-        'hapi-auth-cookie': {
-            reddirectTo: '/'
-          }
-       }
-		}
-
-	},{
 		path: '/api/trending/images',
 		method: 'GET',
 		config: {
@@ -111,20 +95,26 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
       plugins: {
         'hapi-auth-cookie': {
            reddirectTo: '/'
-         }
-      }
-		}
+        	}
+      	}
+	}
 	},{
-    path: "/api/rate",
-    method: "POST",
-    config: {
-      auth: {
-        strategy: "session",
-        mode: "optional"
-      },
-      handler: handler.rate
-    }
-  },
+		path: '/api/user/public/{id}',
+		method: 'GET',
+		handler: handler.publicProfile,
+	
+	},{
+		
+	    path: "/api/rate",
+	    method: "POST",
+	    config: {
+	      auth: {
+	        strategy: "session",
+	        mode: "optional"
+	      },
+	      handler: handler.rate
+	    }
+	  },
 
   {
      path: '/logout',
@@ -159,6 +149,25 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 
 		}
 
+	},{
+		path: '/{userid}',
+		method: 'GET',
+		handler: handler.publicProfile
+	},{
+		path: '/',
+		method: 'GET',
+		config: {
+			auth: {
+				strategy: 'session',
+				mode: 'try'
+			},
+			handler: handler.home,
+      plugins: {
+        'hapi-auth-cookie': {
+            reddirectTo: '/'
+          }
+       }
+		}
 	}]);
 
 });
