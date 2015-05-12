@@ -11,7 +11,7 @@ var Upload = React.createClass({
 		var image = React.findDOMNode(this.refs.image).value;
 		
 		if (image.length < 1){ 
-			image = 'http://lorempixel.com/200/200/sports/DummyText/';
+			image = 'http://lorempixel.com/150/150/people/';
 		}
 
 		var data = {

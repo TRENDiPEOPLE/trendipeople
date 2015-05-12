@@ -154,7 +154,8 @@ var image = function(request,reply){
 
 			// create a new image to save in db
 			var new_image = new Img();
-			new_image.link = image_link;
+			var number = Math.floor(Math.random()*10);
+			new_image.link = image_link + '/' + number;
 			new_image.rating = 2.5;
 			new_image.raters = [facebook_id];
 			new_image.facebook_id = facebook_id;
