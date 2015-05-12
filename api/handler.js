@@ -412,6 +412,6 @@ module.exports = {
 	user: user,
 	rate: rate,
 	trending: trending,
-	publicProfile: publicProfile
-  upload: upload
+	publicProfile: publicProfile,
+  	upload: upload
 };
