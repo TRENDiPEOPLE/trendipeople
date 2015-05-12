@@ -3,6 +3,7 @@ var Path = require('path');
 var index = Path.resolve(__dirname + '/../public/index.html');
 var crate = require('mongoose-crate');
 var S3 = require('mongoose-crate-s3');
+
 var config = require('./config');
 var Schema = mongoose.Schema;
 
@@ -75,7 +76,6 @@ var home = function(request,reply){
 };
 
 var user = function(request,reply){
-	console.log('user handler triggered');
     // if user is authenticated
 	if (request.auth.isAuthenticated){
     	var email = request.auth.credentials.email;
@@ -102,42 +102,117 @@ var user = function(request,reply){
 
     // if the user isn't authenticated
 	} else {
-		console.log('request.auth.credentials: ', request.auth.credentials);
 		reply('youre not authenticated');
 	}
 };
 
+var publicProfile = function(request,reply){
+	var id = request.params.userid;
+	console.log('id: ', id);
+	
+	User.findOne({facebook_id: id}, function(err,user){
+			if (err){
+	       		console.log(err);
+            throw err;
+		    }
+	        // if the user is registered
+			if (user){
+	    		console.log('Fund user ', user);
+				Img.find({facebook_id: id}, function(err,images){
+					if (err){
+		       			throw err;
+		       			console.log(err);	
+			    	}
+		    		var publicProfile = {
+		    			user: user,
+		    			images: images
+		    		}
+			    	if (images){
+			    		console.log('users images: ', images);
+			    		reply(publicProfile)
+			    	}
+			    	else if (!images){
+			    		console.log('no user images')
+			    		reply(publicProfile)
+			    	}
+			    });
+	        // if the user isn't registered
+			} else if (!user){
+				console.log('couldnt find user');
+			}
+
+	});
+
+	console.log('id: ', id);
+	reply(id);
+};
 
 
 var trending = function(request,reply){
-	console.log('api/user/images handler triggered')
 	if (request.auth.isAuthenticated){
-		
+
 		// fetch all images in db
 		Img.find({},function(err,images){
 			if (err){
 	   			throw err;
-	   			console.log(err);	
 	    	}
 
 	    	if (images){
+
 
 	    		// filter through the images, and only return those with >2 in rating
 	    		trending_images = images.filter(function(image){
 	    			return image.rating > 2;
 	    		});
 
-	    		reply(trending_images)
+	    		reply(trending_images);
 	    	}
 
 	    	else if (!images){
-	    		console.log('no images')
+	    		console.log('no images');
 	    		reply([]);
 	    	}
 		});
 	}
-
 };
+
+var rate = function(request, reply) {
+  console.log("rate handler");
+};
+
+
+var upload = function(request, reply){
+  // console.log(request.payload["image"]);
+  console.log(' - - - - - - - - - - - - - - - - - - - - - - - - - ')
+  console.log('request.payload', request.payload)
+  console.log(' - - - - - - - - - - - - - - - - - - - - - - - - - ');
+  var filedata = fs.readFileSync(request.payload.path);
+  console.log(filedata)
+  console.log(' - - - - - - - - - - - - - - - - - - - - - - - - - ');
+  var data = new Buffer(filedata, "utf8");
+  console.log(data.toString());
+  console.log(' - - - - - - - - - - - - - - - - - - - - - - - - - ');
+  var ext;
+  if(data.toString().toLowerCase().indexOf('png') > -1){
+    ext = '.png'
+  }
+  if(data.toString().toLowerCase().indexOf('jpg') > -1 || data.toString().toLowerCase().indexOf('jfi') > -1) {
+    ext = '.jpg'
+  }
+  console.log('>>> FileType: ', ext);
+  var file = crypto.createHash('sha1').update(data).digest('hex') + ext; // uniqe filename
+  var filepath = __dirname + '/' + file;
+  // var binary = new Buffer(data, 'binary');
+  fs.writeFile(filepath, data, 'binary', function(err) {
+    if (err) throw err;
+    console.log("saved to file!");
+    S.streamFileToS3(filepath, function(err) { // standard callback function:
+      console.log(file,' Was uploaded. Visit:', S.S3FileUrl(file));
+    });
+  });
+
+}
+
 
 var image = function(request,reply){
 	console.log('request: ', request);
@@ -145,7 +220,7 @@ var image = function(request,reply){
 
 		// if the user is adding a new image
 		if (request.raw.req.method === 'POST'){
-			
+
 			// declare some useful variables
 			var id = request.params.id;		
 			var email = request.auth.credentials.email;
@@ -188,15 +263,14 @@ var image = function(request,reply){
 			Img.find({facebook_id: facebook_id}, function(err,images){
 				if (err){
 	       			throw err;
-	       			console.log(err);	
 		    	}
 
-		    	if (images){
+		    if (images){
 		    		console.log('users images: ', images);
-		    		reply(images)
+		    		reply(images);
 		    	}
 		    	else if (!images){
-		    		console.log('no user images')
+		    		console.log('no user images');
 		    		reply([]);
 		    	}
 
@@ -204,10 +278,51 @@ var image = function(request,reply){
 
 		}
 
-	} else {
-		reply('not authenticated');
-	}
+		//var payload= request.payload;
+		//var payloadPath = request.payload.path;
+		//var image = fs.readFileSync(payloadPath);
 
+
+
+
+/*
+		User.findOne({email: email}, function(err,user){
+
+		    if (err){
+	       		throw err;
+	       		console.log(err);
+		    }
+
+	        // if the user is registered
+			if (user){
+				var new_image = {
+					link: image_link,
+					title: 'some title'
+				}
+				user.shared_images.push(new_image);
+
+				user.markModified('shared_images');
+
+                //save the updated
+                user.save(function(err){
+                    if (err){
+                    console.log('Error is : ', err);
+                    }
+                });
+				reply(user);
+
+	        // if the user isn't registered
+			} else if (!user){
+				console.log('couldnt find user');
+			}
+
+		});
+
+*/
+
+  	} else {
+  		reply('not authenticated');
+  }
 };
 
 
@@ -215,8 +330,6 @@ var facebook = function (request, reply) {
 	console.log('facebook handler');
     var creds = request.auth.credentials;
 
-    console.log('facebook handler trigged');
-    console.log('creds.profile.d: ', creds.profile.displayName);
     var profile = {
         username    : creds.profile.displayName,
         auth_method : 'facebook',
@@ -239,13 +352,13 @@ var rate = function(request, reply) {
 		if(voters.indexOf(voter_id) > -1){
 
 			reply(payload);
-		
+
 		} else {
 
 			var new_rating_count = voters.length + 1;
 			var all_ratings_ever = (voters.length * previous_rating) + rating;
 			var new_average_rating = all_ratings_ever / new_rating_count;
-			
+
 			image.rating = new_average_rating;
 			image.raters.push(voter_id);
 			image.markModified('rating');
@@ -257,11 +370,11 @@ var rate = function(request, reply) {
                 }
             });
 
-            console.log('db updated!')
+            console.log('db updated!');
             reply(payload);
 			}
 		});
-}
+};
 
 
 var profiles = function(request,reply){
@@ -280,5 +393,7 @@ module.exports = {
 	user: user,
 	rate: rate,
 	trending: trending,
-	profiles:profiles
+	profiles:profiles,
+	publicProfile: publicProfile,
+  	upload: upload
 };

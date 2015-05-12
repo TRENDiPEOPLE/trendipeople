@@ -1,12 +1,39 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #EEF2F1
+}
+
+#topBox {
+  margin-top: 5%;
+}
+
 #navBar {
   margin-top: 1%;
+}
+
+.navBar {
+  font-size: 18px;
+  background-color: #EEF2F1;
+  box-shadow: 2px 2px 2px grey;
+  border: solid 1px lightgrey;
+  border-radius: 3px;
+  margin-bottom: 3%;
 }
 
 #logo {
   height: 100%;
   width: 30%;
-  max-height: 40px;
-  max-width: 50px;
+  max-height: 60px;
+  max-width: 80px;
+}
+
+#line {
+  border: 1px solid lightgrey;
+  width: 50%;
+  color: lightgrey;
+  opacity: 1;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 .fb-share-button {
@@ -14,15 +41,99 @@
   width: 10%;
 }
 
-.imageBox {
+.profileRow {
+  height: 30%;
+  border: 3px solid lightgrey;
+  background-color: white;
+}
+
+.inactive {
+  opacity: 0.5;
+}
+
+.peopleBox {
+  margin-bottom: 4%;
+}
+
+#trendingPeople {
+  font-size: 22px;
+  text-align: left;
+  margin-left: 2%;
+  margin-bottom: 3%;
+}
+
+#trendingLooks {
+  font-size: 22px;
+  text-align: left;
+  margin-left: 2%;
+}
+
+.wardrobeRow {
+  height: 80%;
+  margin-top: 5%
+}
+
+.wardrobeImage {
   display: inline-block;
-  height: 200px;
-  width: 200px;
   margin: 1%;
-  padding-left: 1%;
-  padding-right: 1%;
   border: 3px solid lightskyblue;
   border-radius: 4px;
+  padding: 1%;
+}
+
+.profileBox {
+  border: solid 3px lightskyblue;
+  margin-top: 1%;
+  border-shadow: 2px 2px 2px lightgrey;
+  border-radius: 4px;
+}
+
+#profilePic {
+  margin: 5px auto;
+  height: 150px;
+  width: 150px;
+  position: relative;
+  display: block;
+}
+
+#userName {
+  text-align: center;
+  font-size: 28px;
+}
+
+.infoBar {
+  position: absolute;
+  top: 80%;
+  height: 20%;
+  width: 95%;
+  background-color: #EEF2F1;
+}
+
+.infoBox {
+  display: inline-block;
+  text-align: center;
+  width: 25%;
+  height: 100%;
+}
+
+.imageBox {
+  display: inline-block;
+  margin-bottom: 2%;
+}
+
+.ratingLogo {
+  width: 100%;
+  margin-top: 4%;
+}
+
+.image {
+  border: 3px solid grey;
+  border-radius: 3px;
+  width: 100%;
+}
+
+.rating {
+  width: 20%;
 }
 
 .lookBox {
@@ -34,12 +145,57 @@
   border-radius: 4px;
 }
 
-.categoryBox {
-  margin-top: 4%;
+
+.boxLine {
+  width: 90%;
+  float: left;
+  border: 1px solid lightgrey;
+  margin: auto;
+  margin-bottom: 5%;
 }
 
-.trendBox {
-  margin-top: 4%;
+
+.boxTitle {
+  font-weight: bold;
+  color: rgb(54, 203, 192);
+  margin-bottom: 5px;
+}
+
+.boxList {
+  font-weight: bold;
+  padding: 0;
+  list-style: none;
+  opacity: 0.7;
+}
+
+.fb-share-button {
+  position: relative;
+  z-index: 100;
+  float: right;
+  display: inline-block;
+  margin: auto;
+}
+
+.logo {
+  display: inline-block;
+  font-size: 28px;
+  margin: 0;
+}
+
+.pluginButtonContainer {
+  float: right;
+}
+
+.fb_iframe_widget {
+  display: inline-block;
+  position: relative;
+  float: right;
+  max-width: 58px;
+}
+
+.twitter-share-button {
+  margin-right: 1%;
+  float: right;
 }
 
 .ps-top-to-bottom {
@@ -67,6 +223,3 @@
   right: -3px;
 }
 
-h5 {
-  text-align: center;
-}

@@ -7,15 +7,15 @@ module.exports = {
 		Request.post('/api/rate')
 			.send(data)
 			.end(function(err,res){
-				console.log('AJAX response rate: ', res);
-				ServerActionCreators.receivedRating(res.body)
+				// console.log('AJAX response rate: ', res);
+				ServerActionCreators.receivedRating(res.body);
 			});
 	},
 
 	fetchUser: function(){
 		Request.get('/api/user')
 			.end(function(err,res){
-				console.log('AJAX response fetchUser: ', res);
+				// console.log('AJAX response fetchUser: ', res);
 				ServerActionCreators.receivedUser(res.body);
 			});
 	},
@@ -23,7 +23,7 @@ module.exports = {
 	fetchUserImages: function(id){
 		Request.get('/api/user/images')
 			.end(function(err,res){
-				console.log('AJAX response fetchUserImages: ', res);
+				// console.log('AJAX response fetchUserImages: ', res);
 				ServerActionCreators.receivedUserImages(res.body);
 			});
 	},
@@ -31,9 +31,9 @@ module.exports = {
 	fetchTrendingImages: function(){
 		Request.get('/api/trending/images')
 			.end(function(err,res){
-				console.log('AJAX response fetchTrendingImages: ', res);
+				// console.log('AJAX response fetchTrendingImages: ', res);
 				ServerActionCreators.receivedTrendingImages(res.body);
-			});		
+			});
 	},
 
 
@@ -63,9 +63,14 @@ module.exports = {
 			.attach("file", data)
 			.type('form')
 			.end(function(err,res) {
-				console.log('AJAX response saveImage: ', res);
+				// console.log('AJAX response saveImage: ', res);
 				ServerActionCreators.receivedImages(res.text);
 			});
+<<<<<<< HEAD
 	}*/
+=======
+	}
+};
+>>>>>>> master2
 
 

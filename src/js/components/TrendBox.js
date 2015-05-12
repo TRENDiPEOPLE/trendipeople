@@ -8,8 +8,9 @@ var TrendBox = React.createClass({
       });
         return(
           <div>
-            <h5>What's Hot Worldwide</h5>
-              <ul>
+            <h5 className="boxTitle">Worldwide Trends</h5>
+              <hr className="boxLine"/>
+              <ul className="boxList">
                 {trendTopics}
               </ul>
           </div>

@@ -27,7 +27,7 @@ imgSchema.plugin(crate, {
     acl: config.s3.acl, // defaults to public-read
     region: config.s3.region, // defaults to us-standard
     path: function(attachment) { // where the file is stored in the bucket - defaults to this function
-      return '/' + path.basename(attachment.path)
+      return '/' + path.basename(attachment.path);
     }
   }),
   fields: {

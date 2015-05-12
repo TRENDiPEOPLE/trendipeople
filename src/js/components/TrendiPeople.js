@@ -11,7 +11,7 @@ var Profile = require('./Profile');
 var Body = require('./Body');
 var Trending = require('./Trending');
 var Upload = require('./Upload');
-
+var User = require('./User');
 var ActionCreators = require('../actions/ActionCreators');
 
 function getStateFromStore(){
@@ -25,8 +25,6 @@ function getStateFromStore(){
 	var userImages 		 = Store.getUserImages();
 	var categories   = Store.getCategories();
 	var trendingImages = Store.getTrendingImages();
-	
-	console.log('user in getStateFromStore: ', user);
 
 	return {
 		rating 		 : rating,
@@ -87,13 +85,16 @@ var TrendiPeople = React.createClass({
 				<div className="container">
 					<div className="row">
 						<div className="col-md-12">
-					    <img src="/public/assets/images/logo.png" id="logo"/>
-					    <p> TRENDiPEOPLE© </p>
-							<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></div>
-							<nav className="navbar navbar-default">
-								<div className="container-fluid">
-								    <div className="navbar-header">
-								    	<Link to="home" className="navbar-brand">Home</Link>
+					    <div id="topBox">
+						    <img src="/public/assets/images/logo.png" id="logo"/>
+							    <p className="logo"> TRENDiPEOPLE© </p>
+									<div className="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></div>
+									<a href="https://twitter.com/share" className="twitter-share-button" data-url="http://trendipeople.com" data-text="Check out the latest fashion trends at trendipeople.com" data-hashtags="trendipeople">Tweet</a>
+								</div>
+									<nav className="navbar navbar-default">
+										<div className="container-fluid">
+										    <div className="navbar-header">
+										    	<Link to="home" className="navbar-brand">Home</Link>
 								    </div>
 								    <div>
 								    {menu}
@@ -103,7 +104,9 @@ var TrendiPeople = React.createClass({
 						</div>
 					</div>
 
-					<div className="row col-md-12">
+					<div className="row">
+
+
 						<RouteHandler rating={this.state.rating}
 													userImages={this.state.userImages}
 													user={this.state.user}
@@ -123,6 +126,9 @@ var TrendiPeople = React.createClass({
 var routes = (
 	<Route name="home" path="/" handler={TrendiPeople} >
 		<Route name="profile" handler={Profile} />
+		<Route path="users">
+			<Route path="/:userId" handler={User} />
+		</Route>
 		<Route name="trending" handler={Trending} />
 		<Route name="upload" handler={Upload} />
 		<DefaultRoute handler={Trending} />
@@ -130,7 +136,7 @@ var routes = (
 );
 
 // Add Router.HistoryLocation to remove the urgy hash from the URL, but then the dynamic urls dont work...
-Router.run(routes, Router.HistoryLocation, function(Handler){
+Router.run(routes, function(Handler){
     React.render(<Handler/>, document.body);
 });
 

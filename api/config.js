@@ -14,9 +14,9 @@ module.exports = {
 	},
 	s3: {
 		key: process.env.S3KEY 					|| require('./creds.json').s3.key,
-		secret: process.env.S3SECRET 			|| require('./creds.json').s3.secret,
-		bucket: process.env.S3BUCKET 			|| require('./creds.json').s3.bucket,
+		secret: process.env.S3SECRET 		|| require('./creds.json').s3.secret,
+		bucket: process.env.S3BUCKET 		|| require('./creds.json').s3.bucket,
 		acl: process.env.S3ACL 					|| require('./creds.json').s3.acl,
-		region: process.env.S3REGION 			|| require('./creds.json').s3.region
+		region: process.env.S3REGION 		|| require('./creds.json').s3.region
 	}
-};	
+};
