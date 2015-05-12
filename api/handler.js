@@ -1,9 +1,14 @@
 var mongoose = require('mongoose');
 var Path = require('path');
 var index = Path.resolve(__dirname + '/../public/index.html');
-var s3 = require("mongoose-crate-s3");
+// var s3 = require("mongoose-crate-s3");
+var S = require('stream-to-s3');
+var crypto  = require('crypto');   // used to create hash of image (used as filename on S3 to avoid name conflicts ;)
+var filetype = require('file-type');
 var crate = require('mongoose-crate');
-var fs = require("fs");
+var fs = require("fs-extra");
+var util = require("util");
+var formidable = require("formidable");
 
 var config = require('./config');
 var Schema = mongoose.Schema;
@@ -140,6 +145,38 @@ var rate = function(request, reply) {
   console.log("rate handler");
 };
 
+var upload = function(request, reply){
+  // console.log(request.payload["image"]);
+  console.log(' - - - - - - - - - - - - - - - - - - - - - - - - - ')
+  console.log('request.payload', request.payload)
+  console.log(' - - - - - - - - - - - - - - - - - - - - - - - - - ');
+  var filedata = fs.readFileSync(request.payload.path);
+  console.log(filedata)
+  console.log(' - - - - - - - - - - - - - - - - - - - - - - - - - ');
+  var data = new Buffer(filedata, "utf8");
+  console.log(data.toString());
+  console.log(' - - - - - - - - - - - - - - - - - - - - - - - - - ');
+  var ext;
+  if(data.toString().toLowerCase().indexOf('png') > -1){
+    ext = '.png'
+  }
+  if(data.toString().toLowerCase().indexOf('jpg') > -1 || data.toString().toLowerCase().indexOf('jfi') > -1) {
+    ext = '.jpg'
+  }
+  console.log('>>> FileType: ', ext);
+  var file = crypto.createHash('sha1').update(data).digest('hex') + ext; // uniqe filename
+  var filepath = __dirname + '/' + file;
+  // var binary = new Buffer(data, 'binary');
+  fs.writeFile(filepath, data, 'binary', function(err) {
+    if (err) throw err;
+    console.log("saved to file!");
+    S.streamFileToS3(filepath, function(err) { // standard callback function:
+      console.log(file,' Was uploaded. Visit:', S.S3FileUrl(file));
+    });
+  });
+
+}
+
 
 var image = function(request,reply){
 
@@ -162,12 +199,30 @@ var image = function(request,reply){
 			// new_image.raters = [facebook_id];
 			// new_image.facebook_id = facebook_id;
       // new_image.image = payload;
-
-      console.log("payload:", request.payload);
-
-      fs.writeFile("logo1.png", request.payload.data, function(err) {
+      var data = request;
+      var image = request.payload.image;
+      console.log(' - - - - - - - - - - - - - - - - - -');
+      console.log(request);
+      console.log(' - - - - - - - - - - - - - - - - - -');
+      // console.log("payload:", request.payload);
+      // var ext = filetype(data.toString());
+      var ext;
+      if(data.toString().toLowerCase().indexOf('png') > -1){
+        ext = '.png'
+      }
+      if(data.toString().toLowerCase().indexOf('jpg') > -1 || data.toString().toLowerCase().indexOf('jfi') > -1) {
+        ext = '.jpg'
+      }
+      console.log('>>> FileType: ', ext);
+      var file = crypto.createHash('sha1').update(data).digest('hex') + ext; // uniqe filename
+      var filepath = __dirname + '/' + file;
+      // var binary = new Buffer(data, 'binary');
+      fs.writeFile(filepath, image, 'binary', function(err) {
         if (err) throw err;
         console.log("saved to file!");
+        S.streamFileToS3(filepath, function(err) { // standard callback function:
+          console.log(file,' Was uploaded. Visit:', S.S3FileUrl(file));
+        });
       });
 
       var img = new Img();
@@ -313,5 +368,6 @@ module.exports = {
 	image:image,
 	user: user,
 	rate: rate,
-	trending: trending
+	trending: trending,
+  upload: upload
 };
