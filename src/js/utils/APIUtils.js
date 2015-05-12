@@ -38,13 +38,39 @@ module.exports = {
 
 
 	saveImage: function(data){
-		Request.post('/api/user/images')
-			.send(data)
+
+		$.ajax({
+		        url: '/api/user/images',
+		        type: 'POST',
+					xhr: function() {  // Custom XMLHttpRequest
+		            var myXhr = $.ajaxSettings.xhr();
+		            if(myXhr.upload){ 
+		                console.log(myXhr.upload);
+		            }
+		            return myXhr;
+		        },
+				data: data,
+        		cache: false,
+				contentType: false,
+		        processData: false
+		    }, "json");
+
+
+	}
+}
+
+/*		Request.post('/api/user/images')
+			.attach("file", data)
+			.type('form')
 			.end(function(err,res) {
 				// console.log('AJAX response saveImage: ', res);
 				ServerActionCreators.receivedImages(res.text);
 			});
+<<<<<<< HEAD
+	}*/
+=======
 	}
 };
+>>>>>>> master2
 
 

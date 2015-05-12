@@ -18,7 +18,7 @@ var Trending = React.createClass({
           <CategoryBox categories={this.props.categories} />
         </div>
         <div className="trendingLooks col-md-10 col-sm-8 col-lg-10 col-xs-8">
-          <TrendingLooks looks={this.props.looks} trendingImages={this.props.trendingImages} />
+          <TrendingLooks user={this.props.user} looks={this.props.looks} trendingImages={this.props.trendingImages} />
         </div>
       </div>
 			);

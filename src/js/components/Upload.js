@@ -1,4 +1,5 @@
 var React = require("react");
+
 var Request = require("superagent");
 
 var ActionCreators = require('../actions/ActionCreators');
@@ -6,7 +7,21 @@ var ActionCreators = require('../actions/ActionCreators');
 
 
 var Upload = React.createClass({
+/*
+	componentDidMount: function(){
+		$("#submitID").click(function(){
+    		var formData = new FormData($('#dog')[0]);
 
+<<<<<<< HEAD
+    		
+		});
+	},
+*/
+/*
+	handleSubmit: function(e){
+		e.preventDefault();
+		var image = React.findDOMNode(this.refs.image).files[0];
+=======
 	getInitialState: function() {
 		return {data_uri: null};
 	},
@@ -18,63 +33,27 @@ var Upload = React.createClass({
 		if (image.length < 1){
 			image = 'http://lorempixel.com/150/150/people/';
 		}
+>>>>>>> master2
 
-		var data = {
-			image: image
-		};
-		ActionCreators.saveImage(data);
+		var formData = new FormData(image);
+
+		console.log('image: ', image, formData);	
+/*		if (image.length < 1){ 
+			image = 'http://lorempixel.com/150/150/people/';
+		}
+		ActionCreators.saveImage(formData);
 	},
-
+*/
 	render: function(){
 
 		var image_api_url = './api/image';
 		console.log('image_api_url: ', image_api_url);
 		return (
-
-			<form onSubmit={this.handleSubmit} >
-  				<input type="file" name="image_link" ref="image" />
-				<input type="submit" value="Share image" />
+			<form onSubmit={this.handleSubmit} action="/api/user/images" method="POST" encType="multipart/form-data" id="dog" ref="upload">
+  				<input type="file" name="image_link" ref="image" accept="image/png, image/jpeg"/>
+				<input type="submit" value="Share image" id="submitID"/>
 			</form>
-		);
-
-
-	// }
-
-	// handleSubmit: function(e){
-	// 	e.preventDefault();
-	// },
-
-	// 	Request.post("/api/user/images")
-	// 				.send({data : this.state.data_uri})
-	// 				.end(function(err, res) {
-	// 					if (err) console.log("err: ", err);
-	// 					console.log("superagent success: ", res);
-	// 				});
-	// 				// console.log(this.state.data_uri);
-	// },
-
-	// handleFile: function(e) {
-	// 	var reader = new FileReader();
-	// 	var file = e.target.files[0];
-
-	// 	reader.onload = function(upload) {
-	// 		this.setState({
-	// 			data_uri: upload.target.result
-	// 		});
-	// 		// console.log(this.state.data_uri);
-	// 	}.bind(this);
-
-	// 	reader.readAsText(file);
-	// },
-
-	// render: function(){
-
-	// 	return (
-	// 		<form method="post" action="/api/user/images" encType="multipart/form-data" >
- //  				<input type="file" name="image" id='image' ref="image" enctype="multipart/form-data" />
-	// 			<input type="submit" value="Save image" />
-	// 		</form>
-	// 	);
+		)
 
 
 	}

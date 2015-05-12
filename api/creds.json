@@ -1,0 +1,22 @@
+{
+	"facebook": {
+		"password"     : "cookie_encryption_password",
+		"clientId"     : "1435448896757183",
+		"clientSecret" : "210ee644e1c933b92b3a85fa3b546cfc"
+	},
+	"database" : {
+	    "dbuser"       : "FoundryMatrix",
+	    "dbpwd"        : "foundry2015",
+	    "dburl"        : "mongodb://trendipeople:trendipeople@ds034348.mongolab.com:34348/trendipeople"
+	},
+	"cookie": {
+		"password": "cookie_password"
+	},
+	"s3" : {
+			"key" 		: "AKIAI55OIMCWQZJOZHEA",
+			"secret"	: "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",
+			"bucket"	: "trendipeople",
+			"acl"		: "public-read-write",
+			"region"	: "eu-west-1"
+	}
+}

@@ -4,6 +4,7 @@ var ActionCreators = require("../actions/ActionCreators");
 var TrendingLooks = React.createClass({
 
     clickHandler: function(rating,_id) {
+      console.log('rateclick: ', rating);
       var voter_id = this.props.user.facebook_id;
       var data = {
         image_id: _id,

@@ -1,14 +1,8 @@
 var mongoose = require('mongoose');
 var Path = require('path');
 var index = Path.resolve(__dirname + '/../public/index.html');
-// var s3 = require("mongoose-crate-s3");
-var S = require('stream-to-s3');
-var crypto  = require('crypto');   // used to create hash of image (used as filename on S3 to avoid name conflicts ;)
-var filetype = require('file-type');
 var crate = require('mongoose-crate');
-var fs = require("fs-extra");
-var util = require("util");
-var formidable = require("formidable");
+var S3 = require('mongoose-crate-s3');
 
 var config = require('./config');
 var Schema = mongoose.Schema;
@@ -112,6 +106,46 @@ var user = function(request,reply){
 	}
 };
 
+var publicProfile = function(request,reply){
+	var id = request.params.userid;
+	console.log('id: ', id);
+	
+	User.findOne({facebook_id: id}, function(err,user){
+			if (err){
+	       		console.log(err);
+            throw err;
+		    }
+	        // if the user is registered
+			if (user){
+	    		console.log('Fund user ', user);
+				Img.find({facebook_id: id}, function(err,images){
+					if (err){
+		       			throw err;
+		       			console.log(err);	
+			    	}
+		    		var publicProfile = {
+		    			user: user,
+		    			images: images
+		    		}
+			    	if (images){
+			    		console.log('users images: ', images);
+			    		reply(publicProfile)
+			    	}
+			    	else if (!images){
+			    		console.log('no user images')
+			    		reply(publicProfile)
+			    	}
+			    });
+	        // if the user isn't registered
+			} else if (!user){
+				console.log('couldnt find user');
+			}
+
+	});
+
+	console.log('id: ', id);
+	reply(id);
+};
 
 
 var trending = function(request,reply){
@@ -124,6 +158,7 @@ var trending = function(request,reply){
 	    	}
 
 	    	if (images){
+
 
 	    		// filter through the images, and only return those with >2 in rating
 	    		trending_images = images.filter(function(image){
@@ -144,6 +179,7 @@ var trending = function(request,reply){
 var rate = function(request, reply) {
   console.log("rate handler");
 };
+
 
 var upload = function(request, reply){
   // console.log(request.payload["image"]);
@@ -179,68 +215,46 @@ var upload = function(request, reply){
 
 
 var image = function(request,reply){
-
+	console.log('request: ', request);
 	if (request.auth.isAuthenticated){
 
 		// if the user is adding a new image
 		if (request.raw.req.method === 'POST'){
 
 			// declare some useful variables
-			// var id = request.params.id;
-			// var email = request.auth.credentials.email;
-			// var facebook_id = request.auth.credentials.auth_id;
-			// var payload = request.payload.data;
-			// var image_link = payload.image;
+			var id = request.params.id;		
+			var email = request.auth.credentials.email;
+			var facebook_id = request.auth.credentials.auth_id;
+			var payload = request.payload;
+			
+			console.log('payload: ', payload);
+
+			var path = payload.image_link.path;
 
 			// create a new image to save in db
 			var new_image = new Img();
-			// new_image.link = image_link;
-			// new_image.rating = 2.5;
-			// new_image.raters = [facebook_id];
-			// new_image.facebook_id = facebook_id;
-      // new_image.image = payload;
-      var data = request;
-      var image = request.payload.image;
-      console.log(' - - - - - - - - - - - - - - - - - -');
-      console.log(request);
-      console.log(' - - - - - - - - - - - - - - - - - -');
-      // console.log("payload:", request.payload);
-      // var ext = filetype(data.toString());
-      var ext;
-      if(data.toString().toLowerCase().indexOf('png') > -1){
-        ext = '.png'
-      }
-      if(data.toString().toLowerCase().indexOf('jpg') > -1 || data.toString().toLowerCase().indexOf('jfi') > -1) {
-        ext = '.jpg'
-      }
-      console.log('>>> FileType: ', ext);
-      var file = crypto.createHash('sha1').update(data).digest('hex') + ext; // uniqe filename
-      var filepath = __dirname + '/' + file;
-      // var binary = new Buffer(data, 'binary');
-      fs.writeFile(filepath, image, 'binary', function(err) {
-        if (err) throw err;
-        console.log("saved to file!");
-        S.streamFileToS3(filepath, function(err) { // standard callback function:
-          console.log(file,' Was uploaded. Visit:', S.S3FileUrl(file));
-        });
-      });
+			console.log('new_image:', new_image);
+			var number = Math.floor(Math.random()*10);
+			new_image.link = path ;
+			new_image.rating = 2.5;
+			new_image.raters = [facebook_id];
+			new_image.facebook_id = facebook_id;
 
-      var img = new Img();
+			// save img
+			new_image.attach("file", {path: path}, function(err) {
+				if (err) console.log(err)
+				console.log("image attached to s3");
 
-      // img.attach("file", {path : request.payload}, function(error) {
-      //   if (error) console.log("attaching error: ", error);
-      //   console.log("image attached to s3");
+		        new_image.save( function(err){
+		            if (err){
+		                console.log('error when saving new image to mongolabs');
+		                throw error;
+		            }
+		            reply('success');
+				})
+	        });
 
-      // save img
-          new_image.save( function(err){
-              if (err){
-                  console.log('error when saving new link');
-                  throw error;
-              }
-              reply('success');
-          });
-        // });
-		}
+		} 
 
 		// find all images from this user
 		else if (request.raw.req.method === 'GET'){
@@ -263,6 +277,7 @@ var image = function(request,reply){
 			});
 
 		}
+
 		//var payload= request.payload;
 		//var payloadPath = request.payload.path;
 		//var image = fs.readFileSync(payloadPath);
@@ -361,6 +376,15 @@ var rate = function(request, reply) {
 		});
 };
 
+
+var profiles = function(request,reply){
+	var userid = request.params.userid;
+	User.findOne({facebook_id: userid}, function(err,user){
+		console.log('user is ', user);
+		reply(user);
+	});
+}
+
 module.exports = {
 	facebook: facebook,
 	home: home,
@@ -369,5 +393,7 @@ module.exports = {
 	user: user,
 	rate: rate,
 	trending: trending,
-  upload: upload
+	profiles:profiles,
+	publicProfile: publicProfile,
+  	upload: upload
 };
