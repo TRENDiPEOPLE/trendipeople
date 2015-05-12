@@ -82,7 +82,8 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 
 			 //for image uploading
 			 payload: {
-	           // output:'file',
+            output:'file',
+            parse: true
 	           // maxBytes:209715200,
 	           // parse: false
 	        },
@@ -91,13 +92,12 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 				strategy: 'session',
 				mode: 'try'
 			},
-			handler: handler.image,
-
-            plugins: {
-                'hapi-auth-cookie': {
-                    reddirectTo: '/'
-                }
-            }
+			handler: handler.upload,
+      plugins: {
+          'hapi-auth-cookie': {
+              reddirectTo: '/'
+          }
+      }
 		}
 	},
 

@@ -40,37 +40,38 @@ var Upload = React.createClass({
 
 	// }
 
-	handleSubmit: function(e){
-		e.preventDefault();
+	// handleSubmit: function(e){
+	// 	e.preventDefault();
+	// },
 
-		Request.post("/api/user/images")
-					.send({data : this.state.data_uri})
-					.end(function(err, res) {
-						if (err) console.log("err: ", err);
-						console.log("superagent success: ", res);
-					});
-					// console.log(this.state.data_uri);
-	},
+	// 	Request.post("/api/user/images")
+	// 				.send({data : this.state.data_uri})
+	// 				.end(function(err, res) {
+	// 					if (err) console.log("err: ", err);
+	// 					console.log("superagent success: ", res);
+	// 				});
+	// 				// console.log(this.state.data_uri);
+	// },
 
-	handleFile: function(e) {
-		var reader = new FileReader();
-		var file = e.target.files[0];
+	// handleFile: function(e) {
+	// 	var reader = new FileReader();
+	// 	var file = e.target.files[0];
 
-		reader.onload = function(upload) {
-			this.setState({
-				data_uri: upload.target.result
-			});
-			// console.log(this.state.data_uri);
-		}.bind(this);
+	// 	reader.onload = function(upload) {
+	// 		this.setState({
+	// 			data_uri: upload.target.result
+	// 		});
+	// 		// console.log(this.state.data_uri);
+	// 	}.bind(this);
 
-		reader.readAsText(file);
-	},
+	// 	reader.readAsText(file);
+	// },
 
 	render: function(){
 
 		return (
-			<form onSubmit={this.handleSubmit} encyType="multipart/form-data" >
-  				<input type="file" onChange={this.handleFile} name="image" ref="image" />
+			<form method="post" action="/api/user/images" encyType="multipart/form-data" >
+  				<input type="file" name="image" id='image' ref="image" enctype="multipart/form-data" />
 				<input type="submit" value="Save image" />
 			</form>
 		);
