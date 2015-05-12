@@ -86,27 +86,33 @@ Dispatcher.register(function(action){
 	switch (action.type) {
 
 		case ActionTypes.RATE:
-			console.log('store RATE')
-			console.log('store: trendingImages: ', trendingImages);
 			var id = action.data.image_id;
-			u = trendingImages.map(function(image){
-				console.log('id: ', id);
-				console.log('image._id', image._id);
-				if (image._id.toString() == id.toString()){
-					var new_rating_count = image.raters.length + 1;
-					var all_ratings_ever = (image.raters.length*image.rating) + action.data.rating;
-					var new_average_rating = all_ratings_ever / new_rating_count;
-					image.rating = new_average_rating;
-					image.raters.push(action.data.voter_id);
-					console.log('image.raters: ', image.raters);
-					console.log('new_average_rating: ', new_average_rating);
-					return image;
-				} 
-				else {
-					return image
-				}
+			var voter_id = action.data.voter_id;
+			newTrendingImages = trendingImages.map(function(image){
+
+					//find correct image
+					if (image._id.toString() == id.toString()){
+
+						// if you've already voted on this image, just return the object without changes
+						if (image.raters.indexOf(voter_id) > -1 ) {
+							return image;
+						}
+						else {
+							var new_rating_count = image.raters.length + 1;
+							var all_ratings_ever = (image.raters.length*image.rating) + action.data.rating;
+							var new_average_rating = all_ratings_ever / new_rating_count;
+							image.rating = new_average_rating;
+							image.raters.push(action.data.voter_id);
+							console.log('returning image: ',image);
+							return image;
+						}
+					}
+					else{
+						return image;
+					}
 			});
-			trendingImages = u;
+
+			trendingImages = newTrendingImages;
 			Store.emitChange();
 			break;
 
@@ -129,6 +135,7 @@ Dispatcher.register(function(action){
 			trendingImages = action.images;
 			Store.emitChange();
 			break;
+
 	}
 
 

@@ -37,7 +37,7 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 		path: '/api/trending/images',
 		method: 'GET',
 		config: {
-			 
+
 			 //for image uploading
 			 /*payload: {
 	           output:'file',
@@ -57,36 +57,36 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
                 }
             }
 		}
-	},{
+	}, {
 		path: '/api/user/images',
-		method: ['GET','POST'],
+		method: ['POST'],
 		config: {
-			 
+
 			 //for image uploading
-			 /*payload: {
-	           output:'file',
-	           maxBytes:209715200,
-	           parse: false
-	        },*/
+			 payload: {
+            output:'file',
+            parse: true
+	           // maxBytes:209715200,
+	           // parse: false
+	        },
 
 			auth: {
 				strategy: 'session',
 				mode: 'try'
 			},
-			handler: handler.image,
-
-            plugins: {
-                'hapi-auth-cookie': {
-                    reddirectTo: '/'
-                }
-            }
+			handler: handler.upload,
+      plugins: {
+          'hapi-auth-cookie': {
+              reddirectTo: '/'
+          }
+      }
 		}
-	},{
+	},
 
+	{
 		path: '/api/user',
 		method: 'GET',
 		config: {
-
 			auth: {
 				strategy: 'session',
 				mode: 'try'
@@ -130,15 +130,14 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 
   {
 		//Facebook login route
-   method  : ['GET', 'POST'],
-   path    : '/facebook',
-   config  : {
-   auth: 'facebook',
-     handler: handler.facebook
-    }
-  },
+	   method  : ['GET', 'POST'],
+	   path    : '/facebook',
+	   config  : {
+	   auth: 'facebook',
+	     handler: handler.facebook
+	    }
+	},{
 
-  {
 		path: "/public/{param*}",
 		method: "GET",
 		handler: {
@@ -146,7 +145,6 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 				path: Path.resolve(__dirname + '/../public'),
 				index: true
 			}
-
 		}
 
 	},{
@@ -155,6 +153,7 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 		handler: handler.publicProfile
 	},{
 		path: '/',
+
 		method: 'GET',
 		config: {
 			auth: {
@@ -168,7 +167,9 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
           }
        }
 		}
+	
 	}]);
+
 
 });
 

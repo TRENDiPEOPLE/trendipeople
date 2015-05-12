@@ -15,6 +15,8 @@ var User = require('./User');
 var ActionCreators = require('../actions/ActionCreators');
 
 function getStateFromStore(){
+
+
 	var rating 		 = Store.getRating();
 	var user   		 = Store.getUser();
 	var people 		 = Store.getPeople();
@@ -23,7 +25,7 @@ function getStateFromStore(){
 	var userImages 		 = Store.getUserImages();
 	var categories   = Store.getCategories();
 	var trendingImages = Store.getTrendingImages();
-	
+
 	return {
 		rating 		 : rating,
 		user   		 : user,
@@ -83,13 +85,16 @@ var TrendiPeople = React.createClass({
 				<div className="container">
 					<div className="row">
 						<div className="col-md-12">
-					    <img src="/public/assets/images/logo.png" id="logo"/>
-					    <p> TRENDiPEOPLE© </p>
-							<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></div>
-							<nav className="navbar navbar-default">
-								<div className="container-fluid">
-								    <div className="navbar-header">
-								    	<Link to="home" className="navbar-brand">Home</Link>
+					    <div id="topBox">
+						    <img src="/public/assets/images/logo.png" id="logo"/>
+							    <p className="logo"> TRENDiPEOPLE© </p>
+									<div className="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></div>
+<a href="https://twitter.com/share" className="twitter-share-button" data-url="http://trendipeople.com" data-text="Check out the latest fashion trends at trendipeople.com" data-hashtags="trendipeople">Tweet</a>
+								</div>
+									<nav className="navbar navbar-default">
+										<div className="container-fluid">
+										    <div className="navbar-header">
+										    	<Link to="home" className="navbar-brand">Home</Link>
 								    </div>
 								    <div>
 								    {menu}
@@ -100,14 +105,16 @@ var TrendiPeople = React.createClass({
 					</div>
 
 					<div className="row col-md-12">
-						<RouteHandler 	rating={this.state.rating}
-										userImages={this.state.userImages}
-										user={this.state.user}
-										people={this.state.people}
-										trends={this.state.trends}
-										looks={this.state.looks}
-										categories={this.state.categories}
-										trendingImages={this.state.trendingImages} />
+
+
+						<RouteHandler rating={this.state.rating}
+													userImages={this.state.userImages}
+													user={this.state.user}
+													people={this.state.people}
+													trends={this.state.trends}
+													looks={this.state.looks}
+													categories={this.state.categories}
+													trendingImages={this.state.trendingImages} />
 					</div>
 				</div>
 			</div>
