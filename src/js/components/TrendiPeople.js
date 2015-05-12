@@ -85,13 +85,16 @@ var TrendiPeople = React.createClass({
 				<div className="container">
 					<div className="row">
 						<div className="col-md-12">
-					    <img src="/public/assets/images/logo.png" id="logo"/>
-					    <p> TRENDiPEOPLE© </p>
-							<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></div>
-							<nav className="navbar navbar-default">
-								<div className="container-fluid">
-								    <div className="navbar-header">
-								    	<Link to="home" className="navbar-brand">Home</Link>
+					    <div id="topBox">
+						    <img src="/public/assets/images/logo.png" id="logo"/>
+							    <p className="logo"> TRENDiPEOPLE© </p>
+									<div className="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></div>
+<a href="https://twitter.com/share" className="twitter-share-button" data-url="http://trendipeople.com" data-text="Check out the latest fashion trends at trendipeople.com" data-hashtags="trendipeople">Tweet</a>
+								</div>
+									<nav className="navbar navbar-default">
+										<div className="container-fluid">
+										    <div className="navbar-header">
+										    	<Link to="home" className="navbar-brand">Home</Link>
 								    </div>
 								    <div>
 								    {menu}

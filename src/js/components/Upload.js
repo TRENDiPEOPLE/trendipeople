@@ -11,31 +11,31 @@ var Upload = React.createClass({
 		return {data_uri: null};
 	},
 
-	// handleSubmit: function(e){
-	// 	e.preventDefault();
-	// 	var image = React.findDOMNode(this.refs.image).value;
+	handleSubmit: function(e){
+		e.preventDefault();
+		var image = React.findDOMNode(this.refs.image).value;
 
-	// 	if (image.length < 1){
-	// 		image = 'http://lorempixel.com/200/200/sports/DummyText/';
-	// 	}
+		if (image.length < 1){
+			image = 'http://lorempixel.com/150/150/people/';
+		}
 
-	// 	var data = {
-	// 		image: image
-	// 	};
-	// 	ActionCreators.saveImage(data);
-	// },
+		var data = {
+			image: image
+		};
+		ActionCreators.saveImage(data);
+	},
 
-	// render: function(){
+	render: function(){
 
-	// 	var image_api_url = './api/image';
-	// 	console.log('image_api_url: ', image_api_url);
-	// 	return (
+		var image_api_url = './api/image';
+		console.log('image_api_url: ', image_api_url);
+		return (
 
-	// 		<form onSubmit={this.handleSubmit} >
- //  				<input type="file" name="image_link" ref="image" />
-	// 			<input type="submit" value="Share image" />
-	// 		</form>
-	// 	);
+			<form onSubmit={this.handleSubmit} >
+  				<input type="file" name="image_link" ref="image" />
+				<input type="submit" value="Share image" />
+			</form>
+		);
 
 
 	// }
@@ -67,14 +67,14 @@ var Upload = React.createClass({
 	// 	reader.readAsText(file);
 	// },
 
-	render: function(){
+	// render: function(){
 
-		return (
-			<form method="post" action="/api/user/images" encyType="multipart/form-data" >
-  				<input type="file" name="image" id='image' ref="image" enctype="multipart/form-data" />
-				<input type="submit" value="Save image" />
-			</form>
-		);
+	// 	return (
+	// 		<form method="post" action="/api/user/images" encType="multipart/form-data" >
+ //  				<input type="file" name="image" id='image' ref="image" enctype="multipart/form-data" />
+	// 			<input type="submit" value="Save image" />
+	// 		</form>
+	// 	);
 
 
 	}
