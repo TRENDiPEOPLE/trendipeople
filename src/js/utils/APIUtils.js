@@ -59,18 +59,5 @@ module.exports = {
 	}
 }
 
-/*		Request.post('/api/user/images')
-			.attach("file", data)
-			.type('form')
-			.end(function(err,res) {
-				// console.log('AJAX response saveImage: ', res);
-				ServerActionCreators.receivedImages(res.text);
-			});
-<<<<<<< HEAD
-	}*/
-=======
-	}
-};
->>>>>>> master2
 
 

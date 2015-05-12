@@ -45,10 +45,11 @@ var Upload = React.createClass({
 	},
 */
 	render: function(){
-
+		console.log('rendering Upload');
 		var image_api_url = './api/image';
 		console.log('image_api_url: ', image_api_url);
 		return (
+
 			<form onSubmit={this.handleSubmit} action="/api/user/images" method="POST" encType="multipart/form-data" id="dog" ref="upload">
   				<input type="file" name="image_link" ref="image" accept="image/png, image/jpeg"/>
 				<input type="submit" value="Share image" id="submitID"/>
