@@ -25,6 +25,7 @@
   "dependencies": {
     "bell": "^2.7.0",
     "browserify": "^9.0.8",
+    "crate": "0.0.0",
     "flux": "^2.0.3",
     "gulp": "^3.8.11",
     "gulp-jest": "^0.4.0",
@@ -32,6 +33,7 @@
     "hapi-auth-cookie": "^2.0.0",
     "harmonize": "^1.4.1",
     "joi": "^6.4.1",
+    "jquery": "^2.1.4",
     "mongoose": "^4.0.1",
     "mongoose-crate": "^1.0.10",
     "mongoose-crate-s3": "^1.1.1",

@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 var Path = require('path');
 var index = Path.resolve(__dirname + '/../public/index.html');
-
+var crate = require('mongoose-crate');
+var S3 = require('mongoose-crate-s3');
 var config = require('./config');
 var Schema = mongoose.Schema;
 
@@ -139,7 +140,7 @@ var trending = function(request,reply){
 };
 
 var image = function(request,reply){
-
+	console.log('request: ', request);
 	if (request.auth.isAuthenticated){
 
 		// if the user is adding a new image
@@ -150,23 +151,32 @@ var image = function(request,reply){
 			var email = request.auth.credentials.email;
 			var facebook_id = request.auth.credentials.auth_id;
 			var payload = request.payload;
-			var image_link = payload.image;
+			
+			console.log('payload: ', payload);
+
+			var path = payload.image_link.path;
 
 			// create a new image to save in db
 			var new_image = new Img();
+			console.log('new_image:', new_image);
 			var number = Math.floor(Math.random()*10);
-			new_image.link = image_link + '/' + number;
+			new_image.link = path ;
 			new_image.rating = 2.5;
 			new_image.raters = [facebook_id];
 			new_image.facebook_id = facebook_id;
 
 			// save img
-	        new_image.save( function(err){
-	            if (err){
-	                console.log('error when saving new member');
-	                throw error;
-	            }
-	            reply('success');
+			new_image.attach("file", {path: path}, function(err) {
+				if (err) console.log(err)
+				console.log("image attached to s3");
+
+		        new_image.save( function(err){
+		            if (err){
+		                console.log('error when saving new image to mongolabs');
+		                throw error;
+		            }
+		            reply('success');
+				})
 	        });
 
 		} 

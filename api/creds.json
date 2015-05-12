@@ -13,8 +13,8 @@
 		"password": "cookie_password"
 	},
 	"s3" : {
-			"key" 		: "AKIAJ4EKISDA4MIZRS7Q",
-			"secret"	: "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",
+			"key" 		: "AKIAI55OIMCWQZJOZHEA",
+			"secret"	: "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",
 			"bucket"	: "trendipeople",
 			"acl"		: "public-read-write",
 			"region"	: "eu-west-1"

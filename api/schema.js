@@ -2,13 +2,13 @@ var mongoose = require('mongoose');
 var crate = require('mongoose-crate');
 var S3 = require('mongoose-crate-s3');
 var config = require('./config');
+var path = require("path");
 
 var userSchema = new mongoose.Schema({
 	username: String,
 	email: String
 });
 
-var User = mongoose.model('User', userSchema);
 
 var imgSchema = new mongoose.Schema({
   link: String,
@@ -17,7 +17,7 @@ var imgSchema = new mongoose.Schema({
   facebook_id: String
 });
 
-var Img = mongoose.model('Img', imgSchema);
+var User = mongoose.model('User', userSchema);
 
 imgSchema.plugin(crate, {
   storage: new S3({
@@ -34,6 +34,8 @@ imgSchema.plugin(crate, {
     file: {}
   }
 });
+
+var Img = mongoose.model('Img', imgSchema);
 
 module.exports = {
 	User: User,
