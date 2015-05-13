@@ -67,15 +67,19 @@ var TrendiPeople = React.createClass({
 
 		// display login or logout if the user is logged in or out
 		if (this.state.user) {
-			menu = <ul className="nav navbar-nav">
-				<li><Link to="profile">Profile</Link></li>
-				<li><Link to="trending">Trending</Link></li>
-				<li><Link to="upload">Upload</Link></li>
-				 <li><a href="/logout">Log out</a></li>
-			</ul>;
+			menu = 	<ul className="nav nav-tabs nav-justified">
+						<li><Link to="home" >Home</Link></li>
+						<li><Link to="profile" id="profilenav">Profile</Link></li>
+						<li><Link to="trending">Trending</Link></li>
+						<li><Link to="upload">Upload</Link></li>
+						<li><a href="/logout">Log out</a></li>
+					</ul>;
 
 		} else {
-			menu =<ul className="nav navbar-nav"> <li><a href="/facebook">Login</a></li></ul>;
+			menu = 	<ul className="nav nav-tabs nav-justified">
+						<li><Link to="home" >Home</Link></li>
+						<li><a href="/facebook">Login</a></li>
+					</ul>;
 		}
 
 		var rating = this.state.rating;
@@ -92,9 +96,6 @@ var TrendiPeople = React.createClass({
 								</div>
 									<nav className="navbar navbar-default">
 										<div className="container-fluid">
-										    <div className="navbar-header">
-										    	<Link to="home" className="navbar-brand">Home</Link>
-								    </div>
 								    <div>
 								    {menu}
 									</div>
