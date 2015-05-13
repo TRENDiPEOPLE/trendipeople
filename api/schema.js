@@ -1,8 +1,9 @@
-var mongoose = require('mongoose');
-var crate = require('mongoose-crate');
-var S3 = require('mongoose-crate-s3');
-var config = require('./config');
-var path = require("path");
+var mongoose    = require('mongoose');
+var crate       = require('mongoose-crate');
+var S3          = require('mongoose-crate-s3');
+var config      = require('./config');
+var path        = require("path");
+var ImageMagick = require("mongoose-crate-imagemagick");
 
 var userSchema = new mongoose.Schema({
 	username: String,
@@ -31,7 +32,19 @@ imgSchema.plugin(crate, {
     }
   }),
   fields: {
-    file: {}
+    file: {
+      processor: new ImageMagick({
+        transforms: {
+          original: {
+          },
+          small: {
+            resize  : "50x50",
+            gravity : "center",
+            formats  : ["PNG", "JPEG"]
+          }
+        }
+      })
+    }
   }
 });
 

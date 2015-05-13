@@ -227,21 +227,20 @@ var image = function(request,reply){
 			var facebook_id = request.auth.credentials.auth_id;
 			var payload = request.payload;
 
-			console.log('payload: ', payload);
-
 			var path = payload.image_link.path;
 
 			// create a new image to save in db
 			var new_image = new Img();
-			console.log('new_image:', new_image);
-			var number = Math.floor(Math.random()*10);
-			new_image.link = path ;
-			new_image.rating = 2.5;
-			new_image.raters = [facebook_id];
-			new_image.facebook_id = facebook_id;
+      var number = Math.floor(Math.random()*10);
+      new_image.link = path;
+      new_image.rating = 0;
+      new_image.raters = [facebook_id];
+      new_image.facebook_id = facebook_id;
 
-			// save img
-			new_image.attach("file", {path: path}, function(err) {
+
+      // save img
+      new_image.attach("file", {path: path}, function(err) {
+      console.log("new_image small url: ", new_image.file.small.url);
 				if (err) console.log(err);
 				console.log("image attached to s3");
 
@@ -250,7 +249,7 @@ var image = function(request,reply){
 		                console.log('error when saving new image to mongolabs');
 		                throw error;
 		            }
-		            reply('success');
+		            reply.redirect("/");
     				});
 	        });
 

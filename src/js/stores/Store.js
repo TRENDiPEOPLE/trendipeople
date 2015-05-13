@@ -18,17 +18,6 @@ var trendingPeople = [
 	// { img : "http://lorempixel.com/150/150/people/8", rating : 0 }
 ];
 
-var looks = [
-	{ look : "http://lorempixel.com/150/150/fashion/1", rating : 0 },
-	{ look : "http://lorempixel.com/150/150/fashion/2", rating : 0 },
-	{ look : "http://lorempixel.com/150/150/fashion/3", rating : 0 },
-	{ look : "http://lorempixel.com/150/150/fashion/4", rating : 0 },
-	{ look : "http://lorempixel.com/150/150/fashion/5", rating : 0 },
-	{ look : "http://lorempixel.com/150/150/fashion/6", rating : 0 },
-	{ look : "http://lorempixel.com/150/150/fashion/7", rating : 0 },
-	{ look : "http://lorempixel.com/150/150/fashion/8", rating : 0 }
-];
-
 var trendingImages = null;
 var publicProfile = {};
 var trends = [ "Xmas", "Winter", "TopShop", "Fur Coats", "River Island", "Hats", "Big Jackets", "Spring"];
@@ -65,7 +54,7 @@ var Store = assign({}, EventEmitter.prototype, {
 	},
 
 	getLooks: function(){
-		return looks;
+		// return looks;
 	},
 
 	getCategories: function(){
