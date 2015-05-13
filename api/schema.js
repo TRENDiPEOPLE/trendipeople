@@ -29,10 +29,22 @@ imgSchema.plugin(crate, {
     region: config.s3.region, // defaults to us-standard
     path: function(attachment) { // where the file is stored in the bucket - defaults to this function
       return '/' + path.basename(attachment.path);
-    },
+    }
   }),
   fields: {
-    file: {}
+    file: {
+      processor: new ImageMagick({
+        transforms: {
+          original: {
+          },
+          small: {
+            resize  : "50x50",
+            gravity : "center",
+            formats  : ["PNG", "JPEG"]
+          }
+        }
+      })
+    }
   }
 });
 

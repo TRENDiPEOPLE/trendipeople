@@ -200,10 +200,10 @@ var image = function(request,reply){
       new_image.raters = [facebook_id];
       new_image.facebook_id = facebook_id;
 
-      console.log("new_image: ", new_image);
 
-			// save img
-			new_image.attach("file", {path: path}, function(err) {
+      // save img
+      new_image.attach("file", {path: path}, function(err) {
+      console.log("new_image small url: ", new_image.file.small.url);
 				if (err) console.log(err);
 				console.log("image attached to s3");
 
