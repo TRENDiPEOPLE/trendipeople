@@ -40,24 +40,22 @@ module.exports = {
 	saveImage: function(data){
 
 		$.ajax({
-		        url: '/api/user/images',
-		        type: 'POST',
-					xhr: function() {  // Custom XMLHttpRequest
-		            var myXhr = $.ajaxSettings.xhr();
-		            if(myXhr.upload){ 
-		                console.log(myXhr.upload);
-		            }
-		            return myXhr;
-		        },
-				data: data,
-        		cache: false,
-				contentType: false,
-		        processData: false
-		    }, "json");
-
-
+		  url: '/api/user/images',
+		  type: 'POST',
+				xhr: function() {  // Custom XMLHttpRequest
+	        var myXhr = $.ajaxSettings.xhr();
+            if(myXhr.upload){
+	          	console.log(myXhr.upload);
+            }
+            return myXhr;
+		      },
+				data 				: data,
+        cache 		  : false,
+				contentType : false,
+		    processData : false
+		}, "json");
 	}
-}
+};
 
 
 

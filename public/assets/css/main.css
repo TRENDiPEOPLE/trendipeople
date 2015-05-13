@@ -3,102 +3,59 @@ body {
   background-color: #EEF2F1
 }
 
-#topBox {
-  margin-top: 5%;
-}
-
-#navBar {
-  margin-top: 1%;
-}
-
-.navBar {
-  font-size: 18px;
-  background-color: #EEF2F1;
-  box-shadow: 2px 2px 2px grey;
-  border: solid 1px lightgrey;
-  border-radius: 3px;
-  margin-bottom: 3%;
-}
-
-#logo {
-  height: 100%;
-  width: 30%;
-  max-height: 60px;
-  max-width: 80px;
-}
-
-#line {
+.boxLine {
+  display: block;
+  width: 60%;
+  float: left;
   border: 1px solid lightgrey;
-  width: 50%;
-  color: lightgrey;
-  opacity: 1;
-  margin-top: 5%;
+  margin: auto;
   margin-bottom: 5%;
+}
+
+.boxList {
+  font-weight: bold;
+  padding: 0;
+  list-style: none;
+  opacity: 0.7;
+}
+
+.boxTitle {
+  font-weight: bold;
+  color: rgb(54, 203, 192);
+  margin-bottom: 5px;
+}
+
+.fb_iframe_widget {
+  display: inline-block;
+  position: relative;
+  float: right;
+  max-width: 58px;
 }
 
 .fb-share-button {
   height:5%;
   width: 10%;
+  position: relative;
+  z-index: 100;
+  float: right;
+  display: inline-block;
+  margin: auto;
 }
 
-.profileRow {
-  height: 30%;
-  border: 3px solid lightgrey;
-  background-color: white;
+.image {
+  border: 3px solid grey;
+  border-radius: 3px;
+  width: 100%;
+}
+
+.imageBox {
+  display: inline-block;
+  margin-bottom: 2%;
+  margin: none;
 }
 
 .inactive {
   opacity: 0.5;
-}
-
-.peopleBox {
-  margin-bottom: 4%;
-}
-
-#trendingPeople {
-  font-size: 22px;
-  text-align: left;
-  margin-left: 2%;
-  margin-bottom: 3%;
-}
-
-#trendingLooks {
-  font-size: 22px;
-  text-align: left;
-  margin-left: 2%;
-}
-
-.wardrobeRow {
-  height: 80%;
-  margin-top: 5%
-}
-
-.wardrobeImage {
-  display: inline-block;
-  margin: 1%;
-  border: 3px solid lightskyblue;
-  border-radius: 4px;
-  padding: 1%;
-}
-
-.profileBox {
-  border: solid 3px lightskyblue;
-  margin-top: 1%;
-  border-shadow: 2px 2px 2px lightgrey;
-  border-radius: 4px;
-}
-
-#profilePic {
-  margin: 5px auto;
-  height: 150px;
-  width: 150px;
-  position: relative;
-  display: block;
-}
-
-#userName {
-  text-align: center;
-  font-size: 28px;
 }
 
 .infoBar {
@@ -116,24 +73,26 @@ body {
   height: 100%;
 }
 
-.imageBox {
+#line {
+  border: 1px solid lightgrey;
+  width: 50%;
+  color: lightgrey;
+  opacity: 1;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+#logo {
+  height: 100%;
+  width: 30%;
+  max-height: 60px;
+  max-width: 80px;
+}
+
+.logo {
   display: inline-block;
-  margin-bottom: 2%;
-}
-
-.ratingLogo {
-  width: 100%;
-  margin-top: 4%;
-}
-
-.image {
-  border: 3px solid grey;
-  border-radius: 3px;
-  width: 100%;
-}
-
-.rating {
-  width: 20%;
+  font-size: 28px;
+  margin: 0;
 }
 
 .lookBox {
@@ -145,57 +104,46 @@ body {
   border-radius: 4px;
 }
 
-
-.boxLine {
-  width: 90%;
-  float: left;
-  border: 1px solid lightgrey;
-  margin: auto;
-  margin-bottom: 5%;
+#navBar {
+  margin-top: 1%;
 }
 
-
-.boxTitle {
-  font-weight: bold;
-  color: rgb(54, 203, 192);
-  margin-bottom: 5px;
+.navBar {
+  font-size: 18px;
+  background-color: #EEF2F1;
+  box-shadow: 2px 2px 2px grey;
+  border: solid 1px lightgrey;
+  border-radius: 3px;
+  margin-bottom: 3%;
 }
 
-.boxList {
-  font-weight: bold;
-  padding: 0;
-  list-style: none;
-  opacity: 0.7;
-}
-
-.fb-share-button {
-  position: relative;
-  z-index: 100;
-  float: right;
-  display: inline-block;
-  margin: auto;
-}
-
-.logo {
-  display: inline-block;
-  font-size: 28px;
-  margin: 0;
+.peopleBox {
+  margin-bottom: 4%;
 }
 
 .pluginButtonContainer {
   float: right;
 }
 
-.fb_iframe_widget {
-  display: inline-block;
-  position: relative;
-  float: right;
-  max-width: 58px;
+.profileBox {
+  border: solid 3px lightskyblue;
+  margin-top: 1%;
+  border-shadow: 2px 2px 2px lightgrey;
+  border-radius: 4px;
 }
 
-.twitter-share-button {
-  margin-right: 1%;
-  float: right;
+#profilePic {
+  margin: 5px auto;
+  height: 150px;
+  width: 150px;
+  position: relative;
+  display: block;
+}
+
+.profileRow {
+  height: 30%;
+  border: 3px solid lightgrey;
+  background-color: white;
 }
 
 .ps-top-to-bottom {
@@ -216,6 +164,7 @@ body {
   bottom: -3px;
   width: 3px;
 }
+
 .ps-top-to-bottom:before {
   left: -3px;
 }
@@ -223,3 +172,55 @@ body {
   right: -3px;
 }
 
+.rating {
+  width: 20%;
+}
+
+.ratingLogo {
+  width: 100%;
+  margin-top: 4%;
+}
+
+#topBox {
+  margin-top: 5%;
+}
+
+.trendBox {
+  position: fixed;
+}
+
+#trendingLooks {
+  font-size: 22px;
+  text-align: left;
+  margin-left: 2%;
+}
+
+#trendingPeople {
+  font-size: 22px;
+  text-align: left;
+  margin-left: 2%;
+  margin-bottom: 3%;
+}
+
+.twitter-share-button {
+  margin-right: 1%;
+  float: right;
+}
+
+#userName {
+  text-align: center;
+  font-size: 28px;
+}
+
+.wardrobeImage {
+  display: inline-block;
+  margin: 1%;
+  border: 3px solid lightskyblue;
+  border-radius: 4px;
+  padding: 1%;
+}
+
+.wardrobeRow {
+  height: 80%;
+  margin-top: 5%
+}

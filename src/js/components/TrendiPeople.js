@@ -61,7 +61,6 @@ var TrendiPeople = React.createClass({
 
 	render: function(){
 
-		//console.log('userImages in TrendiPeople: ', this.state.userImages);
 		//console.log('trendingImages in TrendiPeople: ', this.state.trendingImages);
 		var menu;
 

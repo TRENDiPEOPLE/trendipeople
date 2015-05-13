@@ -1,19 +1,13 @@
 var React = require("react");
-
 var Request = require("superagent");
 
 var ActionCreators = require('../actions/ActionCreators');
-
-
 
 var Upload = React.createClass({
 /*
 	componentDidMount: function(){
 		$("#submitID").click(function(){
     		var formData = new FormData($('#dog')[0]);
-
-<<<<<<< HEAD
-    		
 		});
 	},
 */
@@ -21,7 +15,6 @@ var Upload = React.createClass({
 	handleSubmit: function(e){
 		e.preventDefault();
 		var image = React.findDOMNode(this.refs.image).files[0];
-=======
 	getInitialState: function() {
 		return {data_uri: null};
 	},
@@ -33,12 +26,11 @@ var Upload = React.createClass({
 		if (image.length < 1){
 			image = 'http://lorempixel.com/150/150/people/';
 		}
->>>>>>> master2
 
 		var formData = new FormData(image);
 
-		console.log('image: ', image, formData);	
-/*		if (image.length < 1){ 
+		console.log('image: ', image, formData);
+/*		if (image.length < 1){
 			image = 'http://lorempixel.com/150/150/people/';
 		}
 		ActionCreators.saveImage(formData);
@@ -50,11 +42,11 @@ var Upload = React.createClass({
 		console.log('image_api_url: ', image_api_url);
 		return (
 
-			<form onSubmit={this.handleSubmit} action="/api/user/images" method="POST" encType="multipart/form-data" id="dog" ref="upload">
+			<form action="/api/user/images" method="POST" encType="multipart/form-data" id="dog" ref="upload">
   				<input type="file" name="image_link" ref="image" accept="image/png, image/jpeg"/>
 				<input type="submit" value="Share image" id="submitID"/>
 			</form>
-		)
+		);
 
 
 	}
