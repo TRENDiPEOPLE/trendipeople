@@ -1,19 +1,13 @@
 var React = require("react");
-
 var Request = require("superagent");
 
 var ActionCreators = require('../actions/ActionCreators');
-
-
 
 var Upload = React.createClass({
 /*
 	componentDidMount: function(){
 		$("#submitID").click(function(){
     		var formData = new FormData($('#dog')[0]);
-
-<<<<<<< HEAD
-
 		});
 	},
 */
@@ -21,7 +15,6 @@ var Upload = React.createClass({
 	handleSubmit: function(e){
 		e.preventDefault();
 		var image = React.findDOMNode(this.refs.image).files[0];
-=======
 	getInitialState: function() {
 		return {data_uri: null};
 	},
@@ -33,7 +26,6 @@ var Upload = React.createClass({
 		if (image.length < 1){
 			image = 'http://lorempixel.com/150/150/people/';
 		}
->>>>>>> master2
 
 		var formData = new FormData(image);
 

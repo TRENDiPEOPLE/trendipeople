@@ -109,7 +109,7 @@ var user = function(request,reply){
 var publicProfile = function(request,reply){
 	var id = request.params.userid;
 	console.log('id: ', id);
-	
+
 	User.findOne({facebook_id: id}, function(err,user){
 			if (err){
 	       		console.log(err);
@@ -120,20 +120,20 @@ var publicProfile = function(request,reply){
 	    		console.log('Fund user ', user);
 				Img.find({facebook_id: id}, function(err,images){
 					if (err){
-		       			throw err;
-		       			console.log(err);	
+		       			console.log(err);
+                throw err;
 			    	}
 		    		var publicProfile = {
 		    			user: user,
 		    			images: images
-		    		}
+		    		};
 			    	if (images){
 			    		console.log('users images: ', images);
-			    		reply(publicProfile)
+			    		reply(publicProfile);
 			    	}
 			    	else if (!images){
-			    		console.log('no user images')
-			    		reply(publicProfile)
+			    		console.log('no user images');
+			    		reply(publicProfile);
 			    	}
 			    });
 	        // if the user isn't registered
@@ -176,57 +176,20 @@ var trending = function(request,reply){
 	}
 };
 
-var rate = function(request, reply) {
-  console.log("rate handler");
-};
-
-
-/*var upload = function(request, reply){
-  // console.log(request.payload["image"]);
-  console.log(' - - - - - - - - - - - - - - - - - - - - - - - - - ')
-  console.log('request.payload', request.payload)
-  console.log(' - - - - - - - - - - - - - - - - - - - - - - - - - ');
-  var filedata = fs.readFileSync(request.payload.path);
-  console.log(filedata)
-  console.log(' - - - - - - - - - - - - - - - - - - - - - - - - - ');
-  var data = new Buffer(filedata, "utf8");
-  console.log(data.toString());
-  console.log(' - - - - - - - - - - - - - - - - - - - - - - - - - ');
-  var ext;
-  if(data.toString().toLowerCase().indexOf('png') > -1){
-    ext = '.png'
-  }
-  if(data.toString().toLowerCase().indexOf('jpg') > -1 || data.toString().toLowerCase().indexOf('jfi') > -1) {
-    ext = '.jpg'
-  }
-  console.log('>>> FileType: ', ext);
-  var file = crypto.createHash('sha1').update(data).digest('hex') + ext; // uniqe filename
-  var filepath = __dirname + '/' + file;
-  // var binary = new Buffer(data, 'binary');
-  fs.writeFile(filepath, data, 'binary', function(err) {
-    if (err) throw err;
-    console.log("saved to file!");
-    S.streamFileToS3(filepath, function(err) { // standard callback function:
-      console.log(file,' Was uploaded. Visit:', S.S3FileUrl(file));
-    });
-  });
-
-}
-*/
 
 var image = function(request,reply){
-	console.log('request: ', request);
+	// console.log('request: ', request);
 	if (request.auth.isAuthenticated){
 
 		// if the user is adding a new image
 		if (request.raw.req.method === 'POST'){
 
 			// declare some useful variables
-			var id = request.params.id;		
+			var id = request.params.id;
 			var email = request.auth.credentials.email;
 			var facebook_id = request.auth.credentials.auth_id;
 			var payload = request.payload;
-			
+
 			console.log('payload: ', payload);
 
 			var path = payload.image_link.path;
@@ -242,7 +205,7 @@ var image = function(request,reply){
 
 			// save img
 			new_image.attach("file", {path: path}, function(err) {
-				if (err) console.log(err)
+				if (err) console.log(err);
 				console.log("image attached to s3");
 
 		        new_image.save( function(err){
@@ -251,10 +214,10 @@ var image = function(request,reply){
 		                throw error;
 		            }
 		            reply('success');
-				})
+    				});
 	        });
 
-		} 
+		}
 
 		// find all images from this user
 		else if (request.raw.req.method === 'GET'){
@@ -262,27 +225,19 @@ var image = function(request,reply){
 			var facebook_id = request.auth.credentials.auth_id;
 			Img.find({facebook_id: facebook_id}, function(err,images){
 				if (err){
-	       			throw err;
-		    	}
+	       	throw err;
+		    }
 
 		    if (images){
-		    		console.log('users images: ', images);
-		    		reply(images);
-		    	}
-		    	else if (!images){
-		    		console.log('no user images');
-		    		reply([]);
-		    	}
-
+		    	console.log('users images: ', images);
+		    	reply(images);
+		    }
+		    else if (!images){
+		  		console.log('no user images');
+		  		reply([]);
+	    	}
 			});
-
 		}
-
-		//var payload= request.payload;
-		//var payloadPath = request.payload.path;
-		//var image = fs.readFileSync(payloadPath);
-
-
 
 
 /*
@@ -383,16 +338,16 @@ var profiles = function(request,reply){
 		console.log('user is ', user);
 		reply(user);
 	});
-}
+};
 
 module.exports = {
-	facebook: facebook,
-	home: home,
-	logout: logout,
-	image:image,
-	user: user,
-	rate: rate,
-	trending: trending,
-	profiles:profiles,
-	publicProfile: publicProfile
+	facebook      : facebook,
+	home          : home,
+	logout        : logout,
+	image         : image,
+	user          : user,
+	rate          : rate,
+	trending      : trending,
+	profiles      : profiles,
+	publicProfile : publicProfile
 };

@@ -8,14 +8,14 @@ var CHANGE_EVENT = "change";
 var rating = 0;
 var _user = null;
 var people = [
-	{ img : "http://lorempixel.com/150/150/people/1", rating : 0 },
-	{ img : "http://lorempixel.com/150/150/people/2", rating : 0 },
-	{ img : "http://lorempixel.com/150/150/people/3", rating : 0 },
-	{ img : "http://lorempixel.com/150/150/people/4", rating : 0 },
-	{ img : "http://lorempixel.com/150/150/people/5", rating : 0 },
-	{ img : "http://lorempixel.com/150/150/people/6", rating : 0 },
-	{ img : "http://lorempixel.com/150/150/people/7", rating : 0 },
-	{ img : "http://lorempixel.com/150/150/people/8", rating : 0 }
+	// { img : "http://lorempixel.com/150/150/people/1", rating : 0 },
+	// { img : "http://lorempixel.com/150/150/people/2", rating : 0 },
+	// { img : "http://lorempixel.com/150/150/people/3", rating : 0 },
+	// { img : "http://lorempixel.com/150/150/people/4", rating : 0 },
+	// { img : "http://lorempixel.com/150/150/people/5", rating : 0 },
+	// { img : "http://lorempixel.com/150/150/people/6", rating : 0 },
+	// { img : "http://lorempixel.com/150/150/people/7", rating : 0 },
+	// { img : "http://lorempixel.com/150/150/people/8", rating : 0 }
 ];
 
 var looks = [
@@ -33,7 +33,7 @@ var trendingImages = null;
 
 var trends = [ "Xmas", "Winter", "TopShop", "Fur Coats", "River Island", "Hats", "Big Jackets", "Spring"];
 var categories = [ "Men", " Women", "Accesories", "Beauty", "Hair", "Beachwear", "Sunglasses", "Shorts", "Tops", "Swimwear", "Denim", "Dresses"];
-var userImages;
+var userImages = [];
 var Store = assign({}, EventEmitter.prototype, {
 
 	emitChange: function(){
