@@ -16,7 +16,6 @@ var ActionCreators = require('../actions/ActionCreators');
 
 function getStateFromStore(){
 
-
 	var rating 		 = Store.getRating();
 	var user   		 = Store.getUser();
 	var people 		 = Store.getPeople();
@@ -103,10 +102,7 @@ var TrendiPeople = React.createClass({
 							</nav>
 						</div>
 					</div>
-
 					<div className="row">
-
-
 						<RouteHandler rating={this.state.rating}
 													userImages={this.state.userImages}
 													user={this.state.user}
