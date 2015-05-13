@@ -41,7 +41,24 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 				strategy: 'session',
 				mode: 'try'
 			},
-			handler: handler.trending,
+			handler: handler.trendingImages,
+
+        plugins: {
+          'hapi-auth-cookie': {
+             reddirectTo: '/'
+          }
+       }
+		}
+	},
+	{
+		path: '/api/trending/people',
+		method: 'GET',
+		config: {
+			auth: {
+				strategy: 'session',
+				mode: 'try'
+			},
+			handler: handler.trendingPeople,
 
         plugins: {
           'hapi-auth-cookie': {
@@ -145,10 +162,12 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
 	},
 
   {
-		path: '/{userid}',
-		method: 'GET',
+		path: '/api/user/public/{userid}',
+		method: ['GET','POST'],
 		handler: handler.publicProfile
 	},
+
+
 
   {
 		path: '/',
@@ -166,12 +185,6 @@ server.register([require('bell'), require('hapi-auth-cookie')] , function(err){
       	}
 	   }
 	},
-
-  {
-		path: '/profile/{userid}',
-		method: 'GET',
-		handler: handler.profiles,
-   	},
 
   {
     //Facebook login route

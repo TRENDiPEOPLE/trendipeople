@@ -37,6 +37,7 @@ var Upload = React.createClass({
 	},
 */
 	render: function(){
+		console.log('this.props: ',this.props);
 		console.log('rendering Upload');
 		var image_api_url = './api/image';
 		console.log('image_api_url: ', image_api_url);
