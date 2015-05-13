@@ -11,25 +11,42 @@ var Profile = React.createClass({
 	},
 
 	render: function(){
-		console.log("people props", this.props.people);
 		// the users info is stored in this.props.user
 		var username = this.props.user.username;
 		var facebook_id = this.props.user.facebook_id;
 		var profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture';
 
+    var images = this.props.userImages || [];
+    var trendiLogo = "/public/assets/images/logo-small.png";
+    var that = this;
 
-		var people = this.props.people.map(function(ele, index) {
-        return (
-          <div className="col-md-3 peopleBox">
-           <img src={ele.img} key={Math.random()} className="image" />
-          </div>
-        );
+    // create the HTML for all the images
+    if (images.length > 0){
+          var imagesHTML = images.map(function(image, index){
+          var count = 1;
+          var rating = [];
+          var hidden = "";
+
+          // create the trendi rating below each image
+          while (count<=5){
+            if (image.rating < count) hidden = "inactive";
+            rating.push(<img key={Math.random()} className={"rating " + hidden} src={trendiLogo} />);
+            count +=1;
+          }
+
+          return (
+             <div key={image.file.url} className="imageBox col-md-3">
+              <img src={image.file.url} className="image"/>
+               <div className="ratingLogo">{rating}</div>
+              </div>
+            );
       });
+    }
 
 		return (
 			<div>
 				<div className="profileRow col-md-8 col-md-offset-2">
-					<div className="">
+					<div>
 						<img src={profile_image_url} id="profilePic"/>
 						<p id="userName">{username}</p>
 					</div>
@@ -45,7 +62,7 @@ var Profile = React.createClass({
 					</div>
 				</div>
 				<div className="wardrobeRow col-md-12">
-						{people}
+						{imagesHTML}
 				</div>
 			</div>
 		);

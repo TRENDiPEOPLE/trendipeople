@@ -40,8 +40,8 @@ var TrendingLooks = React.createClass({
             }
 
             return (
-               <div key={id} className="imageBox col-md-3">
-                <img src={image.link} className="image"/>
+               <div key={image.file.url} className="imageBox col-md-3">
+                <img src={image.file.url} className="image"/>
                  <div className="ratingLogo">{rating}</div>
                 </div>
               );

@@ -10,6 +10,7 @@ var TrendBox = React.createClass({
           <div>
             <h5 className="boxTitle">Worldwide Trends</h5>
               <hr className="boxLine"/>
+              <br />
               <ul className="boxList">
                 {trendTopics}
               </ul>
