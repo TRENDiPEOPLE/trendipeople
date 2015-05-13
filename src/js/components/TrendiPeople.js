@@ -16,27 +16,27 @@ var ActionCreators = require('../actions/ActionCreators');
 
 function getStateFromStore(){
 
-
-	var rating 		 = Store.getRating();
-	var user   		 = Store.getUser();
-	var people 		 = Store.getPeople();
-	var trends 		 = Store.getTrends();
-	var looks  		 = Store.getLooks();
-	var userImages 		 = Store.getUserImages();
-	var categories   = Store.getCategories();
-	var trendingImages = Store.getTrendingImages();
+	var rating 		 	= Store.getRating();
+	var user   		 	= Store.getUser();
+	var trendingPeople 	= Store.getTrendingPeople();
+	var trends 		 	= Store.getTrends();
+	var looks  		 	= Store.getLooks();
+	var userImages 	 	= Store.getUserImages();
+	var categories   	= Store.getCategories();
+	var trendingImages 	= Store.getTrendingImages();
+	var publicProfile 	= Store.getPublicProfile();
 
 	return {
-		rating 		 : rating,
-		user   		 : user,
-		people 		 : people,
-		trends 		 : trends,
-		looks  		 : looks,
-		categories   : categories,
-		userImages 		 : userImages,
-		trendingImages: trendingImages
+		rating 		  	: rating,
+		user   		  	: user,
+		trendingPeople	: trendingPeople,
+		trends 		 	: trends,
+		looks  		 	: looks,
+		categories   	: categories,
+		userImages 		: userImages,
+		trendingImages 	: trendingImages,
+		publicProfile 	: publicProfile
 	};
-
 }
 
 var TrendiPeople = React.createClass({
@@ -48,7 +48,7 @@ var TrendiPeople = React.createClass({
 	componentWillMount: function(){
 		// console.log('componentDidMount');
 		Store.addChangeListener(this._onChange);
-		// console.log('going to ActionCreators to fetch user');
+		console.log('going to ActionCreators to fetch user');
 		ActionCreators.fetchUser();
 	},
 
@@ -103,14 +103,12 @@ var TrendiPeople = React.createClass({
 							</nav>
 						</div>
 					</div>
-
 					<div className="row">
-
-
 						<RouteHandler rating={this.state.rating}
+													publicProfile={this.state.publicProfile}
 													userImages={this.state.userImages}
 													user={this.state.user}
-													people={this.state.people}
+													trendingPeople={this.state.trendingPeople}
 													trends={this.state.trends}
 													looks={this.state.looks}
 													categories={this.state.categories}
@@ -128,6 +126,7 @@ var routes = (
 		<Route name="upload" handler={Upload} />
 		<Route name="profile" handler={Profile} />
 		<Route name="trending" handler={Trending} />
+		<Route name=":user" handler={User} />
 		<DefaultRoute handler={Trending} />
 	</Route>
 );

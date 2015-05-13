@@ -15,7 +15,7 @@ module.exports = {
 	fetchUser: function(){
 		Request.get('/api/user')
 			.end(function(err,res){
-				// console.log('AJAX response fetchUser: ', res);
+				console.log('AJAX response fetchUser: ', res);
 				ServerActionCreators.receivedUser(res.body);
 			});
 	},
@@ -31,8 +31,30 @@ module.exports = {
 	fetchTrendingImages: function(){
 		Request.get('/api/trending/images')
 			.end(function(err,res){
-				// console.log('AJAX response fetchTrendingImages: ', res);
+				console.log('AJAX response fetchTrendingImages: ', res);
 				ServerActionCreators.receivedTrendingImages(res.body);
+			});
+	},
+
+	fetchPublicUser: function(id){
+		var data = {
+			id: id
+		}		
+		console.log('fetchPublicUser in APIUTils, id: ', id);
+		var url = '/api/user/public/' + id;
+		Request.post(url)
+			.send(data)
+			.end(function(err,res){
+				console.log('AJAX response fetchPublicUser: ', res);
+				ServerActionCreators.receivedPublicProfile(res.body);
+			});
+	},
+
+	fetchTrendingPeople: function(){
+		Request.get('/api/trending/people')
+			.end(function(err,res){
+				console.log('AJAX response fetchTrendingPeople: ', res);
+				ServerActionCreators.receivedTrendingPeople(res.body);
 			});
 	},
 
@@ -49,7 +71,7 @@ module.exports = {
             }
             return myXhr;
 		      },
-				data 				: data,
+				data  : data,
         cache 		  : false,
 				contentType : false,
 		    processData : false

@@ -31,6 +31,14 @@ module.exports = {
 
 	saveImage: function(data){
 		APIUtils.saveImage(data);
+	},
+
+	fetchPublicUser: function(id){
+		APIUtils.fetchPublicUser(id);
+	},
+
+	fetchTrendingPeople: function(){
+		APIUtils.fetchTrendingPeople();
 	}
 
 };

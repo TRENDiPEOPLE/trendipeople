@@ -7,7 +7,9 @@ module.exports = {
 		RECEIVED_USER: null,
 		RECEIVED_USER_IMAGES: null,
 		RECEIVED_TRENDING_IMAGES: null,
-		RECEIVED_RATING: null
+		RECEIVED_TRENDING_PEOPLE: null,
+		RECEIVED_RATING: null,
+		RECEIVED_PUBLIC_PROFILE: null
 	})
 
 };
