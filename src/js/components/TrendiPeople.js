@@ -94,7 +94,6 @@ var TrendiPeople = React.createClass({
 										<div className="container-fluid">
 										    <div className="navbar-header">
 										    	<Link to="home" className="navbar-brand">Home</Link>
-										    	<a href="/#/10152706542391946" > Public profile</a>
 								    </div>
 								    <div>
 								    {menu}
