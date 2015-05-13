@@ -104,11 +104,20 @@ body {
   border-radius: 4px;
 }
 
-#navBar {
-  margin-top: 1%;
+/*Nav bar*/
+
+.container-fluid {
+  background-color: #EEF2F1;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
-.navBar {
+.nav-tabs.nav-justified>li>a {
+  border-bottom: none;
+  color: #0BAACA;
+}
+
+.nav-tabs.nav-justified>li {
   font-size: 18px;
   background-color: #EEF2F1;
   box-shadow: 2px 2px 2px grey;
