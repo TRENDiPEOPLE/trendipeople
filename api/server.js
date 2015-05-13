@@ -9,6 +9,7 @@ var handler = require('./handler');
 var config = require('./config');
 
 server.connection({
+  host: "trendipeople1.herokuapp.com",
 	port:  process.env.PORT || 8080
 });
 
