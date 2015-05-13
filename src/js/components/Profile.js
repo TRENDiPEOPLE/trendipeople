@@ -6,33 +6,42 @@ var Link = Router.Link;
 var Profile = React.createClass({
 
 	componentWillMount: function(){
-		var facebook_id = this.props.user.facebook_id;
-		ActionCreators.fetchUserImages(facebook_id);
+		console.log('this.props: ', this.props);
+		//var facebook_id = this.props.user.facebook_id;
+		//ActionCreators.fetchUserImages(facebook_id);
 	},
 
 	render: function(){
+
+		var facebook_id = "";
+		var username = "";
+		var profile_image_url = "";
+		var images = [];
 		// the users info is stored in this.props.user
-		var username = this.props.user.username;
-		var facebook_id = this.props.user.facebook_id;
-		var profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture';
+		console.log('this.props.user: ', this.props.user);
+		if (this.props.user !== null){
+			username = this.props.user.username;
+			facebook_id = this.props.user.facebook_id || "";
+			profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture';
+			images = this.props.userImages || [];
+		}
 
-    var images = this.props.userImages || [];
-    var trendiLogo = "/public/assets/images/logo-small.png";
-    var that = this;
+	    var trendiLogo = "/public/assets/images/logo-small.png";
+	    var that = this;
 
-    // create the HTML for all the images
-    if (images.length > 0){
-          var imagesHTML = images.map(function(image, index){
-          var count = 1;
-          var rating = [];
-          var hidden = "";
+	    // create the HTML for all the images
+	    if (images.length > 0){
+	          var imagesHTML = images.map(function(image, index){
+	          var count = 1;
+	          var rating = [];
+	          var hidden = "";
 
-          // create the trendi rating below each image
-          while (count<=5){
-            if (image.rating < count) hidden = "inactive";
-            rating.push(<img key={Math.random()} className={"rating " + hidden} src={trendiLogo} />);
-            count +=1;
-          }
+	          // create the trendi rating below each image
+	          while (count<=5){
+	            if (image.rating < count) hidden = "inactive";
+	            rating.push(<img key={Math.random()} className={"rating " + hidden} src={trendiLogo} />);
+	            count +=1;
+	          }
 
           return (
              <div key={image.file.url} className="imageBox col-md-3">
