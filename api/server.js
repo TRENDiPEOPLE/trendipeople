@@ -9,7 +9,7 @@ var handler = require('./handler');
 var config = require('./config');
 
 server.connection({
-	host: "localhost",
+	host: "",
 	port:  process.env.PORT || 8080
 });
 
