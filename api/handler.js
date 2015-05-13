@@ -31,6 +31,7 @@ var logout = function(request,reply){
 };
 
 var home = function(request,reply){
+	console.log('request.url',request.url)
 	if (request.auth.isAuthenticated){
 
 		console.log('is authenticated');
@@ -45,8 +46,8 @@ var home = function(request,reply){
 		    }
 
 		    if (user){
-		    	console.log('user exists');
-		    	console.log(user);
+		    	console.log('user existsssss');
+		    	//console.log(user);
 				reply.file(index);
 		    }
 
@@ -79,6 +80,9 @@ var user = function(request,reply){
     // if user is authenticated
 	if (request.auth.isAuthenticated){
     	var email = request.auth.credentials.email;
+    	var id = request.auth.credentials.auth_id;
+    	console.log('request.auth.credentials', request.auth.credentials)
+    	console.log('id: ', id);
 
 	    // query the db for the user
 		User.findOne({email: email}, function(err,user){
@@ -90,8 +94,26 @@ var user = function(request,reply){
 
 	        // if the user is registered
 			if (user){
+
 	    		console.log('user is: ', user);
-				reply(user);
+				Img.find({facebook_id: id}, function(err,images){
+					if (err){
+		       			console.log(err);
+                		throw err;
+			    	}
+		    		var profile = {
+		    			user: user,
+		    			images: images
+		    		};
+			    	if (images){
+			    		console.log('users images in user handler: ', images);
+			    		reply(profile);
+			    	}
+			    	else if (!images){
+			    		console.log('no user images');
+			    		reply(profile);
+			    	}
+			    });
 
 	        // if the user isn't registered
 			} else if (!user){
@@ -107,8 +129,9 @@ var user = function(request,reply){
 };
 
 var publicProfile = function(request,reply){
-	var id = request.params.userid;
-	console.log('id: ', id);
+	
+	var id = request.payload.id;
+	console.log('Public profile triggeder! id: ', id);
 
 	User.findOne({facebook_id: id}, function(err,user){
 			if (err){
@@ -121,7 +144,7 @@ var publicProfile = function(request,reply){
 				Img.find({facebook_id: id}, function(err,images){
 					if (err){
 		       			console.log(err);
-                throw err;
+                		throw err;
 			    	}
 		    		var publicProfile = {
 		    			user: user,
@@ -139,16 +162,15 @@ var publicProfile = function(request,reply){
 	        // if the user isn't registered
 			} else if (!user){
 				console.log('couldnt find user');
+				reply('couldnt find user')
 			}
 
 	});
-
-	console.log('id: ', id);
-	reply(id);
+	
 };
 
 
-var trending = function(request,reply){
+var trendingImages = function(request,reply){
 	if (request.auth.isAuthenticated){
 
 		// fetch all images in db
@@ -174,6 +196,21 @@ var trending = function(request,reply){
 	    	}
 		});
 	}
+};
+
+var trendingPeople = function(request,reply){
+	User.find({}, function(err,users){
+			if (err){
+	   			throw err;
+	    	}
+
+	    	if (users){
+	    		reply(users);
+	    	}
+	    	else if (!users){
+	    		reply([]);
+	    	}
+	})
 };
 
 
@@ -296,10 +333,10 @@ var facebook = function (request, reply) {
 };
 
 var rate = function(request, reply) {
+	console.log('about to rate')
 	var payload = request.payload;
 	var voter_id = payload.voter_id;
 	var rating = payload.rating;
-	console.log('payload: ', payload);
 	Img.findOne({_id: payload.image_id}, function(err,image){
 		var voters = image.raters;
 		var previous_rating = image.rating;
@@ -334,7 +371,7 @@ var rate = function(request, reply) {
 var profiles = function(request,reply){
 	var userid = request.params.userid;
 	User.findOne({facebook_id: userid}, function(err,user){
-		console.log('user is ', user);
+		//console.log('user is ', user);
 		reply(user);
 	});
 };
@@ -346,7 +383,8 @@ module.exports = {
 	image         : image,
 	user          : user,
 	rate          : rate,
-	trending      : trending,
+	trendingImages: trendingImages,
+	trendingPeople:trendingPeople,
 	profiles      : profiles,
 	publicProfile : publicProfile
 };

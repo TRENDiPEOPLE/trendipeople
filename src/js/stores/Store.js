@@ -7,7 +7,7 @@ var CHANGE_EVENT = "change";
 
 var rating = 0;
 var _user = null;
-var people = [
+var trendingPeople = [
 	// { img : "http://lorempixel.com/150/150/people/1", rating : 0 },
 	// { img : "http://lorempixel.com/150/150/people/2", rating : 0 },
 	// { img : "http://lorempixel.com/150/150/people/3", rating : 0 },
@@ -19,7 +19,7 @@ var people = [
 ];
 
 var trendingImages = null;
-
+var publicProfile = {};
 var trends = [ "Xmas", "Winter", "TopShop", "Fur Coats", "River Island", "Hats", "Big Jackets", "Spring"];
 var categories = [ "Men", " Women", "Accesories", "Beauty", "Hair", "Beachwear", "Sunglasses", "Shorts", "Tops", "Swimwear", "Denim", "Dresses"];
 var userImages = [];
@@ -45,8 +45,8 @@ var Store = assign({}, EventEmitter.prototype, {
 		return _user;
 	},
 
-	getPeople: function(){
-		return people;
+	getTrendingPeople: function(){
+		return trendingPeople;
 	},
 
 	getTrends: function(){
@@ -68,6 +68,11 @@ var Store = assign({}, EventEmitter.prototype, {
 	getUserImages: function(){
 		return userImages;
 	},
+
+	getPublicProfile: function(){
+		return publicProfile;
+	},
+
 });
 
 Dispatcher.register(function(action){
@@ -106,7 +111,8 @@ Dispatcher.register(function(action){
 			break;
 
 		case ActionTypes.RECEIVED_USER:
-			_user = action.user;
+			userImages = action.userData.images;
+			_user = action.userData.user;
 			Store.emitChange();
 			break;
 
@@ -122,6 +128,16 @@ Dispatcher.register(function(action){
 
 		case ActionTypes.RECEIVED_TRENDING_IMAGES:
 			trendingImages = action.images;
+			Store.emitChange();
+			break;
+
+		case ActionTypes.RECEIVED_PUBLIC_PROFILE:
+			publicProfile = action.data;
+			Store.emitChange();
+			break;
+
+		case ActionTypes.RECEIVED_TRENDING_PEOPLE:
+			trendingPeople = action.people;
 			Store.emitChange();
 			break;
 

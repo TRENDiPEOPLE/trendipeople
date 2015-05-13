@@ -16,27 +16,27 @@ var ActionCreators = require('../actions/ActionCreators');
 
 function getStateFromStore(){
 
-
-	var rating 		 = Store.getRating();
-	var user   		 = Store.getUser();
-	var people 		 = Store.getPeople();
-	var trends 		 = Store.getTrends();
-	var looks  		 = Store.getLooks();
-	var userImages 		 = Store.getUserImages();
-	var categories   = Store.getCategories();
-	var trendingImages = Store.getTrendingImages();
+	var rating 		 	= Store.getRating();
+	var user   		 	= Store.getUser();
+	var trendingPeople 	= Store.getTrendingPeople();
+	var trends 		 	= Store.getTrends();
+	var looks  		 	= Store.getLooks();
+	var userImages 	 	= Store.getUserImages();
+	var categories   	= Store.getCategories();
+	var trendingImages 	= Store.getTrendingImages();
+	var publicProfile 	= Store.getPublicProfile();
 
 	return {
-		rating 		 : rating,
-		user   		 : user,
-		people 		 : people,
-		trends 		 : trends,
-		looks  		 : looks,
-		categories   : categories,
-		userImages 		 : userImages,
-		trendingImages: trendingImages
+		rating 		  	: rating,
+		user   		  	: user,
+		trendingPeople	: trendingPeople,
+		trends 		 	: trends,
+		looks  		 	: looks,
+		categories   	: categories,
+		userImages 		: userImages,
+		trendingImages 	: trendingImages,
+		publicProfile 	: publicProfile
 	};
-
 }
 
 var TrendiPeople = React.createClass({
@@ -48,7 +48,7 @@ var TrendiPeople = React.createClass({
 	componentWillMount: function(){
 		// console.log('componentDidMount');
 		Store.addChangeListener(this._onChange);
-		// console.log('going to ActionCreators to fetch user');
+		console.log('going to ActionCreators to fetch user');
 		ActionCreators.fetchUser();
 	},
 
@@ -67,15 +67,19 @@ var TrendiPeople = React.createClass({
 
 		// display login or logout if the user is logged in or out
 		if (this.state.user) {
-			menu = <ul className="nav navbar-nav">
-				<li><Link to="profile">Profile</Link></li>
-				<li><Link to="trending">Trending</Link></li>
-				<li><Link to="upload">Upload</Link></li>
-				 <li><a href="/logout">Log out</a></li>
-			</ul>;
+			menu = 	<ul className="nav nav-tabs nav-justified">
+						<li><Link to="home" >Home</Link></li>
+						<li><Link to="profile" id="profilenav">Profile</Link></li>
+						<li><Link to="trending">Trending</Link></li>
+						<li><Link to="upload">Upload</Link></li>
+						<li><a href="/logout">Log out</a></li>
+					</ul>;
 
 		} else {
-			menu =<ul className="nav navbar-nav"> <li><a href="/facebook">Login</a></li></ul>;
+			menu = 	<ul className="nav nav-tabs nav-justified">
+						<li><Link to="home" >Home</Link></li>
+						<li><a href="/facebook">Login</a></li>
+					</ul>;
 		}
 
 		var rating = this.state.rating;
@@ -92,9 +96,6 @@ var TrendiPeople = React.createClass({
 								</div>
 									<nav className="navbar navbar-default">
 										<div className="container-fluid">
-										    <div className="navbar-header">
-										    	<Link to="home" className="navbar-brand">Home</Link>
-								    </div>
 								    <div>
 								    {menu}
 									</div>
@@ -102,14 +103,12 @@ var TrendiPeople = React.createClass({
 							</nav>
 						</div>
 					</div>
-
 					<div className="row">
-
-
 						<RouteHandler rating={this.state.rating}
+													publicProfile={this.state.publicProfile}
 													userImages={this.state.userImages}
 													user={this.state.user}
-													people={this.state.people}
+													trendingPeople={this.state.trendingPeople}
 													trends={this.state.trends}
 													looks={this.state.looks}
 													categories={this.state.categories}
@@ -127,6 +126,7 @@ var routes = (
 		<Route name="upload" handler={Upload} />
 		<Route name="profile" handler={Profile} />
 		<Route name="trending" handler={Trending} />
+		<Route name=":user" handler={User} />
 		<DefaultRoute handler={Trending} />
 	</Route>
 );

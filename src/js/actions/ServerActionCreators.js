@@ -11,15 +11,11 @@ module.exports = {
 		});
 	},
 
-	receivedUser: function(user){
+	receivedUser: function(userData){
 		// console.log('ServerActionCreators received user? : ', user);
 		AppDispatcher.dispatch({
 			type: ActionTypes.RECEIVED_USER,
-			user: user
-		});
-		AppDispatcher.dispatch({
-			type: ActionTypes.RECEIVED_USER,
-			user: user
+			userData: userData
 		});
 	},
 
@@ -35,5 +31,19 @@ module.exports = {
 			type: ActionTypes.RECEIVED_TRENDING_IMAGES,
 			images: images
 		});
+	},
+
+	receivedPublicProfile: function(data){
+		AppDispatcher.dispatch({
+			type: ActionTypes.RECEIVED_PUBLIC_PROFILE,
+			data: data
+		});
+	},
+
+	receivedTrendingPeople: function(people){
+		AppDispatcher.dispatch({
+			type: ActionTypes.RECEIVED_TRENDING_PEOPLE,
+			people: people
+		})
 	}
 };
