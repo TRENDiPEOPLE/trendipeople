@@ -13,7 +13,7 @@ var Upload = React.createClass({
     		var formData = new FormData($('#dog')[0]);
 
 <<<<<<< HEAD
-    		
+
 		});
 	},
 */
@@ -37,8 +37,8 @@ var Upload = React.createClass({
 
 		var formData = new FormData(image);
 
-		console.log('image: ', image, formData);	
-/*		if (image.length < 1){ 
+		console.log('image: ', image, formData);
+/*		if (image.length < 1){
 			image = 'http://lorempixel.com/150/150/people/';
 		}
 		ActionCreators.saveImage(formData);
@@ -50,11 +50,11 @@ var Upload = React.createClass({
 		console.log('image_api_url: ', image_api_url);
 		return (
 
-			<form onSubmit={this.handleSubmit} action="/api/user/images" method="POST" encType="multipart/form-data" id="dog" ref="upload">
+			<form action="/api/user/images" method="POST" encType="multipart/form-data" id="dog" ref="upload">
   				<input type="file" name="image_link" ref="image" accept="image/png, image/jpeg"/>
 				<input type="submit" value="Share image" id="submitID"/>
 			</form>
-		)
+		);
 
 
 	}
