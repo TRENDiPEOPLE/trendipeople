@@ -177,7 +177,9 @@ body {
 }
 
 .ratingLogo {
-  width: 100%;
+  display: block;
+  width: 75%;
+  margin: auto;
   margin-top: 4%;
 }
 

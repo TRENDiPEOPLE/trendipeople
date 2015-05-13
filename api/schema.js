@@ -1,8 +1,9 @@
-var mongoose = require('mongoose');
-var crate = require('mongoose-crate');
-var S3 = require('mongoose-crate-s3');
-var config = require('./config');
-var path = require("path");
+var mongoose    = require('mongoose');
+var crate       = require('mongoose-crate');
+var S3          = require('mongoose-crate-s3');
+var config      = require('./config');
+var path        = require("path");
+var ImageMagick = require("mongoose-crate-imagemagick");
 
 var userSchema = new mongoose.Schema({
 	username: String,
@@ -28,7 +29,7 @@ imgSchema.plugin(crate, {
     region: config.s3.region, // defaults to us-standard
     path: function(attachment) { // where the file is stored in the bucket - defaults to this function
       return '/' + path.basename(attachment.path);
-    }
+    },
   }),
   fields: {
     file: {}
