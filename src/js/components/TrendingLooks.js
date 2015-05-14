@@ -22,7 +22,7 @@ var TrendingLooks = React.createClass({
 
     render: function() {
       var images = this.props.trendingImages || [];
-      var trendiLogo = "/public/assets/images/logo-small.png";
+      var trendiLogo = "/public/assets/images/logo-round.png";
       var that = this;
 
       // create the HTML for all the images

@@ -32,7 +32,7 @@ var Profile = React.createClass({
 		}
 		var trendiRating = this.props.rating;
 
-	    var trendiLogo = "/public/assets/images/logo-small.png";
+	    var trendiLogo = "/public/assets/images/logo-round.png";
 	    var that = this;
 
 

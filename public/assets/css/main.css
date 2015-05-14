@@ -50,12 +50,14 @@ body {
 
 .imageBox {
   display: inline-block;
-  margin-bottom: 2%;
   margin: none;
+  margin-bottom: 2%;
+  margin-top: 2%;
+  float: none;
 }
 
 .inactive {
-  opacity: 0.5;
+  opacity: 0.2;
 }
 
 .infoBar {
@@ -124,7 +126,7 @@ body {
   //border: solid 1px lightgrey;
   //border-radius: 3px;
   //margin-bottom: 3%;
-  
+
 }
 
 .nav {
@@ -189,7 +191,8 @@ body {
 }
 
 .rating {
-  width: 20%;
+  width: 16%;
+  margin: 2%;
 }
 
 .ratingLogo {
