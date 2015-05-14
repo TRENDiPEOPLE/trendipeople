@@ -28,10 +28,10 @@ var TrendingLooks = React.createClass({
       // create the HTML for all the images
       if (images.length > 0){
             var imagesHTML = images.map(function(image, index){
-            var id = Math.floor(Math.random()*1000);
-            var count = 1;
-            var rating = [];
-            var hidden = "";
+              var id = Math.floor(Math.random()*1000);
+              var count = 1;
+              var rating = [];
+              var hidden = "";
 
             // create the trendi rating below each image
             while (count<=5){
@@ -42,7 +42,7 @@ var TrendingLooks = React.createClass({
             }
 
             return (
-               <div key={image.file.url} className="imageBox col-md-4">
+               <div key={image.file.url} className="imageBox col-md-3">
                 <img src={image.file.url} className="image"/>
                  <div className="ratingLogo">{rating}</div>
                 </div>
@@ -52,7 +52,7 @@ var TrendingLooks = React.createClass({
 
       return (
             <div>
-              <h5 id="trendingPeople"> TREND<strong>i</strong>NG FASHION LOOKS </h5>
+              <h5 id="TrendingLooks"> TREND<strong>i</strong>NG FASHION LOOKS </h5>
                 <div>
                   {imagesHTML}
               </div>
