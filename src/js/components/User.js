@@ -5,7 +5,7 @@ var ActionCreators = require('../actions/ActionCreators');
 var User = React.createClass({
 
 	componentWillMount: function(){
-		console.log('about to sen ajax to fetchPublicUser');
+		// console.log('about to sen ajax to fetchPublicUser');
 		var id = this.props.params.user;
 		ActionCreators.fetchPublicUser(id);
 	},
@@ -15,7 +15,7 @@ var User = React.createClass({
 
     	//check if the user is logged in
     	if (this.props.user !== null){
-    		console.log('user is logged in to vote');
+    		// console.log('user is logged in to vote');
 	      	var voter_id = this.props.user.facebook_id;
 	      	var data = {
 	      		publicProfileImages : this.props.publicProfile.images,
@@ -97,6 +97,6 @@ var User = React.createClass({
 			</div>
 		);
 	}
-})
+});
 
 module.exports = User;

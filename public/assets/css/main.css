@@ -50,13 +50,12 @@ body {
 
 .imageBox {
   display: inline-block;
-  margin-bottom: 2%;
   margin: none;
   float:none;
 }
 
 .inactive {
-  opacity: 0.5;
+  opacity: 0.2;
 }
 
 .infoBar {
@@ -122,12 +121,6 @@ body {
 .nav-tabs.nav-justified>li {
   font-size: 18px;
   border-bottom: none;
-/*  background-color: #EEF2F1;
-  box-shadow: 2px 2px 2px grey;
-  border: solid 1px lightgrey;
-  border-radius: 3px;
-  margin-bottom: 3%;*/
-  
 }
 
 .menu_text{
@@ -177,7 +170,7 @@ body {
   padding-top: 32px;
 
 /*  padding-top: 18px;
-  padding-right: 48px;*/ 
+  padding-right: 48px;*/
 
 }
 
@@ -228,8 +221,8 @@ body {
 
 
 .rating {
-  width: 20%;
-  border-radius: 100%
+  width: 16%;
+  margin: 2%;
 }
 
 .ratingLogo {
@@ -255,14 +248,14 @@ body {
 .trendBox {
   position: fixed;
 }
-/*
+
 #trendingLooks {
   font-size: 23px;
   text-align: left;
   margin-left: 2%;
   color: grey;
 
-}*/
+}
 
 #trendingPeople {
   color: grey;

@@ -91,8 +91,9 @@ var TrendiPeople = React.createClass({
 							    <img src="/public/assets/images/logo.png" id="logo"/>
 						    	<p className="logo"> TRENDiPEOPLE© </p>
 						    	<div id="social_icons">
-									<div className="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button">
+									<div className="fb-share-button" data-href="https://trendipeople1.herokuapp.com" data-layout="button">
 									</div>
+
 									<a href="https://twitter.com/share" className="twitter-share-button" data-url="http://trendipeople.com" data-text="Check out the latest fashion trends at trendipeople.com" data-hashtags="trendipeople">Tweet</a>
 								</div>
 						</div>
@@ -105,7 +106,7 @@ var TrendiPeople = React.createClass({
 							</nav>
 						</div>
 					</div>
-					
+
 					<RouteHandler rating={this.state.rating}
 								publicProfile={this.state.publicProfile}
 								userImages={this.state.userImages}
@@ -115,7 +116,7 @@ var TrendiPeople = React.createClass({
 								looks={this.state.looks}
 								categories={this.state.categories}
 								trendingImages={this.state.trendingImages} />
-					
+
 				</div>
 			</div>
 		);

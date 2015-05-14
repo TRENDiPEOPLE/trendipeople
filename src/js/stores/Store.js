@@ -73,7 +73,6 @@ Dispatcher.register(function(action){
 
 		case ActionTypes.RATE:
 			var images = action.data.publicProfileImages || action.data.trendingImages;
-			console.log(images);
 			var id = action.data.image_id;
 			var voter_id = action.data.voter_id;
 			newImages = images.map(function(image){
