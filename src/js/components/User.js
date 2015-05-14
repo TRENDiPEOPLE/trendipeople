@@ -42,7 +42,7 @@ var User = React.createClass({
 			username = this.props.publicProfile.user.username;
 			images = this.props.publicProfile.images;
 			facebook_id = this.props.publicProfile.user.facebook_id;
-			profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture';
+			profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture?width=300&height=300';
 		}
 
 	    var publicProfile = this.props.publicProfile.images || [];

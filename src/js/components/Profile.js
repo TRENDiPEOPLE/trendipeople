@@ -22,9 +22,10 @@ var Profile = React.createClass({
 		if (this.props.user !== null){
 			username = this.props.user.username;
 			facebook_id = this.props.user.facebook_id || "";
-			profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture';
+			profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture?width=300&height=300';
 			images = this.props.userImages || [];
 		}
+		var trendiRating = this.props.rating;
 
 	    var trendiLogo = "/public/assets/images/logo-small.png";
 	    var that = this;

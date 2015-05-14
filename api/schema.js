@@ -7,7 +7,10 @@ var ImageMagick = require("mongoose-crate-imagemagick");
 
 var userSchema = new mongoose.Schema({
 	username: String,
-	email: String
+	email: String,
+  avgRating: Number,
+  timesRated: Number,
+  facebook_id: String
 });
 
 
@@ -33,17 +36,17 @@ imgSchema.plugin(crate, {
   }),
   fields: {
     file: {
-      processor: new ImageMagick({
-        transforms: {
-          original: {
-          },
-          small: {
-            resize  : "50x50",
-            gravity : "center",
-            formats  : ["PNG", "JPEG"]
-          }
-        }
-      })
+      // processor: new ImageMagick({
+      //   transforms: {
+      //     original: {
+      //     },
+      //     small: {
+      //       resize  : "50x50",
+      //       gravity : "center",
+      //       formats  : ["PNG", "JPEG"]
+      //     }
+      //   }
+      // })
     }
   }
 });

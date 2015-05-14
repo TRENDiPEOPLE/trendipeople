@@ -55,7 +55,10 @@ var home = function(request,reply){
 				var new_user = new User();
                 new_user.email = email;
                 new_user.username = username;
+                console.log("about to save facebook_id", facebook_id);
                 new_user.facebook_id = facebook_id;
+                new_user.avgRating = 0;
+                new_user.timesRated = 0;
                 new_user.save( function(err){
                     if (err){
                         console.log('error when saving new member');
@@ -234,7 +237,7 @@ var image = function(request,reply){
 
       // save img
       new_image.attach("file", {path: path}, function(err) {
-      console.log("new_image small url: ", new_image.file.small.url);
+      // console.log("new_image small url: ", new_image.file.small.url);
 				if (err) console.log(err);
 				console.log("image attached to s3");
 
@@ -312,7 +315,8 @@ var image = function(request,reply){
 
 
 var facebook = function (request, reply) {
-	console.log('facebook handler');
+    console.log("facebook handler");
+    // console.log("request creds faceobook", request.auth.credentials);
     var creds = request.auth.credentials;
 
     var profile = {
@@ -323,7 +327,7 @@ var facebook = function (request, reply) {
     };
 
     request.auth.session.set(profile);
-    reply.redirect('/');
+    reply.redirect('/#/trending');
 };
 
 var rate = function(request, reply) {
@@ -331,6 +335,7 @@ var rate = function(request, reply) {
 	var payload = request.payload;
 	var voter_id = payload.voter_id;
 	var rating = payload.rating;
+
 	Img.findOne({_id: payload.image_id}, function(err,image){
 		var voters = image.raters;
 		var previous_rating = image.rating;
@@ -354,6 +359,24 @@ var rate = function(request, reply) {
                 console.log('Error is : ', err);
                 }
             });
+
+      var facebook_id = image.facebook_id;
+
+      User.find({_id: facebook_id}, function(err, user) {
+        var totalRating = user.timesRated * user.avgRating;
+        var newTotalRating = totalRating += image.rating;
+        user.timesRated += 1;
+        user.avgRating = newTotalRating/user.timesRated;
+
+        user.markModified("avgRating");
+        user.markModified("timesRated");
+
+        user.save(function(err) {
+          if (err) {
+            console.log("error updating user avg rating: ", err);
+          }
+        });
+      });
 
             console.log('db updated!');
             reply(payload);
