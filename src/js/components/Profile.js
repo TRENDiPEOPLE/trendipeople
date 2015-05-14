@@ -1,7 +1,8 @@
-var React = require("react");
+var React 				 = require("react");
 var ActionCreators = require('../actions/ActionCreators');
-var Router = require('react-router'); // or var Router = ReactRouter; in browsers
-var Link = Router.Link;
+var Router 				 = require('react-router'); // or var Router = ReactRouter; in browsers
+var Upload 				 = require("./Upload");
+var Link 					 = Router.Link;
 
 var Profile = React.createClass({
 
@@ -18,13 +19,13 @@ var Profile = React.createClass({
 		var profile_image_url = "";
 		var images = [];
 		// the users info is stored in this.props.user
-		console.log('this.props.user: ', this.props.user);
 		if (this.props.user !== null){
 			username = this.props.user.username;
 			facebook_id = this.props.user.facebook_id || "";
-			profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture';
+			profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture?width=300&height=300';
 			images = this.props.userImages || [];
 		}
+		var trendiRating = this.props.rating;
 
 	    var trendiLogo = "/public/assets/images/logo-small.png";
 	    var that = this;
@@ -55,6 +56,9 @@ var Profile = React.createClass({
 		return (
 			<div>
 				<div className="profileRow col-md-8 col-md-offset-2">
+					<div id="upload">
+						<Upload />
+					</div>
 					<div>
 						<img src={profile_image_url} id="profilePic"/>
 						<p id="userName">{username}</p>

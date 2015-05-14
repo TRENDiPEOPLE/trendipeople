@@ -39,7 +39,7 @@ module.exports = {
 	fetchPublicUser: function(id){
 		var data = {
 			id: id
-		}		
+		};
 		console.log('fetchPublicUser in APIUTils, id: ', id);
 		var url = '/api/user/public/' + id;
 		Request.post(url)

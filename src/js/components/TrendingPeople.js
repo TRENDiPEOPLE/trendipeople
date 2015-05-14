@@ -11,9 +11,9 @@ var TrendingPeople = React.createClass({
       var profile_url;
       var trendingPeople;
       var profile_image_url;
-      if (this.props.trendingPeople.length > 0){ 
+      if (this.props.trendingPeople.length > 0){
           trendingPeople = this.props.trendingPeople.map(function(ele, index) {
-          profile_image_url = 'https://graph.facebook.com/' + ele.facebook_id + '/picture';
+          profile_image_url = 'https://graph.facebook.com/' + ele.facebook_id + '/picture?width=300&height=300';
           profile_url = '/#/' + ele.facebook_id;
           return (
             <div className="col-md-3 peopleBox">

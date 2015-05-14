@@ -31,7 +31,6 @@ var logout = function(request,reply){
 };
 
 var home = function(request,reply){
-	console.log('request.url',request.url)
 	if (request.auth.isAuthenticated){
 
 		console.log('is authenticated');
@@ -56,7 +55,10 @@ var home = function(request,reply){
 				var new_user = new User();
                 new_user.email = email;
                 new_user.username = username;
+                console.log("about to save facebook_id", facebook_id);
                 new_user.facebook_id = facebook_id;
+                new_user.avgRating = 0;
+                new_user.timesRated = 0;
                 new_user.save( function(err){
                     if (err){
                         console.log('error when saving new member');
@@ -81,8 +83,6 @@ var user = function(request,reply){
 	if (request.auth.isAuthenticated){
     	var email = request.auth.credentials.email;
     	var id = request.auth.credentials.auth_id;
-    	console.log('request.auth.credentials', request.auth.credentials)
-    	console.log('id: ', id);
 
 	    // query the db for the user
 		User.findOne({email: email}, function(err,user){
@@ -106,7 +106,6 @@ var user = function(request,reply){
 		    			images: images
 		    		};
 			    	if (images){
-			    		console.log('users images in user handler: ', images);
 			    		reply(profile);
 			    	}
 			    	else if (!images){
@@ -129,9 +128,8 @@ var user = function(request,reply){
 };
 
 var publicProfile = function(request,reply){
-	
+
 	var id = request.payload.id;
-	console.log('Public profile triggeder! id: ', id);
 
 	User.findOne({facebook_id: id}, function(err,user){
 			if (err){
@@ -151,7 +149,6 @@ var publicProfile = function(request,reply){
 		    			images: images
 		    		};
 			    	if (images){
-			    		console.log('users images: ', images);
 			    		reply(publicProfile);
 			    	}
 			    	else if (!images){
@@ -162,11 +159,11 @@ var publicProfile = function(request,reply){
 	        // if the user isn't registered
 			} else if (!user){
 				console.log('couldnt find user');
-				reply('couldnt find user')
+				reply('couldnt find user');
 			}
 
 	});
-	
+
 };
 
 
@@ -210,7 +207,7 @@ var trendingPeople = function(request,reply){
 	    	else if (!users){
 	    		reply([]);
 	    	}
-	})
+	});
 };
 
 
@@ -240,7 +237,7 @@ var image = function(request,reply){
 
       // save img
       new_image.attach("file", {path: path}, function(err) {
-      console.log("new_image small url: ", new_image.file.small.url);
+      // console.log("new_image small url: ", new_image.file.small.url);
 				if (err) console.log(err);
 				console.log("image attached to s3");
 
@@ -318,7 +315,8 @@ var image = function(request,reply){
 
 
 var facebook = function (request, reply) {
-	console.log('facebook handler');
+    console.log("facebook handler");
+    // console.log("request creds faceobook", request.auth.credentials);
     var creds = request.auth.credentials;
 
     var profile = {
@@ -329,14 +327,15 @@ var facebook = function (request, reply) {
     };
 
     request.auth.session.set(profile);
-    reply.redirect('/');
+    reply.redirect('/#/trending');
 };
 
 var rate = function(request, reply) {
-	console.log('about to rate')
+	console.log('about to rate');
 	var payload = request.payload;
 	var voter_id = payload.voter_id;
 	var rating = payload.rating;
+
 	Img.findOne({_id: payload.image_id}, function(err,image){
 		var voters = image.raters;
 		var previous_rating = image.rating;
@@ -360,6 +359,24 @@ var rate = function(request, reply) {
                 console.log('Error is : ', err);
                 }
             });
+
+      var facebook_id = image.facebook_id;
+
+      User.find({_id: facebook_id}, function(err, user) {
+        var totalRating = user.timesRated * user.avgRating;
+        var newTotalRating = totalRating += image.rating;
+        user.timesRated += 1;
+        user.avgRating = newTotalRating/user.timesRated;
+
+        user.markModified("avgRating");
+        user.markModified("timesRated");
+
+        user.save(function(err) {
+          if (err) {
+            console.log("error updating user avg rating: ", err);
+          }
+        });
+      });
 
             console.log('db updated!');
             reply(payload);

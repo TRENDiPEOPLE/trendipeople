@@ -218,6 +218,11 @@ body {
   float: right;
 }
 
+#upload {
+  position: relative;
+  float: right;
+}
+
 #userName {
   text-align: center;
   font-size: 28px;

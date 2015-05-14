@@ -8,14 +8,6 @@ var CHANGE_EVENT = "change";
 var rating = 0;
 var _user = null;
 var trendingPeople = [
-	// { img : "http://lorempixel.com/150/150/people/1", rating : 0 },
-	// { img : "http://lorempixel.com/150/150/people/2", rating : 0 },
-	// { img : "http://lorempixel.com/150/150/people/3", rating : 0 },
-	// { img : "http://lorempixel.com/150/150/people/4", rating : 0 },
-	// { img : "http://lorempixel.com/150/150/people/5", rating : 0 },
-	// { img : "http://lorempixel.com/150/150/people/6", rating : 0 },
-	// { img : "http://lorempixel.com/150/150/people/7", rating : 0 },
-	// { img : "http://lorempixel.com/150/150/people/8", rating : 0 }
 ];
 
 var trendingImages = null;
@@ -80,9 +72,11 @@ Dispatcher.register(function(action){
 	switch (action.type) {
 
 		case ActionTypes.RATE:
+			var images = action.data.publicProfileImages || action.data.trendingImages;
+			console.log(images);
 			var id = action.data.image_id;
 			var voter_id = action.data.voter_id;
-			newTrendingImages = trendingImages.map(function(image){
+			newImages = images.map(function(image){
 
 					//find correct image
 					if (image._id.toString() == id.toString()){
@@ -106,7 +100,11 @@ Dispatcher.register(function(action){
 					}
 			});
 
-			trendingImages = newTrendingImages;
+			if (action.data.trendingImages) {
+				trendingImages = newImages;
+			} else if (action.data.userImages) {
+				userImages = newImages;
+			}
 			Store.emitChange();
 			break;
 
