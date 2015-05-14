@@ -37,13 +37,13 @@ body {
   width: 10%;
   position: relative;
   z-index: 100;
-  float: right;
+  float: left;
   display: inline-block;
   margin: auto;
 }
 
 .image {
-  border: 3px solid grey;
+  border: 8px solid lightgrey;
   border-radius: 3px;
   width: 100%;
 }
@@ -52,6 +52,7 @@ body {
   display: inline-block;
   margin-bottom: 2%;
   margin: none;
+  float:none;
 }
 
 .inactive {
@@ -60,7 +61,6 @@ body {
 
 .infoBar {
   position: absolute;
-  top: 80%;
   height: 20%;
   width: 95%;
   background-color: #EEF2F1;
@@ -112,29 +112,46 @@ body {
   padding-right: 0px;
 }
 
-.nav-tabs.nav-justified>li>a {
-  border-bottom: none;
-  color: #0BAACA;
+
+.nav-tabs.nav-justified{
+  box-shadow: 2px 2px 2px lightgray;
+
 }
+
 
 .nav-tabs.nav-justified>li {
   font-size: 18px;
-  //background-color: #EEF2F1;
-  //box-shadow: 2px 2px 2px grey;
-  //border: solid 1px lightgrey;
-  //border-radius: 3px;
-  //margin-bottom: 3%;
+  border-bottom: none;
+/*  background-color: #EEF2F1;
+  box-shadow: 2px 2px 2px grey;
+  border: solid 1px lightgrey;
+  border-radius: 3px;
+  margin-bottom: 3%;*/
   
+}
+
+.menu_text{
+  color: rgb(150, 150, 150) !important;
+  font-size: 14px;
+
 }
 
 .nav {
   border: 1px solid lightgrey;
   border-radius: 8px;
+  box-shadow: 2px 2px 2px grey;
+
 }
+
+.navbar-default {
+  background-color: #EEF2F1;
+  border-color: #EEF2F1;
 }
+
 
 .peopleBox {
   margin-bottom: 4%;
+  float: left;
 }
 
 .pluginButtonContainer {
@@ -148,18 +165,38 @@ body {
   border-radius: 4px;
 }
 
+.profileContainer{
+  margin-bottom: 30px;
+}
+
+#social_icons{
+  display: inline;
+  position: relative;
+  float: right;
+  width: 151px;
+  padding-top: 32px;
+
+/*  padding-top: 18px;
+  padding-right: 48px;*/ 
+
+}
+
 #profilePic {
-  margin: 5px auto;
+  margin: 25px auto 0;
   height: 150px;
   width: 150px;
   position: relative;
   display: block;
+    border-radius: 100%;
+  border: 0;
 }
 
 .profileRow {
-  height: 30%;
-  border: 3px solid lightgrey;
+  height: 250px;
+/*  border: 3px solid lightgrey;
   background-color: white;
+  width: 60%;
+  border-radius: 13px;*/
 }
 
 .ps-top-to-bottom {
@@ -188,8 +225,11 @@ body {
   right: -3px;
 }
 
+
+
 .rating {
   width: 20%;
+  border-radius: 100%
 }
 
 .ratingLogo {
@@ -199,6 +239,15 @@ body {
   margin-top: 4%;
 }
 
+#shareID {
+  display: none;
+}
+
+#submitID {
+  display: block;
+  margin: auto;
+}
+
 #topBox {
   margin-top: 5%;
 }
@@ -206,20 +255,27 @@ body {
 .trendBox {
   position: fixed;
 }
-
+/*
 #trendingLooks {
-  font-size: 22px;
+  font-size: 23px;
   text-align: left;
   margin-left: 2%;
-}
+  color: grey;
+
+}*/
 
 #trendingPeople {
+  color: grey;
   font-size: 22px;
   text-align: left;
   margin-left: 2%;
   margin-bottom: 3%;
 }
 
+.trendiStats{
+    text-align: center;
+
+}
 .twitter-share-button {
   margin-right: 1%;
   float: right;
@@ -227,12 +283,14 @@ body {
 
 #upload {
   position: relative;
-  float: right;
+  display: block;
+  margin: auto;
 }
 
 #userName {
   text-align: center;
   font-size: 28px;
+  margin: 0 auto;
 }
 
 .wardrobeImage {
