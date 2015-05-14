@@ -18,7 +18,8 @@ var imgSchema = new mongoose.Schema({
   link: String,
   rating: Number,
   raters: [String],
-  facebook_id: String
+  facebook_id: String,
+  beenRated: Boolean
 });
 
 var User = mongoose.model('User', userSchema);

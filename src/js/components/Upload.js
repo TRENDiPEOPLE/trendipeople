@@ -4,38 +4,12 @@ var Request = require("superagent");
 var ActionCreators = require('../actions/ActionCreators');
 
 var Upload = React.createClass({
-/*
-	componentDidMount: function(){
-		$("#submitID").click(function(){
-    		var formData = new FormData($('#dog')[0]);
-		});
-	},
-*/
-/*
-	handleSubmit: function(e){
-		e.preventDefault();
-		var image = React.findDOMNode(this.refs.image).files[0];
-	getInitialState: function() {
-		return {data_uri: null};
+
+	handleChange: function() {
+		$("#shareID").show();
+		console.log("changes happening");
 	},
 
-	handleSubmit: function(e){
-		e.preventDefault();
-		var image = React.findDOMNode(this.refs.image).value;
-
-		if (image.length < 1){
-			image = 'http://lorempixel.com/150/150/people/';
-		}
-
-		var formData = new FormData(image);
-
-		console.log('image: ', image, formData);
-/*		if (image.length < 1){
-			image = 'http://lorempixel.com/150/150/people/';
-		}
-		ActionCreators.saveImage(formData);
-	},
-*/
 	render: function(){
 		console.log('this.props: ',this.props);
 		console.log('rendering Upload');
@@ -43,10 +17,26 @@ var Upload = React.createClass({
 		console.log('image_api_url: ', image_api_url);
 		return (
 
-			<form action="/api/user/images" method="POST" encType="multipart/form-data" id="dog" ref="upload">
-  				<input type="file" name="image_link" ref="image" accept="image/png, image/jpeg"/>
-				<input type="submit" value="Share image" id="submitID"/>
-			</form>
+				<div className="modal fade" id="myModal">
+				  <div className="modal-dialog">
+				    <div className="modal-content">
+				      <div className="modal-header">
+				        <button type="button" className="close" data-dismiss="modal" aria-hidden="true">×</button>
+				        <h4 className="modal-title">Start a global fashion trend</h4>
+				      </div>
+				      <div className="modal-body">
+							<form action="/api/user/images" method="POST" encType="multipart/form-data" id="dog" ref="upload">
+						  				<input type="file" name="image_link" ref="image" onChange={this.handleChange} accept="image/png, image/jpeg"/>
+										<input type="submit" value="Share image" id="shareID"/>
+									</form>
+				        <p></p>
+				      </div>
+				      <div className="modal-footer">
+				        <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
 		);
 
 

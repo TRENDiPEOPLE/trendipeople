@@ -8,7 +8,7 @@ var Trending = React.createClass({
 	render: function(){
 		return (
 			<div>
-        <div className="trendingPeople col-md-12 col-sm-8 col-lg-10 col-xs-8">
+        <div className="trendingPeople col-md-12">
           <TrendingPeople user={this.props.user} trendingPeople={this.props.trendingPeople} rating={this.props.rating} />
         </div>
         <div className="trendingLooks">
