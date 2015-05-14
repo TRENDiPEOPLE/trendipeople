@@ -1,39 +1,39 @@
-var React = require("react");
-var Router = require('react-router'); // or var Router = ReactRouter; in browsers
+var React 			 = require("react");
+var Router 			 = require('react-router'); // or var Router = ReactRouter; in browsers
 var DefaultRoute = Router.DefaultRoute;
-var Link = Router.Link;
+var Link 				 = Router.Link;
 var RouteHandler = Router.RouteHandler;
-var Route = Router.Route;
+var Route 			 = Router.Route;
 
 //var ActionCreators = require('../actions/ActionCreators');
-var Store = require('../stores/Store');
-var Profile = require('./Profile');
-var Body = require('./Body');
-var Trending = require('./Trending');
-var Upload = require('./Upload');
-var User = require('./User');
+var Store 				 = require('../stores/Store');
+var Profile 			 = require('./Profile');
+var Body 					 = require('./Body');
+var Trending 			 = require('./Trending');
+var Upload 			 	 = require('./Upload');
+var User 					 = require('./User');
 var ActionCreators = require('../actions/ActionCreators');
 
 function getStateFromStore(){
 
-	var rating 		 	= Store.getRating();
-	var user   		 	= Store.getUser();
+	var rating 		 			= Store.getRating();
+	var user   		 			= Store.getUser();
 	var trendingPeople 	= Store.getTrendingPeople();
-	var trends 		 	= Store.getTrends();
-	var looks  		 	= Store.getLooks();
-	var userImages 	 	= Store.getUserImages();
-	var categories   	= Store.getCategories();
+	var trends 		 			= Store.getTrends();
+	var looks  		 			= Store.getLooks();
+	var userImages 	 		= Store.getUserImages();
+	var categories   		= Store.getCategories();
 	var trendingImages 	= Store.getTrendingImages();
 	var publicProfile 	= Store.getPublicProfile();
 
 	return {
-		rating 		  	: rating,
-		user   		  	: user,
+		rating 		  		: rating,
+		user   		  		: user,
 		trendingPeople	: trendingPeople,
-		trends 		 	: trends,
-		looks  		 	: looks,
-		categories   	: categories,
-		userImages 		: userImages,
+		trends 		 			: trends,
+		looks  		 			: looks,
+		categories   		: categories,
+		userImages 		  : userImages,
 		trendingImages 	: trendingImages,
 		publicProfile 	: publicProfile
 	};
@@ -71,7 +71,6 @@ var TrendiPeople = React.createClass({
 						<li><Link to="home" >Home</Link></li>
 						<li><Link to="profile" id="profilenav">Profile</Link></li>
 						<li><Link to="trending">Trending</Link></li>
-						<li><Link to="upload">Upload</Link></li>
 						<li><a href="/logout">Log out</a></li>
 					</ul>;
 

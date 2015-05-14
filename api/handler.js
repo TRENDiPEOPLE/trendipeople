@@ -31,7 +31,6 @@ var logout = function(request,reply){
 };
 
 var home = function(request,reply){
-	console.log('request.url',request.url)
 	if (request.auth.isAuthenticated){
 
 		console.log('is authenticated');
@@ -81,8 +80,6 @@ var user = function(request,reply){
 	if (request.auth.isAuthenticated){
     	var email = request.auth.credentials.email;
     	var id = request.auth.credentials.auth_id;
-    	console.log('request.auth.credentials', request.auth.credentials)
-    	console.log('id: ', id);
 
 	    // query the db for the user
 		User.findOne({email: email}, function(err,user){
@@ -106,7 +103,6 @@ var user = function(request,reply){
 		    			images: images
 		    		};
 			    	if (images){
-			    		console.log('users images in user handler: ', images);
 			    		reply(profile);
 			    	}
 			    	else if (!images){
@@ -129,9 +125,8 @@ var user = function(request,reply){
 };
 
 var publicProfile = function(request,reply){
-	
+
 	var id = request.payload.id;
-	console.log('Public profile triggeder! id: ', id);
 
 	User.findOne({facebook_id: id}, function(err,user){
 			if (err){
@@ -151,7 +146,6 @@ var publicProfile = function(request,reply){
 		    			images: images
 		    		};
 			    	if (images){
-			    		console.log('users images: ', images);
 			    		reply(publicProfile);
 			    	}
 			    	else if (!images){
@@ -162,11 +156,11 @@ var publicProfile = function(request,reply){
 	        // if the user isn't registered
 			} else if (!user){
 				console.log('couldnt find user');
-				reply('couldnt find user')
+				reply('couldnt find user');
 			}
 
 	});
-	
+
 };
 
 
@@ -210,7 +204,7 @@ var trendingPeople = function(request,reply){
 	    	else if (!users){
 	    		reply([]);
 	    	}
-	})
+	});
 };
 
 
@@ -333,7 +327,7 @@ var facebook = function (request, reply) {
 };
 
 var rate = function(request, reply) {
-	console.log('about to rate')
+	console.log('about to rate');
 	var payload = request.payload;
 	var voter_id = payload.voter_id;
 	var rating = payload.rating;

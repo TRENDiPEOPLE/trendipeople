@@ -44,6 +44,6 @@ module.exports = {
 		AppDispatcher.dispatch({
 			type: ActionTypes.RECEIVED_TRENDING_PEOPLE,
 			people: people
-		})
+		});
 	}
 };

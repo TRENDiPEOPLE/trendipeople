@@ -7,6 +7,8 @@ var TrendingLooks = React.createClass({
       console.log('rateclick: ', rating);
       var voter_id = this.props.user.facebook_id;
       var data = {
+        userImages: null,
+        trendingImages: this.props.trendingImages,
         image_id: _id,
         voter_id: voter_id,
         rating: rating
