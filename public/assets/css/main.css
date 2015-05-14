@@ -119,11 +119,18 @@ body {
 
 .nav-tabs.nav-justified>li {
   font-size: 18px;
-  background-color: #EEF2F1;
-  box-shadow: 2px 2px 2px grey;
-  border: solid 1px lightgrey;
-  border-radius: 3px;
-  margin-bottom: 3%;
+  //background-color: #EEF2F1;
+  //box-shadow: 2px 2px 2px grey;
+  //border: solid 1px lightgrey;
+  //border-radius: 3px;
+  //margin-bottom: 3%;
+  
+}
+
+.nav {
+  border: 1px solid lightgrey;
+  border-radius: 8px;
+}
 }
 
 .peopleBox {

@@ -362,7 +362,11 @@ var rate = function(request, reply) {
 
       var facebook_id = image.facebook_id;
 
+<<<<<<< HEAD
       User.find({facebook_id: facebook_id}, function(err, user) {
+=======
+      User.findOne({facebook_id: facebook_id}, function(err, user) {
+>>>>>>> master2
         var totalRating = user.timesRated * user.avgRating;
         var newTotalRating = totalRating += image.rating;
         user.timesRated += 1;
