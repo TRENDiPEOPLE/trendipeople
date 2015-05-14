@@ -68,10 +68,10 @@ var TrendiPeople = React.createClass({
 		// display login or logout if the user is logged in or out
 		if (this.state.user) {
 			menu = 	<ul className="nav nav-tabs nav-justified">
-						<li><Link to="home" >Home</Link></li>
-						<li><Link to="profile" id="profilenav">Profile</Link></li>
-						<li><Link to="trending">Trending</Link></li>
-						<li><a href="/logout">Log out</a></li>
+						<li><Link to="home" >HOME</Link></li>
+						<li><Link to="profile" id="profilenav">PROFILE</Link></li>
+						<li><Link to="trending">TRENDING</Link></li>
+						<li><a href="/logout">LOG OUT</a></li>
 					</ul>;
 
 		} else {

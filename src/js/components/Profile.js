@@ -18,17 +18,23 @@ var Profile = React.createClass({
 		var username = "";
 		var profile_image_url = "";
 		var images = [];
+		var avgRating;
+
+
 		// the users info is stored in this.props.user
 		if (this.props.user !== null){
 			username = this.props.user.username;
 			facebook_id = this.props.user.facebook_id || "";
 			profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture?width=300&height=300';
 			images = this.props.userImages || [];
+			avgRating = this.props.user.avgRating;
+			console.log('setting avgRating to ', avgRating);
 		}
 		var trendiRating = this.props.rating;
 
 	    var trendiLogo = "/public/assets/images/logo-small.png";
 	    var that = this;
+
 
 	    // create the HTML for all the images
 	    if (images.length > 0){
@@ -64,13 +70,7 @@ var Profile = React.createClass({
 						<p id="userName">{username}</p>
 					</div>
 					<div className="infoBar">
-						<div className="infoBox">Followers: 25
-						</div>
-						<div className="infoBox">Following: 12
-						</div>
-						<div className="infoBox">Ratings: 35
-						</div>
-						<div className="infoBox">Average TrendiRating:
+						<div className="infoBox">Average TrendiRating: {avgRating	}
 						</div>
 					</div>
 				</div>
