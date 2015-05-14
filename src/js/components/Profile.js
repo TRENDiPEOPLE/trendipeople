@@ -12,6 +12,10 @@ var Profile = React.createClass({
 		//ActionCreators.fetchUserImages(facebook_id);
 	},
 
+	clickHandler: function() {
+		$('#myModal').modal('show');
+	},
+
 	render: function(){
 
 		var facebook_id = "";
@@ -27,7 +31,7 @@ var Profile = React.createClass({
 			facebook_id = this.props.user.facebook_id || "";
 			profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture?width=300&height=300';
 			images = this.props.userImages || [];
-			avgRating = this.props.user.avgRating;
+			avgRating = (this.props.user.avgRating).toFixed(1);
 			console.log('setting avgRating to ', avgRating);
 		}
 		var trendiRating = this.props.rating;
@@ -59,25 +63,41 @@ var Profile = React.createClass({
       });
     }
 
+
+
+
+			
+
 		return (
-			<div>
-				<div className="profileRow col-md-8 col-md-offset-2">
-					<div id="upload">
-						<Upload />
-					</div>
-					<div>
-						<img src={profile_image_url} id="profilePic"/>
-						<p id="userName">{username}</p>
-					</div>
-					<div className="infoBar">
-						<div className="infoBox">Average TrendiRating: {avgRating	}
+
+
+   		<div>
+   			<div className="profileContainer container">
+   				<div className="row">
+					<div className="profileRow col-md-8 col-md-offset-2">
+								<div id="profileCard">		
+									<div>
+										<img src={profile_image_url} id="profilePic" className="image"/>
+										<div className="infoBar">
+											<p id="userName">{username}</p>
+											<div className="trendiStats"><p>TrendiRating: {avgRating}</p>
+											</div>
+										<div id="upload">
+											<input type="submit" value="Share image" onClick={this.clickHandler} id="submitID"/>
+											<Upload />
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div className="wardrobeRow col-md-12">
-						{imagesHTML}
+			<div className="container">
+				<div className="row">
+					{imagesHTML}		
 				</div>
 			</div>
+		</div>
 		);
 	}
 });

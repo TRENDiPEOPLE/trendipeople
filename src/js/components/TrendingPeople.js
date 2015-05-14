@@ -16,7 +16,7 @@ var TrendingPeople = React.createClass({
           profile_image_url = 'https://graph.facebook.com/' + ele.facebook_id + '/picture?width=300&height=300';
           profile_url = '/#/' + ele.facebook_id;
           return (
-            <div className="col-md-3 peopleBox">
+            <div className="col-md-2 peopleBox">
              <a href={profile_url}><img src={profile_image_url} key={Math.random()} className="image" /></a>
             </div>
           );
@@ -25,7 +25,7 @@ var TrendingPeople = React.createClass({
       }
         return(
           <div>
-            <h5 id="trendingLooks"> TREND<strong>i</strong>NG PEOPLE </h5>
+            <h5 id="trendingPeople"> TREND<strong>i</strong>NG PEOPLE </h5>
             {trendingPeople}
             <hr id="line" />
           </div>
