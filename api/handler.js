@@ -181,7 +181,7 @@ var trendingImages = function(request,reply){
 
 	    		// filter through the images, and only return those with >2 in rating
 	    		trending_images = images.filter(function(image){
-	    			return image.rating > 2;
+	    			return image.rating > 0;
 	    		});
 
 	    		reply(trending_images);
@@ -344,8 +344,13 @@ var rate = function(request, reply) {
 			reply(payload);
 
 		} else {
-
-			var new_rating_count = voters.length + 1;
+        var new_rating_count;
+      if (!image.beenRated) {
+			  new_rating_count = 1;
+        image.beenRated = true;
+      } else if (image.beenRated) {
+        new_rating_count += 1;
+      }
 			var all_ratings_ever = (voters.length * previous_rating) + rating;
 			var new_average_rating = all_ratings_ever / new_rating_count;
 
@@ -353,6 +358,7 @@ var rate = function(request, reply) {
 			image.raters.push(voter_id);
 			image.markModified('rating');
 			image.markModified('raters');
+      image.markModified("beenRated");
 
             image.save(function(err){
                 if (err){
@@ -362,11 +368,7 @@ var rate = function(request, reply) {
 
       var facebook_id = image.facebook_id;
 
-<<<<<<< HEAD
-      User.find({facebook_id: facebook_id}, function(err, user) {
-=======
       User.findOne({facebook_id: facebook_id}, function(err, user) {
->>>>>>> master2
         var totalRating = user.timesRated * user.avgRating;
         var newTotalRating = totalRating += image.rating;
         user.timesRated += 1;
