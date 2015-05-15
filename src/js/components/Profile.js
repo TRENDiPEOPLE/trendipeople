@@ -32,7 +32,6 @@ var Profile = React.createClass({
 			profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture?width=300&height=300';
 			images = this.props.userImages || [];
 			avgRating = (this.props.user.avgRating).toFixed(1);
-			console.log('setting avgRating to ', avgRating);
 		}
 		var trendiRating = this.props.rating;
 
@@ -57,25 +56,19 @@ var Profile = React.createClass({
           return (
              <div key={image.file.url} className="imageBox col-md-3">
               <img src={image.file.url} className="image"/>
-               <div className="ratingLogo">{rating}</div>
+               <div className="ratingLogo">{rating}
+               </div>
               </div>
             );
       });
     }
 
-
-
-
-			
-
 		return (
-
-
    		<div>
    			<div className="profileContainer container">
    				<div className="row">
 					<div className="profileRow col-md-8 col-md-offset-2">
-								<div id="profileCard">		
+								<div id="profileCard">
 									<div>
 										<img src={profile_image_url} id="profilePic" className="image"/>
 										<div className="infoBar">
@@ -94,7 +87,7 @@ var Profile = React.createClass({
 				</div>
 			<div className="container">
 				<div className="row">
-					{imagesHTML}		
+					{imagesHTML}
 				</div>
 			</div>
 		</div>
