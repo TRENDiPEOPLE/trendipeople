@@ -17,21 +17,22 @@ body {
 #homepageimage {
   -webkit-filter: opacity(.2);
   filter: opacity(.2);
-  top: 0; 
-  left: 0; 
+  top: 0;
+  left: 0;
   /* Preserve aspect ratio */
   width: 100%;
   min-width: 100%;
   min-height: 100%;
+
 }
 
-#homepagelogo {
+/*#homepagelogo {
   background-position: center;
   top: 1px;
-  left: 1px; 
-    
+  left: 1px;
+
   padding: 5px;
-}
+}*/
 
 .boxLine {
   display: block;
@@ -53,6 +54,14 @@ body {
   font-weight: bold;
   color: rgb(54, 203, 192);
   margin-bottom: 5px;
+}
+
+#centreBox {
+  position: fixed;
+  display: block;
+  border: 8px solid lightgrey;
+  border-radius: 3px;
+  margin-top: 5%;
 }
 
 
@@ -113,6 +122,19 @@ color: white;
   text-align: center;
   width: 25%;
   height: 100%;
+}
+
+#landingTrendi {
+  display: block;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#landingText {
+  color: white;
+  font-size: 18px;
+  text-align: center;
 }
 
 #line {
