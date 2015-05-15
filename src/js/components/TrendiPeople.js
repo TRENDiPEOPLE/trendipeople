@@ -100,8 +100,8 @@ var TrendiPeople = React.createClass({
 
 	render: function(){
 
-		//console.log('trendingImages in TrendiPeople: ', this.state.trendingImages);
-		var menu;
+		// //console.log('trendingImages in TrendiPeople: ', this.state.trendingImages);
+		// var menu;
 
 		// display login or logout if the user is logged in or out
 		if (this.state.user) {
@@ -118,8 +118,10 @@ var TrendiPeople = React.createClass({
 						<li><a href="/facebook" className="menu_text">Login</a></li>
 					</ul>;
 		}
+		// // display login or logout if the user is logged in or out
 
 		var rating = this.state.rating;
+		if (this.state.user) {
 		return(
 		<div>
 			<div className="container">
@@ -139,6 +141,7 @@ var TrendiPeople = React.createClass({
 						    <div>
 								{menu}
 							</div>
+
 						</div>
 						</nav>
 					</div>
@@ -156,6 +159,16 @@ var TrendiPeople = React.createClass({
 		</div>
 	</div>
 		);
+		} else {
+			return(
+				<div id="homepagecontainer">
+					<ul className="nav nav-tabs nav-justified">
+						<li><a href="/facebook">Login</a></li>
+					</ul>
+					<img src="../../public/assets/images/fashion.jpg" id="homepageimage" />
+				</div>
+				)
+		}
 	}
 });
 

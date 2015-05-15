@@ -3,6 +3,36 @@ body {
   background-color: #EEF2F1
 }
 
+#homepagecontainer {
+  position: relative;
+}
+
+/*.login {
+  display: block;
+  margin-left: 800px;
+  margin-right: 800px;
+  position: absolute;
+}*/
+
+#homepageimage {
+  -webkit-filter: opacity(.2);
+  filter: opacity(.2);
+  top: 0; 
+  left: 0; 
+  /* Preserve aspect ratio */
+  width: 100%;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+#homepagelogo {
+  background-position: center;
+  top: 1px;
+  left: 1px; 
+    
+  padding: 5px;
+}
+
 .boxLine {
   display: block;
   width: 60%;
