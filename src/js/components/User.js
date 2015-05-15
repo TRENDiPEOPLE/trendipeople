@@ -40,7 +40,7 @@ var User = React.createClass({
 		// check that publicProfile is populated from the AJAX reply. Or else, it triggers an error
 		if (this.props.publicProfile.user !== undefined){
 			username = this.props.publicProfile.user.username;
-			images = this.props.publicProfile.images;
+			images = this.props.publicProfile.images.reverse();
 			facebook_id = this.props.publicProfile.user.facebook_id;
 			profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture?width=300&height=300';
 		}
@@ -65,7 +65,7 @@ var User = React.createClass({
 				}
 
 			return (
-				<div key={image.file.url} className="imageBox col-md-3">
+				<div key={image.file.url} className="imageBox col-md-3 col-sm-4 col-lg-2 col-xs-6">
 				<img src={image.file.url} className="image"/>
 				<div className="ratingLogo">{rating}</div>
 				</div>
