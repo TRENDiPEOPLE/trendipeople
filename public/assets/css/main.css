@@ -25,6 +25,15 @@ body {
   margin-bottom: 5px;
 }
 
+
+
+.custom_modal_header{
+  border-radius: 4px 4px 0 0;
+ /* background-color: rgb(72, 202, 170);*/
+  background-color: rgb(11, 185, 213);
+color: white;
+}
+
 .fb_iframe_widget {
   display: inline-block;
   position: relative;
@@ -42,6 +51,8 @@ body {
   margin: auto;
 }
 
+
+
 .image {
   border: 8px solid lightgrey;
   border-radius: 3px;
@@ -52,6 +63,8 @@ body {
   display: inline-block;
   margin: none;
   float:none;
+  margin-bottom: 2%;
+
 }
 
 .inactive {
@@ -162,6 +175,10 @@ body {
   margin-bottom: 30px;
 }
 
+.profile_score{
+  font-weight:bold;
+}
+
 #social_icons{
   display: inline;
   position: relative;
@@ -175,7 +192,7 @@ body {
 }
 
 #profilePic {
-  margin: 25px auto 0;
+  margin: 0 auto ;
   height: 150px;
   width: 150px;
   position: relative;
@@ -234,11 +251,25 @@ body {
 
 #shareID {
   display: none;
+  margin: 16px 10px 0;
+  color: white;
+
+}
+
+#share-button{
+
+}
+
+.share-button-container{
+  display:block;
+  margin: 0 auto;
 }
 
 #submitID {
   display: block;
   margin: auto;
+  color: white;
+  background-color: rgb(11, 185, 213);
 }
 
 #topBox {
@@ -297,4 +328,55 @@ body {
 .wardrobeRow {
   height: 80%;
   margin-top: 5%
+}
+
+
+
+
+/* STYLING FOR THE UPLOAD BUTTON IN MODAL FORM */
+
+.left {
+float: left;
+}
+.both {
+clear: both;
+}
+.file-upload-container {
+width:400px;
+border: 1px solid #efefef;
+padding:10px;
+border-radius: 6px;
+-webkit-border-radius: 6px;
+-moz-border-radius: 6px;
+background: #fbfbfa;
+}
+.file-upload-override-button {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: rgb(11, 185, 213);
+;
+  padding: 10px;
+  border-radius: 4px;
+  color: white;
+}
+.file-upload-override-button:hover {
+background-color:#63AD9B;;
+}
+.file-upload-override-button:active {
+position:relative; top:1px;
+}
+.file-upload-button {
+position: absolute;
+height: 50px;
+top: -10px;
+left: -10px;
+cursor: pointer;
+opacity: 0;
+filter:alpha(opacity=0);
+}
+.file-upload-filename {
+margin-left: 10px;
+height: auto;
+padding: 8px;
 }

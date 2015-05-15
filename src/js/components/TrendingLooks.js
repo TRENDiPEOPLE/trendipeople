@@ -27,7 +27,8 @@ var TrendingLooks = React.createClass({
 
       // create the HTML for all the images
       if (images.length > 0){
-            var imagesHTML = images.map(function(image, index){
+            reverse_images = images.reverse();
+            var imagesHTML = reverse_images.map(function(image, index){
               var id = Math.floor(Math.random()*1000);
               var count = 1;
               var rating = [];
@@ -42,7 +43,7 @@ var TrendingLooks = React.createClass({
             }
 
             return (
-               <div key={image.file.url} className="imageBox col-md-3">
+               <div key={image.file.url} className="imageBox col-md-3 col-sm-4 col-lg-2 col-xs-6">
                 <img src={image.file.url} className="image"/>
                  <div className="ratingLogo">{rating}</div>
                 </div>
