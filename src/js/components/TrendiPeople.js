@@ -88,8 +88,7 @@ var TrendiPeople = React.createClass({
 					<div className="row">
 						<div className="col-md-12">
 					    	<div id="topBox">
-							    <img src="/public/assets/images/logo.png" id="logo"/>
-						    	<p className="logo"> TRENDiPEOPLE© </p>
+							    <img src="/public/assets/images/trendi.png" id="logo"/>
 						    	<div id="social_icons">
 									<div className="fb-share-button" data-href="https://trendipeople1.herokuapp.com" data-layout="button">
 									</div>
