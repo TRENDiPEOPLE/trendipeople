@@ -115,6 +115,16 @@ color: white;
   height: 100%;
 }
 
+ .navbar-default .navbar-nav > .active{
+    color: #000;
+   background: lightgreen;
+ }
+ .navbar-default .navbar-nav > .active > a, 
+ .navbar-default .navbar-nav > .active > a:hover, 
+ .navbar-default .navbar-nav > .active > a:focus {
+      color: #000;
+      background: lightgreen;
+ }
 #line {
   border: 1px solid lightgrey;
   width: 50%;
@@ -125,8 +135,8 @@ color: white;
 }
 
 #logo {
-  height: 100%;
-  width: 30%;
+  width: 200px;
+
   max-height: 60px;
   margin-bottom: 5px;
 }
@@ -209,12 +219,16 @@ color: white;
   font-weight:bold;
 }
 
+.publicProfileRow{
+  height:200px;
+}
+
 #social_icons{
   display: inline;
   position: relative;
   float: right;
   width: 151px;
-  padding-top: 32px;
+  padding-top: 20px;
 
 /*  padding-top: 18px;
   padding-right: 48px;*/
@@ -326,6 +340,10 @@ color: white;
   margin-bottom: 3%;
 }
 
+.trendiPeopleImage{
+  
+}
+
 .trendiStats{
     text-align: center;
 
@@ -372,7 +390,7 @@ float: left;
 clear: both;
 }
 .file-upload-container {
-width:400px;
+width:50%;
 border: 1px solid #efefef;
 padding:10px;
 border-radius: 6px;
@@ -410,3 +428,21 @@ margin-left: 10px;
 height: auto;
 padding: 8px;
 }
+
+@media screen and (max-width: 500px) {
+  
+  #logo {
+    width:125px;
+  }
+
+  #social_icons{
+    padding-top:0px;
+  }
+
+}
+
+
+
+
+
+

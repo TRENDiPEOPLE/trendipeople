@@ -137,7 +137,10 @@ Dispatcher.register(function(action){
 			trendingPeople = action.people;
 			Store.emitChange();
 			break;
-
+		case ActionTypes.REMOVE_PUBLIC_USER:
+			publicProfile = {};
+			console.log('publicProfile is: ', publicProfile);
+			Store.emitChange();
 	}
 
 

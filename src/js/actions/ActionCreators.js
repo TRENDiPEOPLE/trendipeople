@@ -21,6 +21,12 @@ module.exports = {
 		APIUtils.fetchUser();
 	},
 
+	removePublicUser: function(){
+		AppDispatcher.dispatch({
+			type: ActionTypes.REMOVE_PUBLIC_USER
+		});
+	},
+
 	fetchUserImages: function(){
 		APIUtils.fetchUserImages();
 	},

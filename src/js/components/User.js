@@ -9,6 +9,10 @@ var User = React.createClass({
 		ActionCreators.fetchPublicUser(id);
 	},
 
+	componentWillUnmount: function(){
+		ActionCreators.removePublicUser();
+	},
+
     clickHandler: function(rating,_id) {
 
     	//check if the user is logged in
@@ -34,14 +38,16 @@ var User = React.createClass({
 		var profile_image_url = "";
 		var facebook_id = "";
 		var avgRating;
+		var numOfImgs;
 
 		// check that publicProfile is populated from the AJAX reply. Or else, it triggers an error
 		if (this.props.publicProfile.user !== undefined){
 			username = this.props.publicProfile.user.username;
-			images = this.props.publicProfile.images.reverse();
+			images = this.props.publicProfile.images;
 			facebook_id = this.props.publicProfile.user.facebook_id;
 			profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture?width=300&height=300';
 			avgRating = (this.props.publicProfile.user.avgRating).toFixed(1);
+			numOfImgs = images.length;
 		}
 
 	    var publicProfile = this.props.publicProfile.images || [];
@@ -51,6 +57,7 @@ var User = React.createClass({
 	    // create the HTML for all the images
 	    if (images.length > 0){
 			var imagesHTML = images.map(function(image, index) {
+			
 			var count = 1;
 			var rating = [];
 			var hidden = "";
@@ -72,22 +79,51 @@ var User = React.createClass({
 			);
 			});
     }
+return (
+   		<div>
+   			<div className="profileContainer container">
+   				<div className="row">
+					<div className="publicProfileRow col-md-8 col-md-offset-2">
+								<div id="profileCard">
+									<div>
+										<img src={profile_image_url} id="profilePic" className="image"/>
+										<div className="infoBar">
+											<p id="userName">{username}</p>
+											<div className="trendiStats"><p>TrendiRating: <span className="profile_score">{avgRating}</span> Images shared: <span className="profile_score">{numOfImgs}</span></p>
+											</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			<div className="container">
+				<div className="row">
+					{imagesHTML}
+				</div>
+			</div>
+		</div>
+		);
 
+
+/*
 		return (
 			<div>
 				<div className="profileRow col-md-8 col-md-offset-2">
 					<div>
 						<img src={profile_image_url} id="profilePic"/>
 						<p id="userName">{username}</p>
-						<div className="trendiStats"><p>TrendiRating: {avgRating}</p>
+						<div className="trendiStats"><p>TrendiRating: <span className="profile_score">{avgRating}</span> Images shared: <span className="profile_score">{numOfImgs}</span></p>
+											</div>			
+
 						</div>
-					</div>
 				</div>
 				<div className="wardrobeRow col-md-12">
 						{imagesHTML}
 				</div>
 			</div>
-		);
+		);*/
 	}
 });
 
