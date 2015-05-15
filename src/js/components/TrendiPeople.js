@@ -82,6 +82,7 @@ var TrendiPeople = React.createClass({
 		}
 
 		var rating = this.state.rating;
+		if (this.state.user) {
 		return(
 			<div>
 				<div className="container">
@@ -116,6 +117,16 @@ var TrendiPeople = React.createClass({
 				</div>
 			</div>
 		);
+		} else {
+			return(
+				<div id="homepagecontainer">
+					<ul className="nav nav-tabs nav-justified">
+						<li><a href="/facebook">Login</a></li>
+					</ul>
+					<img src="../../public/assets/images/fashion.jpg" id="homepageimage" />
+				</div>
+				)
+		}
 	}
 });
 
