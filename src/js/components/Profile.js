@@ -23,15 +23,18 @@ var Profile = React.createClass({
 		var profile_image_url = "";
 		var images = [];
 		var avgRating;
-
+		var numOfImgs;
 
 		// the users info is stored in this.props.user
 		if (this.props.user !== null){
 			username = this.props.user.username;
 			facebook_id = this.props.user.facebook_id || "";
 			profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture?width=300&height=300';
-			images = this.props.userImages || [];
+			images = this.props.userImages.reverse() || [];
 			avgRating = (this.props.user.avgRating).toFixed(1);
+			console.log('setting avgRating to ', avgRating);
+			numOfImgs = images.length;
+
 		}
 		var trendiRating = this.props.rating;
 
@@ -54,7 +57,7 @@ var Profile = React.createClass({
 	          }
 
           return (
-             <div key={image.file.url} className="imageBox col-md-3">
+             <div key={image.file.url} className="imageBox col-md-3 col-sm-4 col-lg-2 col-xs-6">
               <img src={image.file.url} className="image"/>
                <div className="ratingLogo">{rating}
                </div>
@@ -73,10 +76,12 @@ var Profile = React.createClass({
 										<img src={profile_image_url} id="profilePic" className="image"/>
 										<div className="infoBar">
 											<p id="userName">{username}</p>
-											<div className="trendiStats"><p>TrendiRating: {avgRating}</p>
+											<div className="trendiStats"><p>TrendiRating: <span className="profile_score">{avgRating}</span> Images shared: <span className="profile_score">{numOfImgs}</span></p>
 											</div>
 										<div id="upload">
-											<input type="submit" value="Share image" onClick={this.clickHandler} id="submitID"/>
+											<button type="button" className="btn" value="Share image" onClick={this.clickHandler} id="submitID">
+						Share image
+											</button>
 											<Upload />
 										</div>
 									</div>
