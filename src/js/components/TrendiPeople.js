@@ -60,6 +60,44 @@ var TrendiPeople = React.createClass({
 		this.setState(getStateFromStore());
 	},
 
+
+		/*				<nav className="navbar navbar-default">
+						  <div className="container-fluid">
+						    <div className="navbar-header">
+						      <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						        <span className="sr-only">Toggle navigation</span>
+						        <span className="icon-bar"></span>
+						        <span className="icon-bar"></span>
+						        <span className="icon-bar"></span>
+						      </button>
+						      <a className="navbar-brand" href="#">Brand</a>
+						    </div>
+
+						    <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						      <ul className="nav navbar-nav">
+						        <li className="active"><a href="#">Link <span className="sr-only">(current)</span></a></li>
+						        <li><a href="#">Link</a></li>
+						        <li className="dropdown">
+						          <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+						          <ul className="dropdown-menu" role="menu">
+						            <li><a href="#">Action</a></li>
+						            <li><a href="#">Another action</a></li>
+						            <li><a href="#">Something else here</a></li>
+						            <li className="divider"></li>
+						            <li><a href="#">Separated link</a></li>
+						            <li className="divider"></li>
+						            <li><a href="#">One more separated link</a></li>
+						          </ul>
+						        </li>
+						      </ul>
+						    </div>
+						  </div>
+						</nav>*/
+
+
+
+
+
 	render: function(){
 
 		//console.log('trendingImages in TrendiPeople: ', this.state.trendingImages);
@@ -69,7 +107,7 @@ var TrendiPeople = React.createClass({
 		if (this.state.user) {
 			menu = 	<ul className="nav nav-tabs nav-justified">
 						<li><Link to="home" className="menu_text" >HOME</Link></li>
-						<li><Link to="profile" className="menu_text" id="profilenav">MY TRENDI-WARDROBE</Link></li>
+						<li><Link to="profile" className="menu_text" id="profilenav">MY WARDROBE</Link></li>
 						<li><Link to="trending" className="menu_text">TRENDING</Link></li>
 						<li><a href="/logout" className="menu_text">LOG OUT</a></li>
 					</ul>;
@@ -83,41 +121,40 @@ var TrendiPeople = React.createClass({
 
 		var rating = this.state.rating;
 		return(
-			<div>
-				<div className="container">
-					<div className="row">
-						<div className="col-md-12">
-					    	<div id="topBox">
-							    <img src="/public/assets/images/trendi.png" id="logo"/>
-						    	<div id="social_icons">
-									<div className="fb-share-button" data-href="https://trendipeople1.herokuapp.com" data-layout="button">
-									</div>
+		<div>
+			<div className="container">
+				<div className="row">
+					<div className="col-md-12">
+		    			<div id="topBox">
+				    	<Link to="home"><img src="/public/assets/images/trendi.png" id="logo"/></Link>
+			    			<div id="social_icons">
+								<div className="fb-share-button" data-href="https://trendipeople1.herokuapp.com" data-layout="button">
+								</div>
 
-									<a href="https://twitter.com/share" className="twitter-share-button" data-url="http://trendipeople.com" data-text="Check out the latest fashion trends at trendipeople.com" data-hashtags="trendipeople">Tweet</a>
-								</div>
+								<a href="https://twitter.com/share" className="twitter-share-button" data-url="http://trendipeople.com" data-text="Check out the latest fashion trends at trendipeople.com" data-hashtags="trendipeople">Tweet</a>
+							</div>
 						</div>
-							<nav className="navbar navbar-default">
-								<div className="container-fluid">
-								    <div>
-									    {menu}
-									</div>
-								</div>
-							</nav>
+						<nav className="navbar navbar-default">
+						<div className="container-fluid">
+						    <div>
+								{menu}
+							</div>
 						</div>
+						</nav>
 					</div>
-
-					<RouteHandler rating={this.state.rating}
-								publicProfile={this.state.publicProfile}
-								userImages={this.state.userImages}
-								user={this.state.user}
-								trendingPeople={this.state.trendingPeople}
-								trends={this.state.trends}
-								looks={this.state.looks}
-								categories={this.state.categories}
-								trendingImages={this.state.trendingImages} />
-
 				</div>
-			</div>
+				
+			<RouteHandler rating={this.state.rating}
+						publicProfile={this.state.publicProfile}
+						userImages={this.state.userImages}
+						user={this.state.user}
+						trendingPeople={this.state.trendingPeople}
+						trends={this.state.trends}
+						looks={this.state.looks}
+						categories={this.state.categories}
+						trendingImages={this.state.trendingImages} />
+		</div>
+	</div>
 		);
 	}
 });
