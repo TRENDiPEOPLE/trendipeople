@@ -4,49 +4,60 @@ var Request = require("superagent");
 var ActionCreators = require('../actions/ActionCreators');
 
 var Upload = React.createClass({
-/*
+
 	componentDidMount: function(){
-		$("#submitID").click(function(){
-    		var formData = new FormData($('#dog')[0]);
+		$("#file-upload-button").change(function () {
+			var fileName = $(this).val().replace('C:\\fakepath\\', '');
+			$("#file-upload-filename").html(fileName);
 		});
 	},
-*/
-/*
-	handleSubmit: function(e){
-		e.preventDefault();
-		var image = React.findDOMNode(this.refs.image).files[0];
-	getInitialState: function() {
-		return {data_uri: null};
+
+	handleChange: function() {
+		$("#shareID").show();
+		console.log("changes happening");
 	},
 
-	handleSubmit: function(e){
-		e.preventDefault();
-		var image = React.findDOMNode(this.refs.image).value;
-
-		if (image.length < 1){
-			image = 'http://lorempixel.com/150/150/people/';
-		}
-
-		var formData = new FormData(image);
-
-		console.log('image: ', image, formData);
-/*		if (image.length < 1){
-			image = 'http://lorempixel.com/150/150/people/';
-		}
-		ActionCreators.saveImage(formData);
-	},
-*/
 	render: function(){
+		/*	      <div className="modal-footer">
+				        <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+				      </div>*/
+
+
+		//	<input type="file" className="btn btn-file"  onChange={this.handleChange} accept="image/png, image/jpeg"/>
+
 		console.log('this.props: ',this.props);
 		console.log('rendering Upload');
 		var image_api_url = './api/image';
 		console.log('image_api_url: ', image_api_url);
 		return (
 
-			<form action="/api/user/images" method="POST" encType="multipart/form-data" id="dog" ref="upload">
-  				<input type="file" name="image_link" ref="image" accept="image/png, image/jpeg"/>
-				<input type="submit" value="Share image" id="submitID"/>
-			</form>
+				<div className="modal fade" id="myModal">
+				  <div className="modal-dialog">
+				    <div className="modal-content">
+				      <div className="modal-header custom_modal_header">
+				        <button type="button" className="close" data-dismiss="modal" aria-hidden="true">×</button>
+				        <h4 className="modal-title">Upload your image!</h4>
+				      </div>
+				      <div className="modal-body">
+							<form action="/api/user/images" method="POST" encType="multipart/form-data" id="dog" ref="upload">
+										<div className="file-upload-container">
+											<div className="file-upload-override-button left">
+											Choose image
+											<input type="file" name="image_link" ref="image" className="file-upload-button" id="file-upload-button" onChange={this.handleChange}/>
+											</div>
+											<div className="file-upload-filename left" id="file-upload-filename">No image selected</div>
+											<div className="both"></div>
+											</div>
+											<div className="share-button-container">
+												<input type="submit" id="share-button" value="Share image" id="shareID" className="btn btn-lg"/>
+											</div>
+									</form>
+				       
+				      </div>
+
+				    </div>
+				  </div>
+				</div>
 		);
 
 

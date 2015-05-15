@@ -12,23 +12,35 @@ var Profile = React.createClass({
 		//ActionCreators.fetchUserImages(facebook_id);
 	},
 
+	clickHandler: function() {
+		$('#myModal').modal('show');
+	},
+
 	render: function(){
 
 		var facebook_id = "";
 		var username = "";
 		var profile_image_url = "";
 		var images = [];
+		var avgRating;
+		var numOfImgs;
+
 		// the users info is stored in this.props.user
 		if (this.props.user !== null){
 			username = this.props.user.username;
 			facebook_id = this.props.user.facebook_id || "";
 			profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture?width=300&height=300';
-			images = this.props.userImages || [];
+			images = this.props.userImages.reverse() || [];
+			avgRating = (this.props.user.avgRating).toFixed(1);
+			console.log('setting avgRating to ', avgRating);
+			numOfImgs = images.length;
+
 		}
 		var trendiRating = this.props.rating;
 
-	    var trendiLogo = "/public/assets/images/logo-small.png";
+	    var trendiLogo = "/public/assets/images/logo-round.png";
 	    var that = this;
+
 
 	    // create the HTML for all the images
 	    if (images.length > 0){
@@ -45,39 +57,45 @@ var Profile = React.createClass({
 	          }
 
           return (
-             <div key={image.file.url} className="imageBox col-md-3">
+             <div key={image.file.url} className="imageBox col-md-3 col-sm-4 col-lg-2 col-xs-6">
               <img src={image.file.url} className="image"/>
-               <div className="ratingLogo">{rating}</div>
+               <div className="ratingLogo">{rating}
+               </div>
               </div>
             );
       });
     }
 
 		return (
-			<div>
-				<div className="profileRow col-md-8 col-md-offset-2">
-					<div id="upload">
-						<Upload />
-					</div>
-					<div>
-						<img src={profile_image_url} id="profilePic"/>
-						<p id="userName">{username}</p>
-					</div>
-					<div className="infoBar">
-						<div className="infoBox">Followers: 25
-						</div>
-						<div className="infoBox">Following: 12
-						</div>
-						<div className="infoBox">Ratings: 35
-						</div>
-						<div className="infoBox">Average TrendiRating:
+   		<div>
+   			<div className="profileContainer container">
+   				<div className="row">
+					<div className="profileRow col-md-8 col-md-offset-2">
+								<div id="profileCard">
+									<div>
+										<img src={profile_image_url} id="profilePic" className="image"/>
+										<div className="infoBar">
+											<p id="userName">{username}</p>
+											<div className="trendiStats"><p>TrendiRating: <span className="profile_score">{avgRating}</span> Images shared: <span className="profile_score">{numOfImgs}</span></p>
+											</div>
+										<div id="upload">
+											<button type="button" className="btn" value="Share image" onClick={this.clickHandler} id="submitID">
+						Share image
+											</button>
+											<Upload />
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div className="wardrobeRow col-md-12">
-						{imagesHTML}
+			<div className="container">
+				<div className="row">
+					{imagesHTML}
 				</div>
 			</div>
+		</div>
 		);
 	}
 });

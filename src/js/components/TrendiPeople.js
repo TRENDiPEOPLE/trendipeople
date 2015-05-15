@@ -68,16 +68,16 @@ var TrendiPeople = React.createClass({
 		// display login or logout if the user is logged in or out
 		if (this.state.user) {
 			menu = 	<ul className="nav nav-tabs nav-justified">
-						<li><Link to="home" >Home</Link></li>
-						<li><Link to="profile" id="profilenav">Profile</Link></li>
-						<li><Link to="trending">Trending</Link></li>
-						<li><a href="/logout">Log out</a></li>
+						<li><Link to="home" className="menu_text" >HOME</Link></li>
+						<li><Link to="profile" className="menu_text" id="profilenav">MY TRENDI-WARDROBE</Link></li>
+						<li><Link to="trending" className="menu_text">TRENDING</Link></li>
+						<li><a href="/logout" className="menu_text">LOG OUT</a></li>
 					</ul>;
 
 		} else {
 			menu = 	<ul className="nav nav-tabs nav-justified">
-						<li><Link to="home" >Home</Link></li>
-						<li><a href="/facebook">Login</a></li>
+						<li><Link to="home" className="menu_text" >Home</Link></li>
+						<li><a href="/facebook" className="menu_text">Login</a></li>
 					</ul>;
 		}
 
@@ -88,32 +88,35 @@ var TrendiPeople = React.createClass({
 				<div className="container">
 					<div className="row">
 						<div className="col-md-12">
-					    <div id="topBox">
-						    <img src="/public/assets/images/logo.png" id="logo"/>
-							    <p className="logo"> TRENDiPEOPLE© </p>
-									<div className="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></div>
+					    	<div id="topBox">
+							    <img src="/public/assets/images/trendi.png" id="logo"/>
+						    	<div id="social_icons">
+									<div className="fb-share-button" data-href="https://trendipeople1.herokuapp.com" data-layout="button">
+									</div>
+
 									<a href="https://twitter.com/share" className="twitter-share-button" data-url="http://trendipeople.com" data-text="Check out the latest fashion trends at trendipeople.com" data-hashtags="trendipeople">Tweet</a>
 								</div>
-									<nav className="navbar navbar-default">
-										<div className="container-fluid">
+						</div>
+							<nav className="navbar navbar-default">
+								<div className="container-fluid">
 								    <div>
-								    {menu}
+									    {menu}
 									</div>
 								</div>
 							</nav>
 						</div>
 					</div>
-					<div className="row">
-						<RouteHandler rating={this.state.rating}
-													publicProfile={this.state.publicProfile}
-													userImages={this.state.userImages}
-													user={this.state.user}
-													trendingPeople={this.state.trendingPeople}
-													trends={this.state.trends}
-													looks={this.state.looks}
-													categories={this.state.categories}
-													trendingImages={this.state.trendingImages} />
-					</div>
+
+					<RouteHandler rating={this.state.rating}
+								publicProfile={this.state.publicProfile}
+								userImages={this.state.userImages}
+								user={this.state.user}
+								trendingPeople={this.state.trendingPeople}
+								trends={this.state.trends}
+								looks={this.state.looks}
+								categories={this.state.categories}
+								trendingImages={this.state.trendingImages} />
+
 				</div>
 			</div>
 		);

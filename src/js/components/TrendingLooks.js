@@ -22,16 +22,17 @@ var TrendingLooks = React.createClass({
 
     render: function() {
       var images = this.props.trendingImages || [];
-      var trendiLogo = "/public/assets/images/logo-small.png";
+      var trendiLogo = "/public/assets/images/logo-round.png";
       var that = this;
 
       // create the HTML for all the images
       if (images.length > 0){
-            var imagesHTML = images.map(function(image, index){
-            var id = Math.floor(Math.random()*1000);
-            var count = 1;
-            var rating = [];
-            var hidden = "";
+            reverse_images = images.reverse();
+            var imagesHTML = reverse_images.map(function(image, index){
+              var id = Math.floor(Math.random()*1000);
+              var count = 1;
+              var rating = [];
+              var hidden = "";
 
             // create the trendi rating below each image
             while (count<=5){
@@ -42,7 +43,7 @@ var TrendingLooks = React.createClass({
             }
 
             return (
-               <div key={image.file.url} className="imageBox col-md-4">
+               <div key={image.file.url} className="imageBox col-md-3 col-sm-4 col-lg-2 col-xs-6">
                 <img src={image.file.url} className="image"/>
                  <div className="ratingLogo">{rating}</div>
                 </div>
@@ -52,7 +53,7 @@ var TrendingLooks = React.createClass({
 
       return (
             <div>
-              <h5 id="trendingPeople"> TREND<strong>i</strong>NG FASHION LOOKS </h5>
+              <h5 id="TrendingLooks"> TREND<strong>i</strong>NG FASHION LOOKS </h5>
                 <div>
                   {imagesHTML}
               </div>
