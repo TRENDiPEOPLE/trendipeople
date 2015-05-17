@@ -49,10 +49,10 @@ var Upload = React.createClass({
 											<div className="both"></div>
 											</div>
 											<div className="share-button-container">
-												<input type="submit" id="share-button" value="Share image" id="shareID" className="btn btn-lg"/>
+												<input type="submit" value="Share image" id="shareID" className="btn btn-lg"/>
 											</div>
 									</form>
-				       
+
 				      </div>
 
 				    </div>

@@ -3,29 +3,6 @@ body {
   background-color: #EEF2F1
 }
 
-#homepagecontainer {
-  position: relative;
-}
-
-/*.login {
-  display: block;
-  margin-left: 800px;
-  margin-right: 800px;
-  position: absolute;
-}*/
-
-#homepageimage {
-  -webkit-filter: opacity(.2);
-  filter: opacity(.2);
-  top: 0;
-  left: 0;
-  /* Preserve aspect ratio */
-  width: 100%;
-  min-width: 100%;
-  min-height: 100%;
-
-}
-
 /*#homepagelogo {
   background-position: center;
   top: 1px;
@@ -61,7 +38,10 @@ body {
   display: block;
   border: 8px solid lightgrey;
   border-radius: 3px;
-  margin-top: 5%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  background-color: rgb(11, 185, 213);
+  opacity: 0.5;
 }
 
 
@@ -90,7 +70,29 @@ color: white;
   margin: auto;
 }
 
+ #homepagecontainer {
+  position: relative;
+}
 
+/*.login {
+  display: block;
+  margin-left: 800px;
+  margin-right: 800px;
+  position: absolute;
+}*/
+
+#homepageImage {
+  position: absolute;
+  -webkit-filter: opacity(.2);
+  filter: opacity(.2);
+  top: 0;
+  left: 0;
+  /* Preserve aspect ratio */
+  width: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -10000;
+}
 
 .image {
   border: 8px solid lightgrey;
@@ -129,12 +131,15 @@ color: white;
   margin: auto;
   margin-top: 5px;
   margin-bottom: 5px;
+  border-radius: 2px;
+  opacity: 1;
 }
 
 #landingText {
   color: white;
   font-size: 18px;
   text-align: center;
+  margin: 15px 15px auto;
 }
 
 #line {
