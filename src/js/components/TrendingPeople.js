@@ -31,7 +31,6 @@ var TrendingPeople = React.createClass({
           <div>
             <h5 id="trendingPeople"> TREND<strong>i</strong>NG PEOPLE </h5>
             {trendingPeople}
-            <hr id="line" />
           </div>
         );
     }

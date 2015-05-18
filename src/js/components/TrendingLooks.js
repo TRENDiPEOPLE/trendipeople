@@ -52,6 +52,7 @@ var TrendingLooks = React.createClass({
 
       return (
             <div>
+              <hr id="line" />
               <h5 id="TrendingLooks"> TREND<strong>i</strong>NG FASHION LOOKS </h5>
                 <div>
                   {imagesHTML}
