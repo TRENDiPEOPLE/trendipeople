@@ -33,18 +33,18 @@ var Upload = React.createClass({
 				        <h4 className="modal-title">Upload your image!</h4>
 				      </div>
 				      <div className="modal-body">
-							<form action="/api/user/images" method="POST" encType="multipart/form-data" id="dog" ref="upload">
-										<div className="file-upload-container">
-											<div className="file-upload-override-button left">
-											Choose image
-											<input type="file" name="image_link" ref="image" className="file-upload-button" id="file-upload-button" onChange={this.handleChange}/>
-											</div>
-											<div className="file-upload-filename left" id="file-upload-filename">No image selected</div>
-											<div className="both"></div>
-											</div>
-											<div className="share-button-container">
-												<input type="submit" value="Share image" id="shareID" className="btn btn-lg"/>
-											</div>
+								<form action="/api/user/images" method="POST" encType="multipart/form-data" id="dog" ref="upload">
+									<div className="file-upload-container">
+										<div className="file-upload-override-button left">
+										Choose image
+										<input type="file" name="image_link" ref="image" className="file-upload-button" id="file-upload-button" onChange={this.handleChange}/>
+										</div>
+										<div className="file-upload-filename left" id="file-upload-filename">No image selected</div>
+										<div className="both"></div>
+										</div>
+										<div className="share-button-container">
+											<input type="submit" value="Share image" id="shareID" className="btn btn-lg"/>
+										</div>
 									</form>
 				      </div>
 				    </div>
