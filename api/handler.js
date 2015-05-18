@@ -253,8 +253,7 @@ var image = function(request,reply){
   		            reply.redirect("/");
       				});
   	        });
-      }
-
+        }
 		}
 
 		// find all images from this user
