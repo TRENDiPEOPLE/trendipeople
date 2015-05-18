@@ -1,7 +1,7 @@
-var Constants = require('../constants/Constants');
-var ActionTypes = Constants.ActionTypes;
+var Constants 		= require('../constants/Constants');
+var ActionTypes 	= Constants.ActionTypes;
 var AppDispatcher = require('../dispatcher/Dispatcher');
-var APIUtils = require('../utils/APIUtils');
+var APIUtils 			= require('../utils/APIUtils');
 
 module.exports = {
 

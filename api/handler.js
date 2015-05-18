@@ -1,16 +1,14 @@
 var mongoose = require('mongoose');
-var Path = require('path');
-var index = Path.resolve(__dirname + '/../public/index.html');
-var crate = require('mongoose-crate');
-var S3 = require('mongoose-crate-s3');
+var Path     = require('path');
+var index    = Path.resolve(__dirname + '/../public/index.html');
+var crate    = require('mongoose-crate');
+var S3       = require('mongoose-crate-s3');
 
 var config = require('./config');
 var Schema = mongoose.Schema;
 
 var User = require('./schema').User;
-var Img = require('./schema').Img;
-// local mongoose connection
-//mongoose.connect('mongodb://127.0.0.1:27017/test');
+var Img  = require('./schema').Img;
 
 // mongolab mongoose connection
 mongoose.connect(config.db.dburl);
@@ -33,8 +31,6 @@ var logout = function(request,reply){
 var home = function(request,reply){
 	if (request.auth.isAuthenticated){
 
-		console.log('is authenticated');
-
 		var email = request.auth.credentials.email;
 		var username = request.auth.credentials.username;
 		var facebook_id = request.auth.credentials.auth_id;
@@ -45,17 +41,13 @@ var home = function(request,reply){
 		    }
 
 		    if (user){
-		    	console.log('user existsssss');
-		    	//console.log(user);
 				reply.file(index);
 		    }
 
 		    else {
-		    	console.log('trying to save new user, with all info');
 				var new_user = new User();
                 new_user.email = email;
                 new_user.username = username;
-                console.log("about to save facebook_id", facebook_id);
                 new_user.facebook_id = facebook_id;
                 new_user.avgRating = 0;
                 new_user.timesRated = 0;
@@ -95,7 +87,6 @@ var user = function(request,reply){
 	        // if the user is registered
 			if (user){
 
-	    		console.log('user is: ', user);
 				Img.find({facebook_id: id}, function(err,images){
 					if (err){
 		       			console.log(err);
@@ -138,7 +129,6 @@ var publicProfile = function(request,reply){
 		    }
 	        // if the user is registered
 			if (user){
-	    		console.log('Fund user ', user);
 				Img.find({facebook_id: id}, function(err,images){
 					if (err){
 		       			console.log(err);
@@ -212,7 +202,6 @@ var trendingPeople = function(request,reply){
 
 
 var image = function(request,reply){
-	console.log("Image handler triggered");
 	if (request.auth.isAuthenticated){
 
 		// if the user is adding a new image
@@ -229,7 +218,7 @@ var image = function(request,reply){
   			var payload = request.payload;
 
   			var path = payload.image_link.path;
-        console.log("payload: ", payload);
+
   			// create a new image to save in db
   			var new_image = new Img();
         var number = Math.floor(Math.random()*10);
@@ -237,7 +226,6 @@ var image = function(request,reply){
         new_image.rating = 0;
         new_image.raters = [facebook_id];
         new_image.facebook_id = facebook_id;
-        console.log("new_image: ", new_image);
 
         // save img
         new_image.attach("file", {path: path}, function(err) {
@@ -266,7 +254,6 @@ var image = function(request,reply){
 		    }
 
 		    if (images){
-		    	console.log('users images: ', images);
 		    	reply(images);
 		    }
 		    else if (!images){
@@ -276,42 +263,6 @@ var image = function(request,reply){
 			});
 		}
 
-
-/*
-		User.findOne({email: email}, function(err,user){
-
-		    if (err){
-	       		throw err;
-	       		console.log(err);
-		    }
-
-	        // if the user is registered
-			if (user){
-				var new_image = {
-					link: image_link,
-					title: 'some title'
-				}
-				user.shared_images.push(new_image);
-
-				user.markModified('shared_images');
-
-                //save the updated
-                user.save(function(err){
-                    if (err){
-                    console.log('Error is : ', err);
-                    }
-                });
-				reply(user);
-
-	        // if the user isn't registered
-			} else if (!user){
-				console.log('couldnt find user');
-			}
-
-		});
-
-*/
-
   	} else {
   		reply('not authenticated');
   }
@@ -319,8 +270,6 @@ var image = function(request,reply){
 
 
 var facebook = function (request, reply) {
-    console.log("facebook handler");
-    // console.log("request creds faceobook", request.auth.credentials);
     var creds = request.auth.credentials;
 
     var profile = {
@@ -335,7 +284,6 @@ var facebook = function (request, reply) {
 };
 
 var rate = function(request, reply) {
-	console.log('about to rate');
 	var payload = request.payload;
 	var voter_id = payload.voter_id;
 	var rating = payload.rating;
@@ -398,7 +346,6 @@ var rate = function(request, reply) {
 var profiles = function(request,reply){
 	var userid = request.params.userid;
 	User.findOne({facebook_id: userid}, function(err,user){
-		//console.log('user is ', user);
 		reply(user);
 	});
 };

@@ -1,4 +1,4 @@
-var React = require('react');
+var React 				 = require('react');
 var ActionCreators = require('../actions/ActionCreators');
 
 
@@ -20,10 +20,10 @@ var User = React.createClass({
 	      	var voter_id = this.props.user.facebook_id;
 	      	var data = {
 	      		publicProfileImages : this.props.publicProfile.images,
-	      		trendingImages : null,
-		        image_id: _id,
-		        voter_id: voter_id,
-		        rating: rating
+	      		trendingImages 			: null,
+		        image_id 						: _id,
+		        voter_id 					 	: voter_id,
+		        rating 							: rating
 	      	};
       		ActionCreators.rate(data);
     	}
@@ -33,10 +33,10 @@ var User = React.createClass({
 
 	render: function(){
 
-		var username = "";
-		var images = [];
+		var username 					= "";
+		var images 						= [];
 		var profile_image_url = "";
-		var facebook_id = "";
+		var facebook_id 			= "";
 		var avgRating;
 		var numOfImgs;
 
@@ -57,7 +57,7 @@ var User = React.createClass({
 	    // create the HTML for all the images
 	    if (images.length > 0){
 			var imagesHTML = images.map(function(image, index) {
-			
+
 			var count = 1;
 			var rating = [];
 			var hidden = "";
@@ -91,7 +91,7 @@ return (
 											<p id="userName">{username}</p>
 											<div className="trendiStats"><p>TrendiRating: <span className="profile_score">{avgRating}</span> Images shared: <span className="profile_score">{numOfImgs}</span></p>
 											</div>
-										
+
 									</div>
 								</div>
 							</div>
@@ -105,25 +105,6 @@ return (
 			</div>
 		</div>
 		);
-
-
-/*
-		return (
-			<div>
-				<div className="profileRow col-md-8 col-md-offset-2">
-					<div>
-						<img src={profile_image_url} id="profilePic"/>
-						<p id="userName">{username}</p>
-						<div className="trendiStats"><p>TrendiRating: <span className="profile_score">{avgRating}</span> Images shared: <span className="profile_score">{numOfImgs}</span></p>
-											</div>			
-
-						</div>
-				</div>
-				<div className="wardrobeRow col-md-12">
-						{imagesHTML}
-				</div>
-			</div>
-		);*/
 	}
 });
 

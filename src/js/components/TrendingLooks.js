@@ -1,17 +1,16 @@
-var React = require("react");
+var React          = require("react");
 var ActionCreators = require("../actions/ActionCreators");
 
 var TrendingLooks = React.createClass({
 
     clickHandler: function(rating,_id) {
-      console.log('rateclick: ', rating);
       var voter_id = this.props.user.facebook_id;
       var data = {
-        userImages: null,
-        trendingImages: this.props.trendingImages,
-        image_id: _id,
-        voter_id: voter_id,
-        rating: rating
+        userImages     : null,
+        trendingImages : this.props.trendingImages,
+        image_id       : _id,
+        voter_id       : voter_id,
+        rating         : rating
       };
       ActionCreators.rate(data);
     },

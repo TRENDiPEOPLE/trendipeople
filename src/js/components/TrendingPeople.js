@@ -1,18 +1,14 @@
-var React = require("react");
+var React          = require("react");
 var ActionCreators = require('../actions/ActionCreators');
 
 var TrendingPeople = React.createClass({
 
     componentWillMount: function(){
       ActionCreators.fetchTrendingPeople();
-      console.log('COMPONENE WILL MOUNT')
       $(document).ready(function(){
-        console.log('jquery ready');
         $(".trendiPeopleImage").mouseenter(function(){
-          console.log('hovering over image');
         });
-      })
-
+      });
     },
 
     render: function() {

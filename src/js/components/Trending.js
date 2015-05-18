@@ -1,8 +1,6 @@
-var React = require("react");
-var TrendBox = require("./TrendBox");
-var CategoryBox = require("./CategoryBox");
+var React          = require("react");
 var TrendingPeople = require("./TrendingPeople");
-var TrendingLooks = require("./TrendingLooks");
+var TrendingLooks  = require("./TrendingLooks");
 
 var Trending = React.createClass({
 	render: function(){
@@ -20,7 +18,3 @@ var Trending = React.createClass({
 });
 
 module.exports = Trending;
-
-        // <div className="trendBox col-md-3">
-        //   <TrendBox trends={this.props.trends} />
-        // </div>
