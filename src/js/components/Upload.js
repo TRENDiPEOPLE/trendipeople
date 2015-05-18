@@ -17,13 +17,7 @@ var Upload = React.createClass({
 		console.log("changes happening");
 	},
 
-	render: function(){
-		/*	      <div className="modal-footer">
-				        <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-				      </div>*/
-
-
-		//	<input type="file" className="btn btn-file"  onChange={this.handleChange} accept="image/png, image/jpeg"/>
+	render: function() {
 
 		console.log('this.props: ',this.props);
 		console.log('rendering Upload');
@@ -52,9 +46,7 @@ var Upload = React.createClass({
 												<input type="submit" value="Share image" id="shareID" className="btn btn-lg"/>
 											</div>
 									</form>
-
 				      </div>
-
 				    </div>
 				  </div>
 				</div>

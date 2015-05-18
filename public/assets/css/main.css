@@ -33,7 +33,7 @@ body {
   margin-top: 10%;
   margin-bottom: 10%;
   background-color: rgb(11, 185, 213);
-  opacity: 0.5;
+  opacity: 0.7;
 }
 
 .custom_modal_header{
@@ -65,8 +65,8 @@ body {
 
 #homepageImage {
   position: absolute;
-  -webkit-filter: opacity(.2);
-  filter: opacity(.2);
+  -webkit-filter: opacity(.4);
+  filter: opacity(.4);
   top: 0;
   left: 0;
   /* Preserve aspect ratio */
