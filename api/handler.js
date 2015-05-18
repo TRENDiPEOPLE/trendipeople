@@ -250,7 +250,7 @@ var image = function(request,reply){
   		                console.log('error when saving new image to mongolabs');
   		                throw error;
   		            }
-  		            reply.redirect("/");
+  		            reply.redirect("/#/profile");
       				});
   	        });
         }
