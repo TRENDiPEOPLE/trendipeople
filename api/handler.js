@@ -246,6 +246,7 @@ var image = function(request,reply){
 		                console.log('error when saving new image to mongolabs');
 		                throw error;
 		            }
+                console.log("image saved to mongolabs");
 		            reply.redirect("/");
     				});
 	        });
