@@ -8,7 +8,6 @@ var Route 			 = Router.Route;
 //var ActionCreators = require('../actions/ActionCreators');
 var Store 				 = require('../stores/Store');
 var Profile 			 = require('./Profile');
-var Body 					 = require('./Body');
 var Trending 			 = require('./Trending');
 var Upload 			 	 = require('./Upload');
 var User 					 = require('./User');
@@ -19,10 +18,8 @@ function getStateFromStore(){
 	var rating 		 			= Store.getRating();
 	var user   		 			= Store.getUser();
 	var trendingPeople 	= Store.getTrendingPeople();
-	var trends 		 			= Store.getTrends();
 	var looks  		 			= Store.getLooks();
 	var userImages 	 		= Store.getUserImages();
-	var categories   		= Store.getCategories();
 	var trendingImages 	= Store.getTrendingImages();
 	var publicProfile 	= Store.getPublicProfile();
 
@@ -30,9 +27,7 @@ function getStateFromStore(){
 		rating 		  		: rating,
 		user   		  		: user,
 		trendingPeople	: trendingPeople,
-		trends 		 			: trends,
 		looks  		 			: looks,
-		categories   		: categories,
 		userImages 		  : userImages,
 		trendingImages 	: trendingImages,
 		publicProfile 	: publicProfile
@@ -48,7 +43,6 @@ var TrendiPeople = React.createClass({
 	componentWillMount: function(){
 		// console.log('componentDidMount');
 		Store.addChangeListener(this._onChange);
-		console.log('going to ActionCreators to fetch user');
 		ActionCreators.fetchUser();
 	},
 
@@ -61,47 +55,7 @@ var TrendiPeople = React.createClass({
 	},
 
 
-		/*				<nav className="navbar navbar-default">
-						  <div className="container-fluid">
-						    <div className="navbar-header">
-						      <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						        <span className="sr-only">Toggle navigation</span>
-						        <span className="icon-bar"></span>
-						        <span className="icon-bar"></span>
-						        <span className="icon-bar"></span>
-						      </button>
-						      <a className="navbar-brand" href="#">Brand</a>
-						    </div>
-
-						    <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						      <ul className="nav navbar-nav">
-						        <li className="active"><a href="#">Link <span className="sr-only">(current)</span></a></li>
-						        <li><a href="#">Link</a></li>
-						        <li className="dropdown">
-						          <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-						          <ul className="dropdown-menu" role="menu">
-						            <li><a href="#">Action</a></li>
-						            <li><a href="#">Another action</a></li>
-						            <li><a href="#">Something else here</a></li>
-						            <li className="divider"></li>
-						            <li><a href="#">Separated link</a></li>
-						            <li className="divider"></li>
-						            <li><a href="#">One more separated link</a></li>
-						          </ul>
-						        </li>
-						      </ul>
-						    </div>
-						  </div>
-						</nav>*/
-
-
-
-
-
 	render: function(){
-
-		// //console.log('trendingImages in TrendiPeople: ', this.state.trendingImages);
-		// var menu;
 
 		// display login or logout if the user is logged in or out
 		if (this.state.user) {
@@ -174,7 +128,7 @@ var TrendiPeople = React.createClass({
 							</div>
 					</div>
 				</div>
-			)
+			);
 		}
 	}
 });

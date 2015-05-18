@@ -311,10 +311,6 @@ body {
   margin-top: 5%;
 }
 
-.trendBox {
-  position: fixed;
-}
-
 #trendingLooks {
   font-size: 23px;
   text-align: left;

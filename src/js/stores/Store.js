@@ -1,8 +1,8 @@
-var Dispatcher = require('../dispatcher/Dispatcher');
+var Dispatcher 	 = require('../dispatcher/Dispatcher');
 var EventEmitter = require('events').EventEmitter;
-var Constants = require('../constants/Constants');
-var ActionTypes = Constants.ActionTypes;
-var assign = require('object-assign');
+var Constants 	 = require('../constants/Constants');
+var ActionTypes  = Constants.ActionTypes;
+var assign   		 = require('object-assign');
 var CHANGE_EVENT = "change";
 
 var rating = 0;
@@ -12,9 +12,8 @@ var trendingPeople = [
 
 var trendingImages = null;
 var publicProfile = {};
-var trends = [ "Xmas", "Winter", "TopShop", "Fur Coats", "River Island", "Hats", "Big Jackets", "Spring"];
-var categories = [ "Men", " Women", "Accesories", "Beauty", "Hair", "Beachwear", "Sunglasses", "Shorts", "Tops", "Swimwear", "Denim", "Dresses"];
 var userImages = [];
+
 var Store = assign({}, EventEmitter.prototype, {
 
 	emitChange: function(){
@@ -90,7 +89,6 @@ Dispatcher.register(function(action){
 							var new_average_rating = all_ratings_ever / new_rating_count;
 							image.rating = new_average_rating;
 							image.raters.push(action.data.voter_id);
-							console.log('returning image: ',image);
 							return image;
 						}
 					}

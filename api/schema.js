@@ -36,19 +36,7 @@ imgSchema.plugin(crate, {
     }
   }),
   fields: {
-    file: {
-      // processor: new ImageMagick({
-      //   transforms: {
-      //     original: {
-      //     },
-      //     small: {
-      //       resize  : "50x50",
-      //       gravity : "center",
-      //       formats  : ["PNG", "JPEG"]
-      //     }
-      //   }
-      // })
-    }
+    file: {}
   }
 });
 

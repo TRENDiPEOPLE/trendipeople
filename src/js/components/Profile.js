@@ -7,9 +7,6 @@ var Link 					 = Router.Link;
 var Profile = React.createClass({
 
 	componentWillMount: function(){
-		console.log('this.props: ', this.props);
-		//var facebook_id = this.props.user.facebook_id;
-		//ActionCreators.fetchUserImages(facebook_id);
 	},
 
 	clickHandler: function() {
@@ -18,10 +15,10 @@ var Profile = React.createClass({
 
 	render: function(){
 
-		var facebook_id = "";
-		var username = "";
+		var facebook_id 			= "";
+		var username 					= "";
 		var profile_image_url = "";
-		var images = [];
+		var images 						= [];
 		var avgRating;
 		var numOfImgs;
 
@@ -32,7 +29,6 @@ var Profile = React.createClass({
 			profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture?width=300&height=300';
 			images = this.props.userImages || [];
 			avgRating = (this.props.user.avgRating).toFixed(1);
-			console.log('setting avgRating to ', avgRating);
 			numOfImgs = images.length;
 
 		}
@@ -40,7 +36,6 @@ var Profile = React.createClass({
 
 	    var trendiLogo = "/public/assets/images/logo-round.png";
 	    var that = this;
-
 
 	    // create the HTML for all the images
 	    if (images.length > 0){
@@ -70,7 +65,7 @@ var Profile = React.createClass({
    		<div>
    			<div className="profileContainer container">
    				<div className="row">
-					<div className="profileRow col-md-8 col-md-offset-2">
+						<div className="profileRow col-md-8 col-md-offset-2">
 								<div id="profileCard">
 									<div>
 										<img src={profile_image_url} id="profilePic" className="image"/>
@@ -80,7 +75,7 @@ var Profile = React.createClass({
 											</div>
 										<div id="upload">
 											<button type="button" className="btn" value="Share image" onClick={this.clickHandler} id="submitID">
-							Share image
+											Share image
 											</button>
 											<Upload />
 										</div>

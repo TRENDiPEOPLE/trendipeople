@@ -1,4 +1,4 @@
-var React = require("react");
+var React 	= require("react");
 var Request = require("superagent");
 
 var ActionCreators = require('../actions/ActionCreators');
@@ -14,17 +14,14 @@ var Upload = React.createClass({
 
 	handleChange: function() {
 		$("#shareID").show();
-		console.log("changes happening");
 	},
 
 	render: function() {
 
-		console.log('this.props: ',this.props);
-		console.log('rendering Upload');
-		var image_api_url = './api/image';
-		console.log('image_api_url: ', image_api_url);
-		return (
 
+		var image_api_url = './api/image';
+
+		return (
 				<div className="modal fade" id="myModal">
 				  <div className="modal-dialog">
 				    <div className="modal-content">

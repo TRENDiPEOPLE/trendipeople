@@ -1,5 +1,5 @@
-var Constants = require('../constants/Constants');
-var ActionTypes = Constants.ActionTypes;
+var Constants  	  = require('../constants/Constants');
+var ActionTypes 	= Constants.ActionTypes;
 var AppDispatcher = require('../dispatcher/Dispatcher');
 
 module.exports = {
@@ -12,7 +12,6 @@ module.exports = {
 	},
 
 	receivedUser: function(userData){
-		// console.log('ServerActionCreators received user? : ', user);
 		AppDispatcher.dispatch({
 			type: ActionTypes.RECEIVED_USER,
 			userData: userData
