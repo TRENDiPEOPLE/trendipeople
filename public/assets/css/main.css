@@ -288,7 +288,6 @@ body {
 }
 
 #shareID {
-  display: none;
   margin: 16px 10px 0;
   color: white;
 }
@@ -297,7 +296,7 @@ body {
 }
 
 .share-button-container{
-  display:block;
+  display: block;
   margin: 0 auto;
 }
 
