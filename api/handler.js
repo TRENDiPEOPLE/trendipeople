@@ -218,37 +218,42 @@ var image = function(request,reply){
 		// if the user is adding a new image
 		if (request.raw.req.method === 'POST'){
 
-			// declare some useful variables
-			var id = request.params.id;
-			var email = request.auth.credentials.email;
-			var facebook_id = request.auth.credentials.auth_id;
-			var payload = request.payload;
+      if (request.payload.image_link.filename === "" || Number(request.payload.image_link.bytes) === 0) {
+        reply.redirect("/#/profile");
+      } else {
 
-			var path = payload.image_link.path;
-      console.log("path: ", path);
-			// create a new image to save in db
-			var new_image = new Img();
-      var number = Math.floor(Math.random()*10);
-      new_image.link = path;
-      new_image.rating = 0;
-      new_image.raters = [facebook_id];
-      new_image.facebook_id = facebook_id;
-      console.log("new_image: ", new_image);
+  			// declare some useful variables
+  			var id = request.params.id;
+  			var email = request.auth.credentials.email;
+  			var facebook_id = request.auth.credentials.auth_id;
+  			var payload = request.payload;
 
-      // save img
-      new_image.attach("file", {path: path}, function(err) {
-      // console.log("new_image small url: ", new_image.file.small.url);
-				if (err) console.log(err);
-				console.log("image attached to s3");
+  			var path = payload.image_link.path;
+        console.log("payload: ", payload);
+  			// create a new image to save in db
+  			var new_image = new Img();
+        var number = Math.floor(Math.random()*10);
+        new_image.link = path;
+        new_image.rating = 0;
+        new_image.raters = [facebook_id];
+        new_image.facebook_id = facebook_id;
+        console.log("new_image: ", new_image);
 
-		        new_image.save( function(err){
-		            if (err){
-		                console.log('error when saving new image to mongolabs');
-		                throw error;
-		            }
-		            reply.redirect("/");
-    				});
-	        });
+        // save img
+        new_image.attach("file", {path: path}, function(err) {
+        // console.log("new_image small url: ", new_image.file.small.url);
+  				if (err) console.log(err);
+  				console.log("image attached to s3");
+
+  		        new_image.save( function(err){
+  		            if (err){
+  		                console.log('error when saving new image to mongolabs');
+  		                throw error;
+  		            }
+  		            reply.redirect("/");
+      				});
+  	        });
+      }
 
 		}
 
