@@ -141,12 +141,11 @@ var TrendiPeople = React.createClass({
 						    <div>
 								{menu}
 							</div>
-
 						</div>
 						</nav>
 					</div>
 				</div>
-				
+
 			<RouteHandler rating={this.state.rating}
 						publicProfile={this.state.publicProfile}
 						userImages={this.state.userImages}
@@ -169,9 +168,9 @@ var TrendiPeople = React.createClass({
 						<img src="../../public/assets/images/fashion.jpg" id="homepageImage" />
 						</div>
 						<div className="col-md-12">
-							<div id="centreBox" className="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+							<div id="centreBox" className="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
 								<img src="../../public/assets/images/trendi.png" id="landingTrendi" />
-								<span id="landingText">The fashion industry promotes a distorted image of beauty. At TRENDiPEOPLE we believe everyone is a unique and beautiful individual regardless of body shape, size, colour or where they come from. How does TRENDiPEOPLE work? 1. A place to discover real time trending fashion from around the world. Discover, share your fashion photos and in so doing you might just kick-start a global fashion trend. 2. An app that enables anyone with skills in the fashion and beauty industry to sell their services to the public, earn more revenue, get reviewed using our unique Trendistar Rating System.</span>
+								<span id="landingText">The fashion industry promotes a distorted image of beauty. At TRENDiPEOPLE we believe everyone is a unique and beautiful individual regardless of body shape, size, colour or where they come from. TRENDiPEOPLE is a place to discover real time trending fashion from around the world. Discover, share your fashion photos and in so doing you might just kick-start a global fashion trend.</span>
 							</div>
 					</div>
 				</div>
