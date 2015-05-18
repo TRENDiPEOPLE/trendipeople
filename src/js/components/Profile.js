@@ -30,7 +30,7 @@ var Profile = React.createClass({
 			username = this.props.user.username;
 			facebook_id = this.props.user.facebook_id || "";
 			profile_image_url = 'https://graph.facebook.com/' + facebook_id + '/picture?width=300&height=300';
-			images = this.props.userImages.reverse() || [];
+			images = this.props.userImages || [];
 			avgRating = (this.props.user.avgRating).toFixed(1);
 			console.log('setting avgRating to ', avgRating);
 			numOfImgs = images.length;
@@ -80,7 +80,7 @@ var Profile = React.createClass({
 											</div>
 										<div id="upload">
 											<button type="button" className="btn" value="Share image" onClick={this.clickHandler} id="submitID">
-						Share image
+							Share image
 											</button>
 											<Upload />
 										</div>

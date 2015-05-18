@@ -5,6 +5,14 @@ var TrendingPeople = React.createClass({
 
     componentWillMount: function(){
       ActionCreators.fetchTrendingPeople();
+      console.log('COMPONENE WILL MOUNT')
+      $(document).ready(function(){
+        console.log('jquery ready');
+        $(".trendiPeopleImage").mouseenter(function(){
+          console.log('hovering over image');
+        });
+      })
+
     },
 
     render: function() {
@@ -12,12 +20,11 @@ var TrendingPeople = React.createClass({
       var trendingPeople;
       var profile_image_url;
       if (this.props.trendingPeople.length > 0){
-          reverse_trending_people = this.props.trendingPeople.reverse();
-          trendingPeople = reverse_trending_people.map(function(ele, index) {
+          trendingPeople = this.props.trendingPeople.map(function(ele, index) {
           profile_image_url = 'https://graph.facebook.com/' + ele.facebook_id + '/picture?width=300&height=300';
           profile_url = '/#/' + ele.facebook_id;
           return (
-            <div className="col-md-2 col-sm-3 col-xs-6 peopleBox">
+            <div className="col-md-2 col-sm-3 col-xs-6 peopleBox trendiPeopleImage">
              <a href={profile_url}><img src={profile_image_url} key={Math.random()} className="image" /></a>
             </div>
           );
